@@ -7,7 +7,7 @@ const express = require('express'),
 app.use(express.json());
 
 //Connect SQLite database
-const dbPath = path.resolve(__dirname, '../data/clearbnb.db')
+const dbPath = path.resolve(__dirname, '../database/clearbnb.db')
 const db = new sqlite.Database(dbPath)
 db.all = util.promisify(db.all)
 
@@ -20,7 +20,7 @@ app.get('/api/clearbnb', (req, res)=>{
 
 //Access residence data from ClearBnB DB
 app.get('/api/clearbnb/residences', async (req, res) => {
-  let residences = await db.all(`SELECT * FROM residencesInfo`)
+  let residences = await db.all(`SELECT * FROM residences`)
   res.json({
     residences: residences
   })
@@ -37,6 +37,6 @@ app.get('/api/clearbnb/residences/:id', async (req, res) => {
 })
 
 
-app.listen(3001, ()=> {
+app.listen(4000, ()=> {
   console.log('Node Server is running...')
 })
