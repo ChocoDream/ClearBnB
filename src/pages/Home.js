@@ -1,14 +1,13 @@
 import React from 'react';
-import NavMenu from '../components/NavMenu';
-import FrontPageBookingMenu from '../components/FrontpageBookingMenu'
+import FrontPageBookingMenuMobile from '../components/FrontpageBookingMenuMobile'
 
 const Home = () => {
   return (
-    <div>
-      <NavMenu></NavMenu>
+    <div className="frontpage-splash">
       <div className="d-lg-none"> {/*MEDIUM-SMALL DEVICES (mobile)*/}
-        <FrontPageBookingMenu />
+        <FrontPageBookingMenuMobile />
       </div>
+      <div className="d-lg"></div>
     </div>
   )
 }
