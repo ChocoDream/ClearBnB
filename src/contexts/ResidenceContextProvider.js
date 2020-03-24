@@ -9,16 +9,14 @@ export default function ResidenceContextProvider(props) {
   const getResidence = async () => {
     let res = await fetch('/api/clearbnb/residences')
     res = await res.json()
-    setResidence(res)
     console.log(res);
+    setResidence(res)
   }
 
   useEffect(() => {
     getResidence()
   }, [])
 
- 
-  
   const values = {
     residence, 
     setResidence

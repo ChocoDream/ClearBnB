@@ -7,7 +7,7 @@ const express = require('express'),
 app.use(express.json());
 
 //Connect SQLite database
-const dbPath = path.resolve(__dirname, '../database/clearbnb.db')
+const dbPath = path.resolve(__dirname, '../backend/database/clearbnb.db')
 const db = new sqlite.Database(dbPath)
 db.all = util.promisify(db.all)
 
