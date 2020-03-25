@@ -36,6 +36,24 @@ app.get('/api/clearbnb/residences/:id', async (req, res) => {
   })
 })
 
+//Access all residence by city from ClearBnB DB
+app.get('/api/clearbnb/residencesByCity/:city', async (req, res) => {
+  let residencesByCity = await db.all("SELECT a.id, a.rooms, a.maxGuests, b.* FROM residences a, addresses b WHERE a.addressId = b.id and b.city like $city order by b.streetName, a.rooms desc ", {
+    $city: req.params.city
+  })
+  res.json({
+    residencesByCity: residencesByCity
+  })
+})
+
+//Access all residence order by city from ClearBnB DB
+app.get('/api/clearbnb/residencesOrderByRegion/', async (req, res) => {
+  let residencesOrderByRegion = await db.all("SELECT a.id residenceId, b.* FROM residences a, addresses b WHERE a.addressId = b.id order by b.region, b.city ", {
+  })
+  res.json({
+    residencesOrderByRegion: residencesOrderByRegion
+  })
+})
 
 app.listen(4000, ()=> {
   console.log('Node Server is running...')
