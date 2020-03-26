@@ -18,15 +18,18 @@ const NavMenu = () => {
       {/*Right now the user got to refresh to head
       to each page after clicking on the link, Got to fix */}
       <Navbar color="faded" light>
-        <Link to="/" className="mr-auto navbar-brand">ClearBnB</Link>
+        <Link to="/" className="mr-auto h2 text-info"><b>ClearBnB</b></Link>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
+          <Nav navbar className="text-right h4 mr-2">
             <NavItem>
-              <Link to="/search/" className="nav-link">Search</Link>
+              <Link to="/login/" className="text-info">Logga in</Link>
             </NavItem>
             <NavItem>
-              <Link to="/about/" className="nav-link">About</Link>
+              <Link to="/search/" className="text-info">Sök</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/about/" className="text-info">Om oss</Link>
             </NavItem>
           </Nav>
         </Collapse>

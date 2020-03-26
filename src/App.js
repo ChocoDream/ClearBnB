@@ -7,11 +7,13 @@ import {
 import Home from './pages/Home';
 import About from './pages/About';
 import Search from './pages/Search';
+import NavMenu from './components/NavMenu';
 
 const App = () => {
   return (
     <div className="App">
       <Router>
+        <NavMenu />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />

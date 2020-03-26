@@ -1,10 +1,10 @@
 import React from 'react';
 import { Col, Row, Form, FormGroup, Input, Container } from 'reactstrap';
 
-const FrontPageBookingMenuMobile = () => {
+const FrontPageMenu = () => {
   return (
-    <Container className="pt-4 rounded" style={{ backgroundColor: 'rgba(110,110,110, 0.8)' }}>
-      <h4 className="text-center">ClearBnB</h4>
+    <div>
+    <Container className="pt-4 rounded d-lg-hide" style={{ backgroundColor: 'rgba(110,110,110, 0.8)' }}>
         <Form>
           <Row form>
             <Col sd={6}>
@@ -21,9 +21,9 @@ const FrontPageBookingMenuMobile = () => {
           <FormGroup>
             <Input type="text" name="address" placeholder="Sök adress.."/>
           </FormGroup>
-          <span className="btn btn-primary d-block ml-3 mr-3 mb-4">Boka nu</span>
-          <span className="btn btn-primary d-block mt-3 mb-3 ml-1 mr-1">Ny Medlem?</span>
-          <span className="btn btn-primary d-block mt-3 mb-3 ml-1 mr-1">Logga in</span>
+          <span className="btn btn-info d-block mb-4">Boka nu</span>
+          <span className="btn btn-info d-block mt-3 mb-3">Ny Medlem?</span>
+          <span className="btn btn-info d-block mt-3 mb-3">Logga in</span>
         </Form>
       <section className="d-flex 
       justify-content-between
@@ -32,7 +32,8 @@ const FrontPageBookingMenuMobile = () => {
         <p className="text-white">Om oss</p>
       </section>
       </Container>
+    </div>
   )
 };
 
-export default FrontPageBookingMenuMobile;
+export default FrontPageMenu;

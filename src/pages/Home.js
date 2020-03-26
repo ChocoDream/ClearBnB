@@ -1,13 +1,15 @@
 import React from 'react';
-import FrontPageBookingMenuMobile from '../components/FrontpageBookingMenuMobile'
+import FrontPageMenu from '../components/FrontPageMenu'
 
 const Home = () => {
   return (
     <div className="frontpage-splash">
-      <div className="d-lg-none"> {/*MEDIUM-SMALL DEVICES (mobile)*/}
-        <FrontPageBookingMenuMobile />
+      <div className="d-lg-none"> {/*MOBILE-TABLET MODE */}
+        <FrontPageMenu />
       </div>
-      <div className="d-lg"></div>
+      <div> {/*DESKTOP MODE */}
+        
+      </div>
     </div>
   )
 }
