@@ -1,14 +1,15 @@
 import React from 'react';
-import FrontPageMenu from '../components/FrontPageMenu'
+import FrontPageMenuMobile from '../components/FrontPageMenuMobile.js';
+import FrontPageMenuDesktop from '../components/FrontPageMenuDesktop';
 
 const Home = () => {
   return (
     <div className="frontpage-splash">
       <div className="d-lg-none"> {/*MOBILE-TABLET MODE */}
-        <FrontPageMenu />
+        <FrontPageMenuMobile />
       </div>
-      <div> {/*DESKTOP MODE */}
-        
+      <div className="d-none d-lg-block"> {/*DESKTOP MODE */}
+        <FrontPageMenuDesktop />
       </div>
     </div>
   )

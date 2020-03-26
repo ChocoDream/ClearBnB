@@ -17,7 +17,7 @@ const NavMenu = () => {
 
       {/*Right now the user got to refresh to head
       to each page after clicking on the link, Got to fix */}
-      <Navbar color="faded" light>
+      <Navbar color="faded" light className="d-md-none"> {/*MOBILE */}
         <Link to="/" className="mr-auto h2 text-info"><b>ClearBnB</b></Link>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
@@ -33,7 +33,10 @@ const NavMenu = () => {
             </NavItem>
           </Nav>
         </Collapse>
-      </Navbar>
+        </Navbar>
+        
+        
+
       </Router>
     </div>
   )
