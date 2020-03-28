@@ -3,7 +3,7 @@ package com.clearbnb.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="residences")
+@Table(name = "residences")
 
 public class Residence {
     @Id
@@ -11,7 +11,6 @@ public class Residence {
     private int id;
     private int rooms;
     private int maxGuests;
-    private int size;
 
     public Residence(){}
 
@@ -37,13 +36,5 @@ public class Residence {
 
     public void setMaxGuests(int maxGuests) {
         this.maxGuests = maxGuests;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 }

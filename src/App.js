@@ -8,10 +8,12 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Search from './pages/Search';
 import NavMenu from './components/NavMenu';
+import ResidenceContextProvider from './contexts/ResidenceContextProvider'
 
 const App = () => {
   return (
     <div className="App">
+      <ResidenceContextProvider>
       <Router>
         <NavMenu />
         <Switch>
@@ -20,6 +22,7 @@ const App = () => {
           <Route exact path="/search" component={Search} />
         </Switch>
       </Router>
+      </ResidenceContextProvider>
     </div>
   );
 }

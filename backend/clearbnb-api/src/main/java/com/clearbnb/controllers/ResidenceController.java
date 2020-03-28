@@ -13,12 +13,12 @@ public class ResidenceController {
     @Autowired
     private ResidenceService residenceService;
 
-    @GetMapping("/api/clearbnb/residences")
+    @GetMapping("/api/residences")
     public List<Residence> getAllResidences(){
         return residenceService.getAllResidences();
     }
 
-    @GetMapping("/api/clearbnb/residences/{id}")
+    @GetMapping("/api/residences/{id}")
     public Residence getOneResidence(@PathVariable int id){
         return residenceService.getOneResidence(id);
     }
