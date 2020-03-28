@@ -5,7 +5,7 @@ module.exports = {
   openInBrowser: true,
   // path to your own backend api
   // (set to empty string if yo don't have an internal JS-based api)
-  pathToAPI: './api/index',
+  pathToAPI: '',
   // the host for your backend api 
   // set to another machine if your api is not local  
   hostForAPI: 'localhost',
@@ -16,7 +16,7 @@ module.exports = {
     // where you want to run the react-dev-server
     react: 3456,
     // where you serve your api (make sure to serve it on that port)
-    api: 4000
+    api: 3200
   },
   // a path to an optional script to run after builds
   postBuildScript: './postBuildScript.js',
