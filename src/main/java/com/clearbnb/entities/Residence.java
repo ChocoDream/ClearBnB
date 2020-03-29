@@ -13,9 +13,15 @@ public class Residence {
     private int price;
     private int rooms;
     private int max_guests;
+
+    @Column(name = "address_id")
     private int address_id;
     private String country;
+
+    @Column(name = "region")
     private String region;
+
+    @Column(name = "city")
     private String city;
     private int zip_code;
     private String street_name;

@@ -29,7 +29,4 @@ public class AddressService {
         return (List<Address>) addressRepo.findByCityContaining(city);
     }
 
-    /*public List<Address> getAllCities() {
-        return (List<Address>) addressRepo.findAllCities();
-    }*/
 }

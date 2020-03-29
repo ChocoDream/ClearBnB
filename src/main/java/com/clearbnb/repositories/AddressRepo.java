@@ -18,12 +18,6 @@ public interface AddressRepo extends CrudRepository<Address, Integer>, JpaReposi
 
     public List<Address> findByCityContaining(String city);
 
-    /*public static final String FIND_CITIES = "SELECT distinct a.city FROM residences r,\n" +
-            "           addresses a\n" +
-            "     WHERE r.address_id = a.id order by a.city";
-    @Query(value = FIND_CITIES, nativeQuery = true)
-    public List<Address> findAllCities();*/
-
     /*public List<Address> findByRegionContains(String region);
     public List<Address> findByRegionIsContaining(String region);*/
 }
