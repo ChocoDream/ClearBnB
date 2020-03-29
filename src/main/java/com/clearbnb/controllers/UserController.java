@@ -18,10 +18,10 @@ public class UserController {
         return userService.findAllUser();
     }
 
-    @GetMapping("/api/clearbnb/users/{id}")
+  /*  @GetMapping("/api/clearbnb/users/{id}")
     public User getOneUser(@PathVariable int id) {
         return userService.getOneUser(id);
-    }
+    }*/
 
     @PostMapping("/api/clearbnb/users")
     public User createNewUser(@RequestBody User user) {

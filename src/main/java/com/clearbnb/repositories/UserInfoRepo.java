@@ -1,10 +1,10 @@
 package com.clearbnb.repositories;
 
-import com.clearbnb.entities.User;
+import com.clearbnb.entities.UserInfo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends CrudRepository<User, Integer> {
-    public User findByUsername(String username);
+public interface UserInfoRepo extends CrudRepository<UserInfo, Integer> {
+    public UserInfo findById(int id);
 }
