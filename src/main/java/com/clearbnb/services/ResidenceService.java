@@ -1,6 +1,5 @@
 package com.clearbnb.services;
 
-import com.clearbnb.entities.Address;
 import com.clearbnb.entities.Residence;
 import com.clearbnb.repositories.ResidenceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,10 @@ public class ResidenceService {
 
     public List<Residence> getAllResidencesByAddressId(int address_id) {
         return residenceRepo.findByAddressId(address_id);
+    }
+
+    public List<Residence> getAllResidencesByCityId(int city_id) {
+        return residenceRepo.findByCityId(city_id);
     }
 
     public List<Residence> getAllResidenceByCity(String city) {

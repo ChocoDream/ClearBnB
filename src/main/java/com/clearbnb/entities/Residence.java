@@ -26,6 +26,7 @@ public class Residence {
     private int zip_code;
     private String street_name;
     private String street_number;
+    private String apartment_number;
 
     public Residence(){
     }
@@ -116,5 +117,13 @@ public class Residence {
 
     public void setStreet_number(String street_number) {
         this.street_number = street_number;
+    }
+
+    public String getApartment_number() {
+        return apartment_number;
+    }
+
+    public void setApartment_number(String apartment_number) {
+        this.apartment_number = apartment_number;
     }
 }
