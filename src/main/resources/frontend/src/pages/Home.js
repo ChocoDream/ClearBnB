@@ -6,7 +6,7 @@ import {ResidenceContext} from '../contexts/ResidenceContextProvider'
 const Home = () => {
   const {residences} = useContext(ResidenceContext)
   // const residence = residences.map(r => r.city)
-  console.log(residences);
+  console.log("reading from home", residences);
 
   return (
     <div className="frontpage-splash">

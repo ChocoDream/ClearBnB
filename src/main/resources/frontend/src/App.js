@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import About from './pages/About';
 import Search from './pages/Search';
+import Results from './pages/Results';
 import NavMenu from './components/NavMenu';
 import ResidenceContextProvider from './contexts/ResidenceContextProvider'
 
@@ -22,6 +23,7 @@ const App = () => {
           <Route exact path="/user-login" component={Login} />
           <Route exact path="/about" component={About} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/results" component={Results} />
         </Switch>
       </Router>
       </ResidenceContextProvider>
