@@ -16,7 +16,7 @@ const NavMenu = () => {
       <Router>
       {/*Right now the user got to refresh to head
       to each page after clicking on the link, Got to fix */}
-      <Navbar color="faded" light className=""> {/*MOBILE */}
+      <Navbar color="faded" light className="">
         <Link to="/" className="mr-auto h2 text-info"><b>ClearBnB</b></Link>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
