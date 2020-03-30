@@ -15,9 +15,9 @@ public class AmenityController {
     @Autowired
     AmenityService amenityService;
 
-    @GetMapping("/api/clearbnb/amenitites")
+    @GetMapping("/api/clearbnb/amenities")
     public List<Amenity> getAllAmenitites(){
-        return amenityService.findAllAmenitites();
+        return amenityService.findAllAmenities();
     }
 
     @GetMapping("/api/clearbnb/amenity/{id}")

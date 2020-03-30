@@ -14,16 +14,15 @@ const NavMenu = () => {
   return (
     <div>
       <Router>
-
       {/*Right now the user got to refresh to head
       to each page after clicking on the link, Got to fix */}
-      <Navbar color="faded" light className="d-md-none"> {/*MOBILE */}
+      <Navbar color="faded" light className=""> {/*MOBILE */}
         <Link to="/" className="mr-auto h2 text-info"><b>ClearBnB</b></Link>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar className="text-right h4 mr-2">
             <NavItem>
-              <Link to="/login/" className="text-info">Logga in</Link>
+              <Link to="/user-login" className="text-info">Logga in</Link>
             </NavItem>
             <NavItem>
               <Link to="/search/" className="text-info">Sök</Link>

@@ -5,8 +5,9 @@ import {ResidenceContext} from '../contexts/ResidenceContextProvider';
 import {CityContext} from '../contexts/CityContextProvider';
 
 const Home = () => {
-  const residencesInfo = useContext(ResidenceContext)
-  console.log(residencesInfo);
+  const {residences} = useContext(ResidenceContext)
+  // const residence = residences.map(r => r.city)
+  console.log(residences);
 
   const citiesInfo = useContext(CityContext)
   console.log(citiesInfo);
