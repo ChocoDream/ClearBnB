@@ -11,10 +11,10 @@ const Home = () => {
   return (
     <div className="frontpage-splash">
       <div className="d-lg-none"> {/*MOBILE-TABLET MODE */}
-        {/* <FrontPageMenuMobile /> */}
+        <FrontPageMenuMobile />
       </div>
       <div className="d-none d-lg-block"> {/*DESKTOP MODE */}
-        {/* <FrontPageMenuDesktop /> */}
+        <FrontPageMenuDesktop />
       </div>
     </div>
   )

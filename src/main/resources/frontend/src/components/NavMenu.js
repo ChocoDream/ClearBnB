@@ -22,7 +22,7 @@ const NavMenu = () => {
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar className="text-right h4 mr-2">
             <NavItem>
-              <Link to="/login" className="text-info">Logga in</Link>
+              <Link to="/user-login" className="text-info">Logga in</Link>
             </NavItem>
             <NavItem>
               <Link to="/search/" className="text-info">Sök</Link>

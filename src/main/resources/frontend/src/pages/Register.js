@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const springLogin = async () => {
+  const springRegister = async () => {
   const credentials = 'username=' +
     encodeURIComponent(username)
     + '&password=' +
@@ -47,10 +47,11 @@ const Login = () => {
             id="password" 
             placeholder="Password" />
         </FormGroup>
-         <Button color="info" onClick={springLogin}>Submit</Button>
+         <Button color="info" onClick={springRegister}>Submit</Button>
       </Form>
     </div>
   )
 }
 
-export default Login
+export default Register
+

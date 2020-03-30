@@ -11,7 +11,7 @@ public class AmenityService {
     @Autowired
     AmenityRepo amenityRepo;
 
-    public List<Amenity> findAllAmenitites() {
+    public List<Amenity> findAllAmenities() {
         return (List<Amenity>) amenityRepo.findAll();
     }
 
