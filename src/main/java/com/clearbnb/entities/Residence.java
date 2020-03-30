@@ -1,8 +1,6 @@
 package com.clearbnb.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "residences_info")
@@ -15,17 +13,16 @@ public class Residence {
     private int price;
     private int rooms;
     private int max_guests;
+   /* private int address_id;*/
+    private String country;
+    private String region;
+    private String city;
+    private int zip_code;
     private String street_name;
     private String street_number;
-    private int zip_code;
-    private String city;
-    private String country;
-    private Boolean balcony;
-    private Boolean wifi;
-    private Boolean pool;
-    private Boolean tv;
 
-    public Residence(){}
+    public Residence(){
+    }
 
     public int getId() {
         return id;
@@ -59,6 +56,46 @@ public class Residence {
         this.max_guests = max_guests;
     }
 
+    /*public int getAddress_id() {
+        return address_id;
+    }*/
+
+    /*public void setAddress_id(int address_id) {
+        this.address_id = address_id;
+    }*/
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getZip_code() {
+        return zip_code;
+    }
+
+    public void setZip_code(int zip_code) {
+        this.zip_code = zip_code;
+    }
+
     public String getStreet_name() {
         return street_name;
     }
@@ -73,61 +110,5 @@ public class Residence {
 
     public void setStreet_number(String street_number) {
         this.street_number = street_number;
-    }
-
-    public int getZip_code() {
-        return zip_code;
-    }
-
-    public void setZip_code(int zip_code) {
-        this.zip_code = zip_code;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public Boolean getBalcony() {
-        return balcony;
-    }
-
-    public void setBalcony(Boolean balcony) {
-        this.balcony = balcony;
-    }
-
-    public Boolean getWifi() {
-        return wifi;
-    }
-
-    public void setWifi(Boolean wifi) {
-        this.wifi = wifi;
-    }
-
-    public Boolean getPool() {
-        return pool;
-    }
-
-    public void setPool(Boolean pool) {
-        this.pool = pool;
-    }
-
-    public Boolean getTv() {
-        return tv;
-    }
-
-    public void setTv(Boolean tv) {
-        this.tv = tv;
     }
 }

@@ -23,7 +23,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @PostConstruct
     private void createDefaultUsers(){
         if (userRepo.findByUsername("user") == null) {
-            addUser("maruf", "sumi");
+            addUser("user", "password");
         }
     }
 
@@ -47,8 +47,6 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     private UserDetails toUserDetails(User user) {
-        // If you have a User entity you have to
-        // use the userdetails User for this to work
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())

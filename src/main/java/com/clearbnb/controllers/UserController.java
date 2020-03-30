@@ -23,8 +23,8 @@ public class UserController {
         return userService.getOneUser(id);
     }*/
 
-    @PostMapping("/api/clearbnb/users")
+  /*  @PostMapping("/api/clearbnb/users")
     public User createNewUser(@RequestBody User user) {
         return userService.createUser(user);
-    }
+    }*/
 }
