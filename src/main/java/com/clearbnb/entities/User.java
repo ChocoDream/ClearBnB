@@ -3,7 +3,7 @@ package com.clearbnb.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "persons")
+@Table(name = "users")
 public class User {
 
     @Id

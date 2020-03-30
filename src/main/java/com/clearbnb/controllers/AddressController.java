@@ -25,18 +25,4 @@ public class AddressController {
         return addressService.getOneAddress(id);
     }
 
-    @GetMapping("/api/clearbnb/residencesByRegion/{region}")
-    public List<Address> getAllAddressesByRegion(@PathVariable String region) {
-        return addressService.getAllAddressByRegion(region);
-    }
-
-    @GetMapping("/api/clearbnb/residencesByCity/{city}")
-    public List<Address> getAllAddressesByCity(@PathVariable String city) {
-        return addressService.getAllAddressByCity(city);
-    }
-
-    /*@GetMapping("/api/clearbnb/cities")
-    public List<Address> getAllCities() {
-        return addressService.getAllCities();
-    }*/
 }

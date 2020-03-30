@@ -13,9 +13,15 @@ public class Residence {
     private int price;
     private int rooms;
     private int max_guests;
-   /* private int address_id;*/
+
+    @Column(name = "address_id")
+    private int address_id;
     private String country;
+
+    @Column(name = "region")
     private String region;
+
+    @Column(name = "city")
     private String city;
     private int zip_code;
     private String street_name;
@@ -56,13 +62,13 @@ public class Residence {
         this.max_guests = max_guests;
     }
 
-    /*public int getAddress_id() {
+    public int getAddress_id() {
         return address_id;
-    }*/
+    }
 
-    /*public void setAddress_id(int address_id) {
+    public void setAddress_id(int address_id) {
         this.address_id = address_id;
-    }*/
+    }
 
     public String getCountry() {
         return country;
