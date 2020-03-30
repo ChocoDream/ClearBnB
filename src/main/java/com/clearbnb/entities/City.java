@@ -7,30 +7,30 @@ import javax.persistence.*;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int value;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "label")
+    private String label;
 
-    @Column(name = "country")
+    /*@Column(name = "country")
     private String country;
 
     @Column(name = "region")
-    private String region;
+    private String region;*/
 
-    public int getId() {
-        return id;
+    public int getValue() {
+        return value;
     }
 
-    public String getCity() {
-        return city;
+    public String getLabel() {
+        return label;
     }
 
-    public String getCountry() {
+    /*public String getCountry() {
         return country;
     }
 
     public String getRegion() {
         return region;
-    }
+    }*/
 }
