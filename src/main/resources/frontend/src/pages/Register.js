@@ -1,33 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { UserContext } from '../contexts/UserContextProvider'
 
-const Register = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Register = (props) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const { setUser } = useContext(UserContext)
 
-  const springRegister = async () => {
-  const credentials = 'username=' +
-    encodeURIComponent(username)
-    + '&password=' +
-    encodeURIComponent(password)
-
-  let response = await fetch("/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: credentials
-  });
-
-  if(response.url.includes('error')) {
-    console.log('Wrong username/password');
-  }else{
-    console.log('Successfully logged in.');    
+  const userRegister = async() => {
+    const credentials = {
+      username,
+      password
+    }
+  
+    let res = await fetch("/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials)
+    });
+    try {
+      res = await res.json()
+      setUser(res)
+      props.history.push('/')
+    } catch {
+      console.log('Bad credentials');
+    }
   }
-}
 
   return (
     <div className="container">
-      <h3>Login</h3>
       <Form className="col-lg-6 col-sm-12 mx-auto">
+        <h3 className="my-3 pb-3 text-info">Skapa konto</h3>
         <FormGroup>
           <Label for="username">Username</Label>
           <Input 
@@ -47,7 +50,7 @@ const Register = () => {
             id="password" 
             placeholder="Password" />
         </FormGroup>
-         <Button color="info" onClick={springRegister}>Submit</Button>
+         <Button color="info" onClick={userRegister}>Submit</Button>
       </Form>
     </div>
   )

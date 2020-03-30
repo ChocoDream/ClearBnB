@@ -26,8 +26,8 @@ const Login = () => {
 
   return (
     <div className="container">
-      <h3>Login</h3>
       <Form className="col-lg-6 col-sm-12 mx-auto">
+        <h3 className="my-3 pb-3 text-info">Logga in</h3>
         <FormGroup>
           <Label for="username">Username</Label>
           <Input 
