@@ -24,4 +24,9 @@ public class AmenityController {
     public Amenity getOneAmenity(@PathVariable int id) {
         return amenityService.getOneAmenity(id);
     }
+
+    @GetMapping("/api/clearbnb/amenitiesByResidenceId/{residence_id}")
+    public List<Amenity> getAllAmenitiesByResidenceId(@PathVariable int residence_id) {
+        return amenityService.getAllAmenitiesByResidenceId(residence_id);
+    }
 }
