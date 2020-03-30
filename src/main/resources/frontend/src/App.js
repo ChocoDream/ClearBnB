@@ -12,21 +12,24 @@ import Search from './pages/Search';
 import NavMenu from './components/NavMenu';
 import ResidenceContextProvider from './contexts/ResidenceContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
+import CityContextProvider from './contexts/CityContextProvider'
 
 const App = () => {
   return (
     <div className="App">
       <ResidenceContextProvider>
-        <UserContextProvider>
-          <Router>
-            <NavMenu />
-              <Route exact path="/" component={Home} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/search" component={Search} />
-              <Route exact path="/user-login" component={Login} />
-              <Route exact path="/user-register" component={Register} />
-          </Router>
-        </UserContextProvider>
+        <CityContextProvider>
+          <UserContextProvider>
+            <Router>
+              <NavMenu />
+                <Route exact path="/" component={Home} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/search" component={Search} />
+                <Route exact path="/user-login" component={Login} />
+                <Route exact path="/user-register" component={Register} />
+            </Router>
+          </UserContextProvider> 
+        </CityContextProvider>
       </ResidenceContextProvider>
     </div>
   );
