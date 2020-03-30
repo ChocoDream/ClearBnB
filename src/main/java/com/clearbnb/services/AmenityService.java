@@ -19,4 +19,8 @@ public class AmenityService {
         return amenityRepo.findById(id);
     }
 
+    public List<Amenity>  getAllAmenitiesByResidenceId(int residence_id) {
+        return amenityRepo.findByResidenceId(residence_id);
+    }
+
 }
