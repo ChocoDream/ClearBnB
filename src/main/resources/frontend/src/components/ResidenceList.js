@@ -21,9 +21,11 @@ const ResidenceList = () => {
       return (
         <Col
           key={"res" + index + residence.id}
-          className="mt-2 mb-2" xs={12} md={6} lg={4}>
+          className="mt-2 mb-2" xs={12} md={6} lg={4}
+        onClick={() => {console.log("hej från :", residence.id)}}>
           <Card>
             <CardBody>
+              {/*Ersätt denna kod neranför med bild från db alt ResidenceImageCarousel, nästa sprint */}
               <CardImg src={randomImages[(Math.floor(Math.random() * 6))]} alt="ClearBnB boende" />
               
               <CardText className="text-muted">Max antal gäster: {residence.max_guest} </CardText>
