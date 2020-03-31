@@ -9,7 +9,7 @@ export default function CityList() {
 
   const CitiesSelect = () => {
     return (
-      <div class="reactSelectDd">
+      <div className="reactSelectDd">
         <Select options={cities} placeholder="Vart vill du åka?" isSearchable required />
       </div>
       )
