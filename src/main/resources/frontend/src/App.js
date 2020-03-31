@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
   Route
 } from 'react-router-dom';
 import Home from './pages/Home';
@@ -30,6 +29,7 @@ const App = () => {
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/user-login" component={Login} />
                 <Route exact path="/user-register" component={Register} />
+                <Route exact path="/results" component={Results} />
             </Router>
             </AmenityContextProvider>
           </UserContextProvider> 

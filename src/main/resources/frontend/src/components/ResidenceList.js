@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { ResidenceContext } from '../contexts/ResidenceContextProvider';
 import {
-  Card, CardImg, CardTitle, CardText, CardDeck,
-  CardSubtitle, CardBody
+  Card, CardImg, CardTitle, CardText,
+  CardSubtitle, CardBody,
+  Row, Col
 } from 'reactstrap';
 
 const ResidenceList = () => {
@@ -10,37 +11,32 @@ const ResidenceList = () => {
 
   const list = () => {
     return residences.map((residence, i) => {
-      return(
-        <Card
-          key={residence.price + residence.country + residence.id + i}
-        >
-          <CardBody>
-            {/*När vi lägger in bilder
-            <CardImg src="" alt=`boende i ${residence.city}` />
-            */}
-            <CardTitle> {residence.price} SEK:- </CardTitle>
-            <CardTitle> {residence.street_name} {residence.street_number}, {residence.city} </CardTitle>
-            <CardSubtitle> {residence.region}, {residence.country} </CardSubtitle>
-            <CardText>Max antal gäster: {residence.max_guest} </CardText>
-            <p>Price: {residence.price} </p>
-            <p>Address id: {residence.address_id} </p>
-            <p>country: {residence.country} </p>
-            <p>region: {residence.region} </p>
-            <p>city: {residence.city} </p>
-            <p>zip_code: {residence.zip_code} </p>
-            <p>street_name: {residence.street_name} </p>
-            <p>street_number: {residence.street_number} </p>
-            <p>max_guest: {residence.max_guest} </p>
-          </CardBody>
-        </Card>
+      return (
+        <Col>
+          <Card
+            key={residence.price + residence.country + residence.id + i}
+            className="mt-2 mb-2"
+          >
+            <CardBody>
+              {/*När vi lägger in bilder
+              <CardImg src="" alt=`boende i ${residence.city}` />
+              */}
+              <CardText>Max antal gäster: {residence.max_guest} </CardText>
+              <CardSubtitle> {residence.city}, {residence.region} </CardSubtitle>
+              <CardTitle className="h4"> <b>{residence.price} kr SEK /</b> natt </CardTitle>
+            </CardBody>
+          </Card> 
+        </Col>
       )
     })
   }
 
   return (
-    <CardDeck className="container">
+    <div className="container">
+      <Row className="row-cols-3">
       {list()}
-    </CardDeck>
+      </Row>
+    </div>
   )
 };
 
