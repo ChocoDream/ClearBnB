@@ -1,10 +1,13 @@
 import React from 'react';
+import {Container} from 'reactstrap';
 import ResidenceList from '../components/ResidenceList';
 
 const Results = () => {
   return (
     <div>
-      <ResidenceList />
+      <Container>
+        <ResidenceList />
+      </Container>
     </div>
   )
 };
