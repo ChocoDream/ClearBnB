@@ -1,11 +1,18 @@
 import React from 'react';
-import CitiesSelect from '../components/CitiesSelect';
+import AmenitiesList from '../components/AmenitiesList';
+import {
+  Container, 
+  Row } from 'reactstrap';
 
 const About = () => {
   return (
     <div>
       <p>THIS IS THE ABOUT PAGE</p>
-      <CitiesSelect />
+        <div>
+          <Container>
+            <Row><AmenitiesList /></Row>
+          </Container>
+          </div>
     </div>
   )
 }

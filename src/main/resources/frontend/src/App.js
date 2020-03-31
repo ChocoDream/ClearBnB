@@ -13,6 +13,7 @@ import NavMenu from './components/NavMenu';
 import ResidenceContextProvider from './contexts/ResidenceContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 import CityContextProvider from './contexts/CityContextProvider'
+import AmenityContextProvider from './contexts/AmenityContextProvider'
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <ResidenceContextProvider>
         <CityContextProvider>
           <UserContextProvider>
+            <AmenityContextProvider>
             <Router>
               <NavMenu />
                 <Route exact path="/" component={Home} />
@@ -28,6 +30,7 @@ const App = () => {
                 <Route exact path="/user-login" component={Login} />
                 <Route exact path="/user-register" component={Register} />
             </Router>
+            </AmenityContextProvider>
           </UserContextProvider> 
         </CityContextProvider>
       </ResidenceContextProvider>
