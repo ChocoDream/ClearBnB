@@ -13,7 +13,6 @@ const ResidenceList = () => {
       return(
         <Card
           key={residence.price + residence.country + residence.id + i}
-          body
         >
           <CardBody>
             {/*När vi lägger in bilder
