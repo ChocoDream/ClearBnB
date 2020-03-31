@@ -3,7 +3,7 @@ import { Collapse, Navbar, NavbarToggler, Nav, NavItem, Form } from 'reactstrap'
 import { Link } from "react-router-dom";
 import { UserContext } from '../contexts/UserContextProvider'
 
-const NavMenu = () => {
+const NavMenu = (props) => {
 
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => setCollapsed(!collapsed);
@@ -13,7 +13,6 @@ const NavMenu = () => {
   const logout = () => {
     fetch('/logout')
     setUser(null)
-    console.log('Logging out');
   }
 
   return (
@@ -33,13 +32,23 @@ const NavMenu = () => {
             <Link to="/about/" className="nav-link text-info h5">Om oss</Link>
           </NavItem>
           {!user?(
-          <NavItem>
-            <Link to="/user-login" className="nav-link text-info h5">Logga in</Link>
-          </NavItem>
+          <>
+            <NavItem>
+              <Link to="/user-login" className="nav-link text-info h5">Logga in</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/user-register" className="nav-link text-info h5">Skapa konto</Link>
+            </NavItem>
+          </>
           ):(
-          <NavItem>
-            <Link onClick={logout} to="/" className="nav-link text-info h5"> Logout</Link>
-          </NavItem>
+          <>
+            <NavItem>
+              <Link to="/profile" className="nav-link text-success h5">{user.username.toUpperCase()}</Link>
+            </NavItem>
+            <NavItem>
+              <Link onClick={logout} to="/" className="nav-link text-info h5"> Logout</Link>
+            </NavItem>
+          </>
           )}
         </Nav>
       </Collapse>

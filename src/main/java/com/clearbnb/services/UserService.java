@@ -22,6 +22,11 @@ public class UserService {
     }
 
     public User registerUser(User user) {
-        return myUserDetailsService.addUser(user.getUsername(), user.getPassword());
+        return myUserDetailsService.addUser(
+                user.getUsername(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getFirst_name(),
+                user.getLast_name());
     }
 }

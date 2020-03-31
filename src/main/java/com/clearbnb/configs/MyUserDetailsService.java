@@ -20,12 +20,12 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepo userRepo;
 
-    @PostConstruct
+   /* @PostConstruct
     private void createDefaultUsers(){
         if (userRepo.findByUsername("user") == null) {
             addUser("user", "password");
         }
-    }
+    }*/
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,8 +36,8 @@ public class MyUserDetailsService implements UserDetailsService {
         return toUserDetails(user);
     }
 
-    public User addUser(String username, String password){
-        User user = new User(username, encoder.encode(password));
+    public User addUser(String username, String password, String email, String first_name, String last_name){
+        User user = new User(username, encoder.encode(password), email, first_name, last_name);
         try {
             return userRepo.save(user);
         } catch (Exception ex) {

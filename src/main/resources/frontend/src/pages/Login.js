@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import React, { useState, useContext } from 'react'
+import { Button, FormGroup, Label } from 'reactstrap';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { UserContext } from "../contexts/UserContextProvider";
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState();
+  const { fetchUser } = useContext(UserContext);
 
-  const springLogin = async () => {
+  const userLogin = async () => {
   const credentials = 'username=' +
     encodeURIComponent(username)
     + '&password=' +
@@ -18,37 +22,43 @@ const Login = () => {
   });
 
   if(response.url.includes('error')) {
-    console.log('Wrong username/password');
+    setMessage('Fel användarnamn eller lösenord!')
   }else{
-    console.log('Successfully logged in.');    
+    fetchUser();
+    props.history.push("/");    
   }
 }
 
   return (
     <div className="container">
-      <Form className="col-lg-6 col-sm-12 mx-auto">
+      <AvForm className="col-lg-6 col-sm-12 mx-auto">
         <h3 className="my-3 pb-3 text-info">Logga in</h3>
         <FormGroup>
           <Label for="username">Username</Label>
-          <Input 
+          <AvField 
             value={username} 
             onChange={e=>setUsername(e.target.value)} 
             type="username" 
             name="username" 
             id="username" 
-            placeholder="Username" />
+            required
+            />
         </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
-          <Input 
+          <AvField 
             value={password} 
             onChange={e=>setPassword(e.target.value)} 
             type="password" name="password" 
             id="password" 
-            placeholder="Password" />
+            required
+            />
         </FormGroup>
-         <Button color="info" onClick={springLogin}>Submit</Button>
-      </Form>
+        <div className="d-flex flex-row">
+          <Button color="info" onClick={userLogin}>Submit</Button>
+          <div className="ml-4 pt-2 text-danger">{message}</div>
+        </div>
+      </AvForm>
     </div>
   )
 }
