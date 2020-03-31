@@ -22,7 +22,7 @@ const ResidenceList = () => {
         <Col
           key={"res" + index + residence.id}
           className="mt-2 mb-2" xs={12} md={6} lg={4}
-        onClick={() => {console.log("hej från :", residence.id)}}>
+        onClick={() => {console.log("hej från :", residence.id)}}> {/* Makes the whole card selectable */}
           <Card>
             <CardBody>
               {/*Ersätt denna kod neranför med bild från db alt ResidenceImageCarousel, nästa sprint */}
