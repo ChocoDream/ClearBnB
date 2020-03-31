@@ -10,12 +10,14 @@ import About from './pages/About';
 import Search from './pages/Search';
 import Results from './pages/Results';
 import NavMenu from './components/NavMenu';
-import ResidenceContextProvider from './contexts/ResidenceContextProvider'
+import ResidenceContextProvider from './contexts/ResidenceContextProvider';
+import CityContextProvider from './contexts/CityContextProvider'
 
 const App = () => {
   return (
     <div className="App">
       <ResidenceContextProvider>
+        <CityContextProvider>
       <Router>
         <NavMenu />
         <Switch>
@@ -26,6 +28,7 @@ const App = () => {
           <Route exact path="/results" component={Results} />
         </Switch>
       </Router>
+        </CityContextProvider>
       </ResidenceContextProvider>
     </div>
   );

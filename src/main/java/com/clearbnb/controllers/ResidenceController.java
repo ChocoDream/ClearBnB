@@ -1,6 +1,5 @@
 package com.clearbnb.controllers;
 
-import com.clearbnb.entities.Address;
 import com.clearbnb.entities.Residence;
 import com.clearbnb.services.ResidenceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +38,11 @@ public class ResidenceController {
     @GetMapping("/api/clearbnb/residencesByAddressId/{address_id}")
     public List<Residence> getAllResidencesByAddressId(@PathVariable int address_id) {
         return residenceService.getAllResidencesByAddressId(address_id);
+    }
+
+    @GetMapping("/api/clearbnb/residencesByCityId/{city_id}")
+    public List<Residence> getAllResidencesByCityId(@PathVariable int city_id) {
+        return residenceService.getAllResidencesByCityId(city_id);
     }
 
     @GetMapping("/api/clearbnb/residences/cities")
