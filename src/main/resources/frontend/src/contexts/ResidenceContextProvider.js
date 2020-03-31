@@ -4,6 +4,7 @@ export const ResidenceContext = createContext()
 
 export default function ResidenceContextProvider(props) {
   const [residences, setResidences] = useState([])
+  const [residence, setResidence] = useState([])
 
   //Get Data from API
   const getResidences = async () => {
@@ -12,13 +13,21 @@ export default function ResidenceContextProvider(props) {
     setResidences(res)
   }
 
+  const getResidence = async (id) => {
+    let res = await fetch('api/clearbnb/residences/' + id)
+    res = await res.json()
+    setResidence(res)
+  }
+
   useEffect(() => {
     getResidences()
   }, [])
 
   const values = {
     residences, 
-    setResidences
+    setResidences,
+    residence,
+    setResidence
   }
 
   return (

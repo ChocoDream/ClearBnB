@@ -25,7 +25,7 @@ const ResidenceList = () => {
         onClick={() => {console.log("hej från :", residence.id)}}> {/* Makes the whole card selectable */}
           <Card>
             <CardBody>
-              {/*Ersätt denna kod neranför med bild från db alt ResidenceImageCarousel, nästa sprint */}
+              {/*Ersätt denna kod neranför med bild från db i nästa sprint */}
               <CardImg src={randomImages[(Math.floor(Math.random() * 6))]} alt="ClearBnB boende" />
               
               <CardText className="text-muted">Max antal gäster: {residence.max_guest} </CardText>
