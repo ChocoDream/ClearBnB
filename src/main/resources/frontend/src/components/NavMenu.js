@@ -1,43 +1,49 @@
-import React, {useState} from 'react';
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
-
+import React, { useState, useContext } from 'react';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, Form } from 'reactstrap';
+import { Link } from "react-router-dom";
+import { UserContext } from '../contexts/UserContextProvider'
 
 const NavMenu = () => {
 
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  return (
-    <div>
-      <Router>
-      {/*Right now the user got to refresh to head
-      to each page after clicking on the link, Got to fix */}
-      <Navbar color="faded" light className="">
-        <Link to="/" className="mr-auto h2 text-info"><b>ClearBnB</b></Link>
-        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-        <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar className="text-right h4 mr-2">
-            <NavItem>
-              <Link to="/user-login" className="text-info">Logga in</Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/search/" className="text-info">Sök</Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/about/" className="text-info">Om oss</Link>
-            </NavItem>
-          </Nav>
-        </Collapse>
-        </Navbar>
-        
-        
+  const { user, setUser } = useContext(UserContext)
 
-      </Router>
-    </div>
+  const logout = () => {
+    fetch('/logout')
+    setUser(null)
+    console.log('Logging out');
+  }
+
+  return (
+    <Navbar color="faded" light className="container" expand="md"> {/*MOBILE */}
+      <Link to="/" className="mr-auto navbar-brand text-info"><h3>Clear BnB</h3></Link>
+      <NavbarToggler onClick={toggleNavbar} className="mr-0" />
+      <Collapse isOpen={!collapsed} navbar>
+        <Nav navbar className="text-right ml-auto">
+          <NavItem>
+            {/* <Link to="/search/" className="nav-link text-info">Sök</Link> */}
+            <Form className="form-inline d-flex flex-row">         
+              <input className="form-control mt-1 mr-sm-0 py-0" type="search" placeholder="Sök" aria-label="Search"/>
+              <button className="btn btn-sm btn-outline-success my-sm-0 d-none" type="submit">Sök</button>          
+            </Form>
+          </NavItem>
+          <NavItem>
+            <Link to="/about/" className="nav-link text-info h5">Om oss</Link>
+          </NavItem>
+          {!user?(
+          <NavItem>
+            <Link to="/user-login" className="nav-link text-info h5">Logga in</Link>
+          </NavItem>
+          ):(
+          <NavItem>
+            <Link onClick={logout} to="/" className="nav-link text-info h5"> Logout</Link>
+          </NavItem>
+          )}
+        </Nav>
+      </Collapse>
+      </Navbar>
   )
 }
 
