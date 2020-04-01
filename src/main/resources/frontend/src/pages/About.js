@@ -1,5 +1,5 @@
 import React from 'react';
-import AmenitiesList from '../components/AmenitiesList';
+//import AmenitiesList from '../components/AmenitiesList';
 import {
   Container, 
   Row } from 'reactstrap';
@@ -7,10 +7,11 @@ import {
 const About = () => {
   return (
     <div>
-      <p>THIS IS THE ABOUT PAGE</p>
         <div>
           <Container>
-            <Row><AmenitiesList /></Row>
+          <Row>
+            <p>THIS IS THE ABOUT PAGE</p>
+            </Row>
           </Container>
           </div>
     </div>
