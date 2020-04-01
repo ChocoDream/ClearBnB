@@ -29,7 +29,7 @@ const App = () => {
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/user-login" component={Login} />
                 <Route exact path="/user-register" component={Register} />
-                <Route exact path="/results" component={Results} />
+                <Route exact path="/residences" component={Results} />
             </Router>
             </AmenityContextProvider>
           </UserContextProvider> 
