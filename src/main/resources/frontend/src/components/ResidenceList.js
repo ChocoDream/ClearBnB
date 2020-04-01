@@ -21,9 +21,9 @@ const ResidenceList = () => {
       return (
         <Col
           key={"res" + index + residence.id}
-          className="mt-2 mb-2" xs={12} md={6} lg={4}
-        onClick={() => {console.log("hej från :", residence.id)}}> {/* Makes the whole card selectable */}
-          <Card>
+          className="mt-2 mb-4" xs={12} md={6} lg={4}
+        onClick={() => {console.log("hej från :", residence.id)}} style={{cursor: "pointer"}}> {/* Makes the whole card selectable */}
+          <Card outline color="light">
             <CardBody>
               {/*Ersätt denna kod neranför med bild från db i nästa sprint */}
               <CardImg src={randomImages[(Math.floor(Math.random() * 6))]} alt="ClearBnB boende" />
