@@ -1,5 +1,5 @@
 import React from 'react';
-//import AmenitiesList from '../components/AmenitiesList';
+import AmenitiesList from '../components/AmenitiesList';
 import {
   Container, 
   Row } from 'reactstrap';
@@ -13,6 +13,7 @@ const About = () => {
             <p>THIS IS THE ABOUT PAGE</p>
             </Row>
           </Container>
+          <AmenitiesList />
           </div>
     </div>
   )
