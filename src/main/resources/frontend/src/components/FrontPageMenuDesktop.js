@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import {Button, Form, Input, FormGroup } from 'reactstrap';
+import {Alert , Button, Form, Input, FormGroup } from 'reactstrap';
 import Select from 'react-select';
 import { ResidenceContext } from '../contexts/ResidenceContextProvider'
 import { CityContext } from '../contexts/CityContextProvider'
@@ -7,13 +7,13 @@ import { CityContext } from '../contexts/CityContextProvider'
 const FrontPageMenuDesktop = () => {
   const { setResidences } = useContext(ResidenceContext)
 
-  const [region, setRegion] = useState('')
-  const [city, setCity] = useState('')
+  //const [region, setRegion] = useState('')
+  //const [city, setCity] = useState('')
   const [start_date, setStartDate] = useState('')
   const [end_date, setEndDate] = useState('')
   const [count_person, setCountPerson] = useState('')
   const [city_id, setCityId] = useState('');
-  const { setResidence } = useContext(ResidenceContext)
+  const [message, setMessage] = useState();
 
   const { cities } = useContext(CityContext)
 
@@ -25,8 +25,8 @@ const FrontPageMenuDesktop = () => {
 
   const doSearch = async() => {
     const datas = {
-                  region,
-                  city,
+                  //region,
+                  //city,
                   city_id,
                   start_date,
                   end_date,
@@ -35,8 +35,9 @@ const FrontPageMenuDesktop = () => {
     console.log(datas.city_id+' '+datas.city+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
 
     let res;
-    if((!datas.city_id) && (!datas.start_date)) {
+    if((!datas.city_id) || (!datas.start_date) || (!datas.end_date) || (!datas.count_person)) {
       res = await fetch('/api/clearbnb/residences')
+      setMessage('Alla fält är obligatoriska!');
     } else {
       res = await fetch('/api/clearbnb/residenceSearch/'+datas.city_id+'/'+datas.start_date+'/'+datas.end_date+'/'+datas.count_person+'')
     }
@@ -64,7 +65,7 @@ const FrontPageMenuDesktop = () => {
               type="text" name="start_date" 
               id="start_date"
               placeholder="Startdatum"
-              required/>
+              required />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Input
@@ -73,18 +74,18 @@ const FrontPageMenuDesktop = () => {
               type="text" name="end_date" 
               id="end_date" 
               placeholder="Slutdatum"
-              required/>
+              required />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Input
-              value={count_person} 
+              value={count_person}
               onChange={e=>setCountPerson(e.target.value)} 
               type="count_person" name="count_person" 
               id="count_person" 
               placeholder="Hur många gäster?"
-              required/>
+              required  />
           </FormGroup>
-          <Button onClick={doSearch} color="info" size="lg" >Sök</Button>
+          <Button onClick={doSearch} color="info" size="lg" >Sök</Button> 
       </Form>
     </div>
   )
