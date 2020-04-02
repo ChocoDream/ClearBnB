@@ -35,7 +35,7 @@ const FrontPageMenuDesktop = () => {
                   end_date,
                   count_person
                   }
-    console.log(datas.city_id+' '+datas.city+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
+    console.log(datas.city_id+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
 
     let res;
     if((!datas.city_id) || (!datas.start_date) || (!datas.end_date) || (!datas.count_person)) {
