@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Col, Row, Form, FormGroup, Input, Container } from 'reactstrap';
 
 const FrontPageMenuMobile = () => {
@@ -22,14 +23,13 @@ const FrontPageMenuMobile = () => {
             <Input type="text" name="address" bsSize="lg" placeholder="Sök adress.."/>
           </FormGroup>
           <span className="btn-lg btn-info d-block mb-4 text-center">Sök</span>
-          <span className="btn-lg btn-info d-block mt-3 mb-3 text-center">Ny Medlem?</span>
-          <span className="btn-lg btn-info d-block mt-3 mb-3 text-center">Logga in</span>
+          <Link to="/user-register" className="btn-lg btn-info d-block mt-3 mb-3 text-center">Ny Medlem?</Link>
+          <Link to="/user-login" className="btn-lg btn-info d-block mt-3 mb-3 text-center">Logga in</Link>
         </Form>
       <section className="d-flex 
-      justify-content-between
+      justify-content-end
       ">
-        <p className="text-white">Glömt lösenord?</p>
-        <p className="text-white">Om oss</p>
+        <Link to="/about/" className="text-white nav-link text-center">Om oss</Link>
       </section>
       </Container>
     </div>
