@@ -10,9 +10,11 @@ export default function AmenitiesList() {
   const { amenities } = useContext(AmenityContext)
 
   const AmenitiesList = () => {
-    return amenities.map((amenity, i) => {
+    return amenities.map((amenity, index) => {
         return (
-            <Col>{amenity.name}</Col>
+            <Col key={index}
+            onClick={() => {console.log("amenity :", amenity.id)}}>
+            >{amenity.name} ({amenity.id})</Col>
           )
         })
   }

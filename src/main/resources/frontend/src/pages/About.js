@@ -10,7 +10,7 @@ const About = () => {
       <p>THIS IS THE ABOUT PAGE</p>
         <div>
           <Container>
-            <Row><AmenitiesList /></Row>
+            <AmenitiesList/>
           </Container>
           </div>
     </div>
