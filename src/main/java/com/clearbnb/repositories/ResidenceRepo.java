@@ -64,4 +64,34 @@ public interface ResidenceRepo extends CrudRepository<Residence, Integer> {
             "                                 order by ci.city";
     @Query(value = FIND_CITIES, nativeQuery = true)
     public List findAllCities();
+
+
+    public static final String FIND_RESIDENCE_BY_SEARCH_PARAMETERS = "" +
+            "select distinct re.id,\n" +
+            "                re.rooms,\n" +
+            "                re.price,\n"+
+            "                re.max_guests,\n" +
+            "                re.address_id,\n " +
+            "                ci.country,\n" +
+            "                ci.region,\n" +
+            "                ci.city,\n" +
+            "                ad.zip_code,\n" +
+            "                ad.street_name,\n" +
+            "                ad.street_number,\n" +
+            "                ad.apartment_number\n" +
+            "           from residences re,\n" +
+            "                addresses ad,\n" +
+            "                cities ci\n" +
+            "      LEFT JOIN bookings b ON re.id = b.residence_id\n" +
+            "          where re.address_id = ad.id\n" +
+            "            and ad.city_id = ci.id\n" +
+            "            and ci.id = :city_id\n" +
+            "            and re.max_guests >= :max_guest\n" +
+            "            and ((b.start_date > :end_date) or (b.end_date < :start_date) or b.start_date is null)\n" +
+            "       order by re.id";
+    @Query(value = FIND_RESIDENCE_BY_SEARCH_PARAMETERS, nativeQuery = true)
+    public List<Residence> findBySearchParameters(int city_id,
+                                                  int start_date,
+                                                  int end_date,
+                                                  int max_guest);
 }

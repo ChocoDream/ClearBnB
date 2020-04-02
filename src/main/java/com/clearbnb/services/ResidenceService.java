@@ -40,5 +40,12 @@ public class ResidenceService {
     public List getAllCities() {
         return residenceRepo.findAllCities();
     }
+
+    public List<Residence> getAllResidencesBySearchParameters(int city_id,
+                                                              int start_date,
+                                                              int end_date,
+                                                              int max_guest) {
+        return residenceRepo.findBySearchParameters(city_id,start_date,end_date,max_guest);
+    }
 }
 
