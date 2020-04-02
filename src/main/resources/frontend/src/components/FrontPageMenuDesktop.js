@@ -22,6 +22,9 @@ const FrontPageMenuDesktop = () => {
       label: opt,
       value: opt
   }));
+  const [visible, setVisible] = useState(false);
+
+  const onDismiss = () => setVisible(false);
 
   const doSearch = async() => {
     const datas = {
@@ -38,6 +41,7 @@ const FrontPageMenuDesktop = () => {
     if((!datas.city_id) || (!datas.start_date) || (!datas.end_date) || (!datas.count_person)) {
       res = await fetch('/api/clearbnb/residences')
       setMessage('Alla fält är obligatoriska!');
+      setVisible(true);
     } else {
       res = await fetch('/api/clearbnb/residenceSearch/'+datas.city_id+'/'+datas.start_date+'/'+datas.end_date+'/'+datas.count_person+'')
     }
@@ -85,7 +89,8 @@ const FrontPageMenuDesktop = () => {
               placeholder="Hur många gäster?"
               required  />
           </FormGroup>
-          <Button onClick={doSearch} color="info" size="lg" >Sök</Button> 
+          <Button onClick={doSearch} color="info" size="lg" >Sök</Button>          
+          <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
       </Form>
     </div>
   )
