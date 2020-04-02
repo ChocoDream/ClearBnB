@@ -16,6 +16,8 @@ public class Residence {
 
     @Column(name = "address_id")
     private int address_id;
+
+
     private String country;
 
     @Column(name = "region")

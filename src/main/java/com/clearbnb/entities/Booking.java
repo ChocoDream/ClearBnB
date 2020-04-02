@@ -7,13 +7,8 @@ import javax.persistence.*;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-
-    @Column(name = "user_id")
-    private int user_id;
-
-    @Column(name = "residence_id")
-    private int residence_id;
 
     @Column(name = "start_date")
     private int start_date;
@@ -30,28 +25,20 @@ public class Booking {
     @Column(name = "is_active")
     private boolean is_active;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
+    @OneToOne
+    @JoinColumn(name = "residence_id")
+    Residence residence;
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getResidence_id() {
-        return residence_id;
-    }
-
-    public void setResidence_id(int residence_id) {
-        this.residence_id = residence_id;
     }
 
     public int getStart_date() {
@@ -92,5 +79,21 @@ public class Booking {
 
     public void setIs_active(boolean is_active) {
         this.is_active = is_active;
+    }
+
+    public Residence getResidence() {
+        return residence;
+    }
+
+    public void setResidence(Residence residence) {
+        this.residence = residence;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

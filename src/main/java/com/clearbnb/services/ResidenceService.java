@@ -1,5 +1,6 @@
 package com.clearbnb.services;
 
+import com.clearbnb.entities.Address;
 import com.clearbnb.entities.Residence;
 import com.clearbnb.repositories.ResidenceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
