@@ -54,15 +54,6 @@ const FrontPageMenuDesktop = () => {
   return (
     <div className="d-flex justify-content-center">
       <Form className="bg-secondary rounded p-2 form-inline" style={{marginTop: '5%'}}>
-      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Input
-              value={region} 
-              onChange={e=>setRegion(e.target.value)} 
-              type="text" name="region" 
-              id="region"
-              placeholder="Ange region"
-              required/>
-          </FormGroup>
           <FormGroup>
             {CitiesSelect()}
           </FormGroup>

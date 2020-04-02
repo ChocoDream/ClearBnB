@@ -1,7 +1,6 @@
 import React from 'react';
-//import AmenitiesList from '../components/AmenitiesList';
 import {
-  Container } from 'reactstrap';
+  Row, Container } from 'reactstrap';
 
 const About = () => {
   return (
