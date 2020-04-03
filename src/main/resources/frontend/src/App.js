@@ -12,10 +12,11 @@ import Residences from './pages/Residences';
 import ResidencePage from './pages/ResidencePage';
   
 import NavMenu from './components/NavMenu';
-import ResidenceContextProvider from './contexts/ResidenceContextProvider';
-import UserContextProvider from './contexts/UserContextProvider';
-import CityContextProvider from './contexts/CityContextProvider';
-import AmenityContextProvider from './contexts/AmenityContextProvider';
+import NewResidence from './pages/NewResidence';
+import ResidenceContextProvider from './contexts/ResidenceContextProvider'
+import UserContextProvider from './contexts/UserContextProvider'
+import CityContextProvider from './contexts/CityContextProvider'
+import AmenityContextProvider from './contexts/AmenityContextProvider'
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
                 <Route exact path="/user-register" component={Register} />
                 <Route exact path="/mypage" component={MyPage} />
                 <Route exact path="/residences" component={Residences} />
+                <Route exact path="/new-residence" component={NewResidence} />
                 <Route exact path="/residences/:id" children={<ResidencePage />} />
             </Router>
             </AmenityContextProvider>

@@ -17,7 +17,6 @@ public class Residence {
     @Column(name = "address_id")
     private int address_id;
 
-
     private String country;
 
     @Column(name = "region")
@@ -25,6 +24,10 @@ public class Residence {
 
     @Column(name = "city")
     private String city;
+
+    //@Column(name = "city_id")
+    private int city_id;
+
     private int zip_code;
     private String street_name;
     private String street_number;
@@ -32,6 +35,20 @@ public class Residence {
 
     public Residence(){
     }
+
+    /*public Residence(int address_id, int city_id, int zip_code, String street_name, String street_number, String apartment_number,
+                     int price, int rooms, int max_guests) {
+
+        this.address_id = address_id;
+        this.city_id = city_id;
+        this.zip_code = zip_code;
+        this.street_name = street_name;
+        this.street_number = street_number;
+        this.apartment_number = apartment_number;
+        this.price = price;
+        this.rooms = rooms;
+        this.max_guests = max_guests;
+    }*/
 
     public int getId() {
         return id;
