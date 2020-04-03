@@ -6,6 +6,7 @@ import {
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import MyPage from './pages/MyPage';
 import About from './pages/About';
 import Results from './pages/Results';
 import NavMenu from './components/NavMenu';
@@ -27,6 +28,7 @@ const App = () => {
                 <Route exact path="/about" component={About} />
                 <Route exact path="/user-login" component={Login} />
                 <Route exact path="/user-register" component={Register} />
+                <Route exact path="/mypage" component={MyPage} />
                 <Route exact path="/residences" component={Results} />
             </Router>
             </AmenityContextProvider>

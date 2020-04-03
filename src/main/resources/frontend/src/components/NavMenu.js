@@ -43,10 +43,10 @@ const NavMenu = (props) => {
           ):(
           <>
             <NavItem>
-              <Link to="/profile" 
+              <Link to="/mypage" 
                 className="nav-link text-warning h5 capitalize"
                 style={{ textTransform: 'capitalize' }}
-              >{user.first_name}</Link>
+              >Mina sidor</Link>
             </NavItem>
             <NavItem>
               <Link onClick={logout} to="/" className="nav-link text-info h5"> Logout</Link>
