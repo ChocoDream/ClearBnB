@@ -6,8 +6,8 @@ import {
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import MyPage from './pages/MyPage';
 import About from './pages/About';
-import Search from './pages/Search';
 import Residences from './pages/Residences';
 import ResidencePage from './pages/ResidencePage';
   
@@ -28,9 +28,9 @@ const App = () => {
               <NavMenu />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
-                <Route exact path="/search" component={Search} />
                 <Route exact path="/user-login" component={Login} />
                 <Route exact path="/user-register" component={Register} />
+                <Route exact path="/mypage" component={MyPage} />
                 <Route exact path="/residences" component={Residences} />
                 <Route exact path="/residences/:id" children={<ResidencePage />} />
             </Router>

@@ -9,7 +9,7 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int value;
 
-    @Column(name = "label")
+    @Column(name = "city")
     private String label;
 
     /*@Column(name = "country")

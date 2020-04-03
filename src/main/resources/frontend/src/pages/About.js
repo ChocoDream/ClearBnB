@@ -1,16 +1,15 @@
 import React from 'react';
-import AmenitiesList from '../components/AmenitiesList';
 import {
-  Container, 
-  Row } from 'reactstrap';
+  Row, Container } from 'reactstrap';
 
 const About = () => {
   return (
     <div>
-      <p>THIS IS THE ABOUT PAGE</p>
         <div>
           <Container>
-            <AmenitiesList/>
+          <Row>
+            <p>THIS IS THE ABOUT PAGE</p>
+            </Row>
           </Container>
           </div>
     </div>
