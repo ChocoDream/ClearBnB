@@ -4,8 +4,6 @@ import { ResidenceContext } from '../contexts/ResidenceContextProvider';
 
 const ResidencePage = () => {
   let { id } = useParams();
-  const { residence, setResidence, getResidence } = useContext(ResidenceContext);
-  
   
   return (
     <div>
