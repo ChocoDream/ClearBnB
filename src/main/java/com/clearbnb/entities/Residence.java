@@ -25,7 +25,7 @@ public class Residence {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "city_id")
+    //@Column(name = "city_id")
     private int city_id;
 
     private int zip_code;
