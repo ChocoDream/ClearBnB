@@ -24,6 +24,7 @@ public interface ResidenceRepo extends CrudRepository<Residence, Integer> {
                 "           ci.country,\n" +
                 "           ci.region,\n" +
                 "           ci.city,\n" +
+                "           a.city_id, \n" +
                 "           a.zip_code,\n" +
                 "           a.street_name,\n" +
                 "           a.street_number,\n" +
@@ -45,6 +46,7 @@ public interface ResidenceRepo extends CrudRepository<Residence, Integer> {
             "           ci.country,\n" +
             "           ci.region,\n" +
             "           ci.city,\n" +
+            "           a.city_id, \n" +
             "           a.zip_code,\n" +
             "           a.street_name,\n" +
             "           a.street_number,\n" +
@@ -75,6 +77,7 @@ public interface ResidenceRepo extends CrudRepository<Residence, Integer> {
             "                ci.country,\n" +
             "                ci.region,\n" +
             "                ci.city,\n" +
+            "                ad.city_id, \n" +
             "                ad.zip_code,\n" +
             "                ad.street_name,\n" +
             "                ad.street_number,\n" +
@@ -87,7 +90,7 @@ public interface ResidenceRepo extends CrudRepository<Residence, Integer> {
             "            and ad.city_id = ci.id\n" +
             "            and ci.id = :city_id\n" +
             "            and re.max_guests >= :max_guest\n" +
-            "            and ((b.start_date > :end_date) or (b.end_date < :start_date) or b.start_date is null)\n" +
+            "            and (((b.start_date > :end_date) or (b.end_date < :start_date) or b.start_date is null) and :end_date > :start_date)\n" +
             "       order by re.id";
     @Query(value = FIND_RESIDENCE_BY_SEARCH_PARAMETERS, nativeQuery = true)
     public List<Residence> findBySearchParameters(int city_id,

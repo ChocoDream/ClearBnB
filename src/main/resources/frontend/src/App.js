@@ -10,6 +10,7 @@ import MyPage from './pages/MyPage';
 import About from './pages/About';
 import Results from './pages/Results';
 import NavMenu from './components/NavMenu';
+import NewResidence from './pages/NewResidence';
 import ResidenceContextProvider from './contexts/ResidenceContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 import CityContextProvider from './contexts/CityContextProvider'
@@ -30,6 +31,7 @@ const App = () => {
                 <Route exact path="/user-register" component={Register} />
                 <Route exact path="/mypage" component={MyPage} />
                 <Route exact path="/residences" component={Results} />
+                <Route exact path="/new-residence" component={NewResidence} />
             </Router>
             </AmenityContextProvider>
           </UserContextProvider> 
