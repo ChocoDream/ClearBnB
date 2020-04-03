@@ -16,8 +16,8 @@ const FrontPageMenuDesktop = () => {
 
   //const [region, setRegion] = useState('')
   //const [city, setCity] = useState('')
-  const [startDate, setStartDate] = useState(new Date())
-  const [endDate, setEndDate] = useState(tomorrow)
+  const [start_date, setStartDate] = useState(new Date())
+  const [end_date, setEndDate] = useState(tomorrow)
   const [count_person, setCountPerson] = useState('')
   const [city_id, setCityId] = useState('');
   const [message, setMessage] = useState();
@@ -38,8 +38,8 @@ const FrontPageMenuDesktop = () => {
                   //region,
                   //city,
                   city_id,
-                  start_date: moment(startDate).format('X'),
-                  end_date: moment(endDate).format('X'),
+                  start_date: moment(start_date).format('X'),
+                  end_date: moment(end_date).format('X'),
                   count_person
                   }
     console.log(datas.city_id+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
@@ -70,16 +70,9 @@ const FrontPageMenuDesktop = () => {
             {CitiesSelect()}
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            {/* <Input
-              value={start_date} 
-              onChange={e=>setStartDate(e.target.value)} 
-              type="text" name="start_date" 
-              id="start_date"
-              placeholder="Startdatum"
-              required /> */}
           <DatePicker
               className="p-2 rounded-lg"
-                selected={startDate}
+                selected={start_date}
                 onChange={date=>setStartDate(date)}
                 dateFormat='MM/dd/yyyy'
                 minDate={new Date()}
@@ -91,17 +84,10 @@ const FrontPageMenuDesktop = () => {
               />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          {/* <Input
-              value={end_date} 
-              onChange={e=>setEndDate(e.target.value)} 
-              type="text" name="end_date" 
-              id="end_date" 
-              placeholder="Slutdatum"
-              required /> */}
           <DatePicker
               className="p-2 rounded"
               style={{ padding:'2px !important'}}
-                selected={endDate}
+                selected={end_date}
                 onChange={date=>setEndDate(date)}
                 dateFormat='MM/dd/yyyy'
                 minDate={tomorrow}
