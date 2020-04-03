@@ -4,6 +4,9 @@ import Select from 'react-select';
 import { ResidenceContext } from '../contexts/ResidenceContextProvider'
 import { CityContext } from '../contexts/CityContextProvider'
 
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
 const FrontPageMenuDesktop = () => {
   const { setResidences } = useContext(ResidenceContext)
 
@@ -59,22 +62,47 @@ const FrontPageMenuDesktop = () => {
             {CitiesSelect()}
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Input
+            {/* <Input
               value={start_date} 
               onChange={e=>setStartDate(e.target.value)} 
               type="text" name="start_date" 
               id="start_date"
               placeholder="Startdatum"
-              required />
+              required /> */}
+          <DatePicker
+              className="p-2 rounded-lg"
+                selected={startDate}
+                onChange={date=>setStartDate(date)}
+                dateFormat='dd/MM/yyyy'
+                minDate={new Date()}
+                isClearable
+                showWeekNumbers
+                showYearDropdown
+                scrolllableMonthYearDropdown
+                placeholderText=""
+              />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Input
+          {/* <Input
               value={end_date} 
               onChange={e=>setEndDate(e.target.value)} 
               type="text" name="end_date" 
               id="end_date" 
               placeholder="Slutdatum"
-              required />
+              required /> */}
+          <DatePicker
+              className="p-2 rounded"
+              style={{ borderRadius:'5px !important'}}
+                selected={endDate}
+                onChange={date=>setEndDate(date)}
+                dateFormat='dd/MM/yyyy'
+                minDate={new Date()}
+                isClearable
+                showWeekNumbers
+                showYearDropdown
+                scrolllableMonthYearDropdown
+                placeholderText=""
+              />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Input
