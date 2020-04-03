@@ -1,16 +1,23 @@
 import React, { useState, useContext } from 'react';
 import {Alert , Button, Form, Input, FormGroup } from 'reactstrap';
 import Select from 'react-select';
+import moment from 'moment'
 import { ResidenceContext } from '../contexts/ResidenceContextProvider'
 import { CityContext } from '../contexts/CityContextProvider'
 
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
 const FrontPageMenuDesktop = () => {
+  const today = new Date()
+  const tomorrow = today.setDate(today.getDate()+1)
+
   const { setResidences } = useContext(ResidenceContext)
 
   //const [region, setRegion] = useState('')
   //const [city, setCity] = useState('')
-  const [start_date, setStartDate] = useState('')
-  const [end_date, setEndDate] = useState('')
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(tomorrow)
   const [count_person, setCountPerson] = useState('')
   const [city_id, setCityId] = useState('');
   const [message, setMessage] = useState();
@@ -31,8 +38,8 @@ const FrontPageMenuDesktop = () => {
                   //region,
                   //city,
                   city_id,
-                  start_date,
-                  end_date,
+                  start_date: moment(startDate).format('X'),
+                  end_date: moment(endDate).format('X'),
                   count_person
                   }
     console.log(datas.city_id+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
@@ -58,27 +65,52 @@ const FrontPageMenuDesktop = () => {
  
   return (
     <div className="d-flex justify-content-center">
-      <Form className="bg-secondary rounded p-2 form-inline" style={{marginTop: '5%'}}>
+      <Form className="bg-secondary rounded p-1 form-inline" style={{marginTop: '5%'}}>
           <FormGroup>
             {CitiesSelect()}
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Input
+            {/* <Input
               value={start_date} 
               onChange={e=>setStartDate(e.target.value)} 
               type="text" name="start_date" 
               id="start_date"
               placeholder="Startdatum"
-              required />
+              required /> */}
+          <DatePicker
+              className="p-2 rounded-lg"
+                selected={startDate}
+                onChange={date=>setStartDate(date)}
+                dateFormat='MM/dd/yyyy'
+                minDate={new Date()}
+                isClearable
+                showWeekNumbers
+                showYearDropdown
+                scrolllableMonthYearDropdown
+                placeholderText=""
+              />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Input
+          {/* <Input
               value={end_date} 
               onChange={e=>setEndDate(e.target.value)} 
               type="text" name="end_date" 
               id="end_date" 
               placeholder="Slutdatum"
-              required />
+              required /> */}
+          <DatePicker
+              className="p-2 rounded"
+              style={{ padding:'2px !important'}}
+                selected={endDate}
+                onChange={date=>setEndDate(date)}
+                dateFormat='MM/dd/yyyy'
+                minDate={tomorrow}
+                isClearable
+                showWeekNumbers
+                showYearDropdown
+                scrolllableMonthYearDropdown
+                placeholderText=""
+              />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Input
