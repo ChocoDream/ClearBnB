@@ -1,10 +1,10 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect } from 'react';
 
 export const ResidenceContext = createContext()
 
 export default function ResidenceContextProvider(props) {
   const [residences, setResidences] = useState([])
-  const [residence, setResidence] = useState([])
+  const [residence, setResidence] = useState(null)
 
   //Get Data from API
   const getResidences = async () => {
@@ -16,12 +16,13 @@ export default function ResidenceContextProvider(props) {
   const getResidence = async (id) => {
     let res = await fetch('api/clearbnb/residences/' + id)
     res = await res.json()
-    setResidence(res)
+    setResidence(res);
+    console.log(res)
   }
 
   useEffect(() => {
-    getResidences()
-  }, [])
+    getResidences();
+  }, []);
 
   const values = {
     residences, 

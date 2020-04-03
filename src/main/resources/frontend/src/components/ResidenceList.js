@@ -8,7 +8,8 @@ import {
 
 const ResidenceList = () => {
   const { residences } = useContext(ResidenceContext)
-  //Added randomImages for height card testing. 
+
+  //Added randomImages for height card testing. Remove once we got images form db.
   const randomImages = ["https://odis.homeaway.com/odis/listing/7e04139f-1678-4a69-a9dc-d86be6bd80c6.c10.jpg",
     "https://i.ytimg.com/vi/Ft8qVlwhOYE/maxresdefault.jpg",
     "https://i.ytimg.com/vi/kEzvxqjn11c/hqdefault.jpg",
@@ -27,7 +28,7 @@ const ResidenceList = () => {
             <CardBody>
               {/*Ersätt denna kod neranför med bild från db i nästa sprint */}
               <CardImg src={randomImages[(Math.floor(Math.random() * 6))]} alt="ClearBnB boende" />
-              
+
               <CardText className="text-muted">Max antal gäster: {residence.max_guest} </CardText>
               <CardSubtitle> {residence.city}, {residence.region} </CardSubtitle>
               <CardTitle className="h4"> <b>{residence.price} kr SEK /</b> natt </CardTitle>
