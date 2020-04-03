@@ -25,6 +25,9 @@ const FrontPageMenuDesktop = () => {
       label: opt,
       value: opt
   }));
+  const [visible, setVisible] = useState(false);
+
+  const onDismiss = () => setVisible(false);
 
   const doSearch = async() => {
     const datas = {
@@ -35,12 +38,16 @@ const FrontPageMenuDesktop = () => {
                   end_date,
                   count_person
                   }
-    console.log(datas.city_id+' '+datas.city+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
+    console.log(datas.city_id+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
 
     let res;
     if((!datas.city_id) || (!datas.start_date) || (!datas.end_date) || (!datas.count_person)) {
       res = await fetch('/api/clearbnb/residences')
       setMessage('Alla fält är obligatoriska!');
+<<<<<<< HEAD
+=======
+      setVisible(true);
+>>>>>>> develop
     } else {
       res = await fetch('/api/clearbnb/residenceSearch/'+datas.city_id+'/'+datas.start_date+'/'+datas.end_date+'/'+datas.count_person+'')
     }
@@ -68,6 +75,7 @@ const FrontPageMenuDesktop = () => {
               type="text" name="start_date" 
               id="start_date"
               placeholder="Startdatum"
+<<<<<<< HEAD
               required /> */}
           <DatePicker
               className="p-2 rounded-lg"
@@ -81,6 +89,9 @@ const FrontPageMenuDesktop = () => {
                 scrolllableMonthYearDropdown
                 placeholderText=""
               />
+=======
+              required />
+>>>>>>> develop
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           {/* <Input
@@ -89,6 +100,7 @@ const FrontPageMenuDesktop = () => {
               type="text" name="end_date" 
               id="end_date" 
               placeholder="Slutdatum"
+<<<<<<< HEAD
               required /> */}
           <DatePicker
               className="p-2 rounded"
@@ -103,6 +115,9 @@ const FrontPageMenuDesktop = () => {
                 scrolllableMonthYearDropdown
                 placeholderText=""
               />
+=======
+              required />
+>>>>>>> develop
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Input
@@ -113,7 +128,12 @@ const FrontPageMenuDesktop = () => {
               placeholder="Hur många gäster?"
               required  />
           </FormGroup>
+<<<<<<< HEAD
           <Button onClick={doSearch} color="info" size="lg" >Sök</Button> 
+=======
+          <Button onClick={doSearch} color="info" size="lg" >Sök</Button>          
+          <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
+>>>>>>> develop
       </Form>
     </div>
   )

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Col, Row, Form, FormGroup, Input, Container } from 'reactstrap';
+import { Alert, Col, Row, Form, FormGroup, Input, Container } from 'reactstrap';
 import Select from 'react-select';
 import { ResidenceContext } from '../contexts/ResidenceContextProvider'
 import { CityContext } from '../contexts/CityContextProvider'
@@ -7,13 +7,13 @@ import { CityContext } from '../contexts/CityContextProvider'
 const FrontPageMenuMobile = () => {
   const { setResidences } = useContext(ResidenceContext)
 
-  const [region, setRegion] = useState('')
-  const [city, setCity] = useState('')
+  //const [region, setRegion] = useState('')
+  //const [city, setCity] = useState('')
   const [start_date, setStartDate] = useState('')
   const [end_date, setEndDate] = useState('')
   const [count_person, setCountPerson] = useState('')
   const [city_id, setCityId] = useState('');
-  const { setResidence } = useContext(ResidenceContext)
+  const [message, setMessage] = useState();
 
   const { cities } = useContext(CityContext)
 
@@ -23,20 +23,26 @@ const FrontPageMenuMobile = () => {
       value: opt
   }));
 
+  const [visible, setVisible] = useState(false);
+
+  const onDismiss = () => setVisible(false);
+
   const doSearch = async() => {
     const datas = {
-                  region,
-                  city,
+                  //region,
+                  //city,
                   city_id,
                   start_date,
                   end_date,
                   count_person
                   }
-    console.log(datas.city_id+' '+datas.city+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
+    console.log(datas.city_id+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
 
     let res;
-    if((!datas.city_id) && (!datas.start_date)) {
+    if((!datas.city_id) || (!datas.start_date) || (!datas.end_date) || (!datas.count_person)) {
       res = await fetch('/api/clearbnb/residences')
+      setMessage('Alla fält är obligatoriska!');
+      setVisible(true);
     } else {
       res = await fetch('/api/clearbnb/residenceSearch/'+datas.city_id+'/'+datas.start_date+'/'+datas.end_date+'/'+datas.count_person+'')
     }
@@ -91,6 +97,7 @@ const FrontPageMenuMobile = () => {
               placeholder="Hur många gäster?"
               required/>
           </FormGroup>
+          <Alert color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
           <span  onClick={doSearch} className="btn-lg btn-info d-block mb-4 text-center">Sök</span>
           <span className="btn-lg btn-info d-block mt-3 mb-3 text-center">Ny Medlem?</span>
           <span className="btn-lg btn-info d-block mt-3 mb-3 text-center">Logga in</span>
