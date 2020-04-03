@@ -3,9 +3,7 @@ package com.clearbnb.controllers;
 import com.clearbnb.entities.Residence;
 import com.clearbnb.services.ResidenceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,5 +46,14 @@ public class ResidenceController {
     @GetMapping("/api/clearbnb/residences/cities")
     public List getAllCities() {
         return residenceService.getAllCities();
+    }
+
+    @GetMapping("/api/clearbnb/residenceSearch/{city_id}/{start_date}/{end_date}/{max_guest}")
+    public List<Residence> getAllResidencesBySearchParameters(@PathVariable int city_id,
+                                                              @PathVariable int start_date,
+                                                              @PathVariable int end_date,
+                                                              @PathVariable int max_guest
+                                                    ) {
+        return residenceService.getAllResidencesBySearchParameters(city_id,start_date,end_date,max_guest);
     }
 }

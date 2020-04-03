@@ -25,4 +25,12 @@ public class BookingService {
         return bookingRepo.findByResidenceId(residence_id);
     }
 
+    public Booking createBooking(Booking booking) {
+        return bookingRepo.save(booking);
+    }
+
+    public void deleteBooking(int id) {
+        bookingRepo.deleteById(id);
+    }
+
 }
