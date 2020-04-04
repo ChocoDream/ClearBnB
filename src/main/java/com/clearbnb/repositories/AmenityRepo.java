@@ -17,7 +17,7 @@ public interface AmenityRepo extends CrudRepository<Amenity, Integer>{
             "                                                       a.name," +
             "                                                       axr.start_date," +
             "                                                       axr.end_date\n" +
-            "                                                  from amenitiesXresidences axr,\n" +
+            "                                                  from amenities_x_residences axr,\n" +
             "                                                       amenitites a\n" +
             "                                                 where axr.amenity_id = a.id\n" +
             "                                                   and axr.residence_id = :residence_id\n" +
