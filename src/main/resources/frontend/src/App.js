@@ -12,6 +12,8 @@ import Results from './pages/Results';
 import NavMenu from './components/NavMenu';
 import NewResidence from './pages/NewResidence';
 import ResidenceContextProvider from './contexts/ResidenceContextProvider'
+import ResidenceConProvider from './contexts/ResidenceConProvider'
+import AddressContextProvider from './contexts/AddressContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 import CityContextProvider from './contexts/CityContextProvider'
 import AmenityContextProvider from './contexts/AmenityContextProvider'
@@ -20,22 +22,26 @@ const App = () => {
   return (
     <div className="App">
       <ResidenceContextProvider>
-        <CityContextProvider>
-          <UserContextProvider>
-            <AmenityContextProvider>
-            <Router>
-              <NavMenu />
-                <Route exact path="/" component={Home} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/user-login" component={Login} />
-                <Route exact path="/user-register" component={Register} />
-                <Route exact path="/mypage" component={MyPage} />
-                <Route exact path="/residences" component={Results} />
-                <Route exact path="/new-residence" component={NewResidence} />
-            </Router>
-            </AmenityContextProvider>
-          </UserContextProvider> 
-        </CityContextProvider>
+        <ResidenceConProvider>
+          <AddressContextProvider>
+            <CityContextProvider>
+              <UserContextProvider>
+                <AmenityContextProvider>
+                <Router>
+                  <NavMenu />
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/user-login" component={Login} />
+                    <Route exact path="/user-register" component={Register} />
+                    <Route exact path="/mypage" component={MyPage} />
+                    <Route exact path="/residences" component={Results} />
+                    <Route exact path="/new-residence" component={NewResidence} />
+                </Router>
+                </AmenityContextProvider>
+              </UserContextProvider> 
+            </CityContextProvider>
+          </AddressContextProvider>
+        </ResidenceConProvider>
       </ResidenceContextProvider>
     </div>
   );
