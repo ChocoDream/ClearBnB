@@ -1,11 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 export const ResidenceContext = createContext()
 
 export default function ResidenceContextProvider(props) {
   //const [city, setCity] = useState(null)
   const [residences, setResidences] = useState([])
-  const [residence, setResidence] = useState(null)
+  const [residence, setResidence] = useState([])
 
   //Get Data from API
   const getResidences = async () => {
@@ -19,20 +20,23 @@ export default function ResidenceContextProvider(props) {
   }
 
   const getResidence = async (id) => {
-    let res = await fetch('api/clearbnb/residences/' + id)
-    res = await res.json()
+    let res = await fetch('/api/clearbnb/residences/' + id)
+    res = await res.json();
     setResidence(res);
-    console.log(res)
   }
 
   useEffect(() => {
     getResidences()
   }, [])
 
+
   const values = {
     residences, 
     setResidences,
     appendResidence,
+    residence,
+    setResidence,
+    getResidence
   }
 
   return (
