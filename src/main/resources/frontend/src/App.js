@@ -10,9 +10,10 @@ import MyPage from './pages/MyPage';
 import About from './pages/About';
 import Residences from './pages/Residences';
 import ResidencePage from './pages/ResidencePage';
+import NewResidence from './pages/NewResidence';
+import CreateBooking from './pages/CreateBooking';
   
 import NavMenu from './components/NavMenu';
-import NewResidence from './pages/NewResidence';
 import ResidenceContextProvider from './contexts/ResidenceContextProvider'
 import ResidenceConProvider from './contexts/ResidenceConProvider'
 import AddressContextProvider from './contexts/AddressContextProvider'
@@ -38,7 +39,8 @@ const App = () => {
                     <Route exact path="/mypage" component={MyPage} />
                     <Route exact path="/residences" component={Residences} />
                     <Route exact path="/new-residence" component={NewResidence} />
-                <Route exact path="/residences/:id" children={<ResidencePage />} />
+                    <Route exact path="/create-booking" component={CreateBooking} />
+                    <Route exact path="/residences/:id" children={<ResidencePage />} />
                 </Router>
                 </AmenityContextProvider>
               </UserContextProvider> 
