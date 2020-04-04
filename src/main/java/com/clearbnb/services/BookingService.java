@@ -1,6 +1,7 @@
 package com.clearbnb.services;
 
 import com.clearbnb.entities.Booking;
+import com.clearbnb.entities.User;
 import com.clearbnb.repositories.BookingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,10 @@ public class BookingService {
 
     public Booking createBooking(Booking booking) {
         return bookingRepo.save(booking);
+    }
+
+    public List<Booking> getBookingByUserId(int user_id){
+        return bookingRepo.findBookingByUserId(user_id);
     }
 
     public void deleteBooking(int id) {
