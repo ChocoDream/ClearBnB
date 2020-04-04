@@ -15,10 +15,6 @@ export default function ResidenceContextProvider(props) {
     setResidences(res)
   }
   
-  const appendResidence = (residence) => {
-    setResidences([...residences, residence])
-  }
-
   const getResidence = async (id) => {
     let res = await fetch('/api/clearbnb/residences/' + id)
     res = await res.json();
@@ -33,7 +29,6 @@ export default function ResidenceContextProvider(props) {
   const values = {
     residences, 
     setResidences,
-    appendResidence,
     residence,
     setResidence,
     getResidence

@@ -31,7 +31,7 @@ public class Booking {
 
     @OneToOne
     @JoinColumn(name = "residence_id")
-    Residence residence;
+    ResidenceInfo residenceInfo;
 
     public int getId() {
         return id;
@@ -81,12 +81,12 @@ public class Booking {
         this.is_active = is_active;
     }
 
-    public Residence getResidence() {
-        return residence;
+    public ResidenceInfo getResidenceInfo() {
+        return residenceInfo;
     }
 
-    public void setResidence(Residence residence) {
-        this.residence = residence;
+    public void setResidenceInfo(ResidenceInfo residenceInfo) {
+        this.residenceInfo = residenceInfo;
     }
 
     public User getUser() {

@@ -3,34 +3,51 @@ package com.clearbnb.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "city_list")
+@Table(name = "cities")
 public class City {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int value;
+    private int id;
 
-    @Column(name = "city")
-    private String label;
-
-    /*@Column(name = "country")
+    @Column(name = "country")
     private String country;
 
     @Column(name = "region")
-    private String region;*/
+    private String region;
 
-    public int getValue() {
-        return value;
+    @Column(name = "city")
+    private String city;
+
+    public int getId() {
+        return id;
     }
 
-    public String getLabel() {
-        return label;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    /*public String getCountry() {
+    public String getCountry() {
         return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getRegion() {
         return region;
-    }*/
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }

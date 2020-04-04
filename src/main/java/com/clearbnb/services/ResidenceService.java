@@ -1,6 +1,5 @@
 package com.clearbnb.services;
 
-import com.clearbnb.entities.Address;
 import com.clearbnb.entities.Residence;
 import com.clearbnb.repositories.ResidenceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,41 +11,17 @@ import java.util.List;
 public class ResidenceService {
 
     @Autowired
-    ResidenceRepo residenceRepo;
+    private ResidenceRepo residenceRepo;
 
-    public List<Residence> findAllResidences() {
+    public List<Residence> getAllResidences() {
         return (List<Residence>) residenceRepo.findAll();
     }
 
-    public Residence getOneResidence(int id) {
-        return residenceRepo.findById(id);
+    public Residence createResidence(Residence residence) {
+        return residenceRepo.save(residence);
     }
 
-    public List<Residence> getAllResidencesByAddressId(int address_id) {
-        return residenceRepo.findByAddressId(address_id);
-    }
-
-    public List<Residence> getAllResidencesByCityId(int city_id) {
-        return residenceRepo.findByCityId(city_id);
-    }
-
-    public List<Residence> getAllResidenceByCity(String city) {
-        return residenceRepo.findByCityContaining(city);
-    }
-
-    public List<Residence> getAllResidenceByRegion(String region) {
-        return residenceRepo.findByRegionContaining(region);
-    }
-
-    public List getAllCities() {
-        return residenceRepo.findAllCities();
-    }
-
-    public List<Residence> getAllResidencesBySearchParameters(int city_id,
-                                                              int start_date,
-                                                              int end_date,
-                                                              int max_guest) {
-        return residenceRepo.findBySearchParameters(city_id,start_date,end_date,max_guest);
+    public void deleteResidence(int id) {
+        residenceRepo.deleteById(id);
     }
 }
-

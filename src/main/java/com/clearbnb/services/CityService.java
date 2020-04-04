@@ -11,14 +11,17 @@ import java.util.List;
 public class CityService {
 
     @Autowired
-    CityRepo cityRepo;
+    private CityRepo cityRepo;
 
-    public List<City> findAllCities() {
+    public List<City> getAllCities() {
         return (List<City>) cityRepo.findAll();
     }
 
+    public City createCity(City city) {
+        return cityRepo.save(city);
+    }
 
-    public List<City> getAllCities() {
-        return cityRepo.findAllCities();
+    public void deleteCity(int id) {
+        cityRepo.deleteById(id);
     }
 }

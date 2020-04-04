@@ -10,10 +10,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "city_id")
-    City city;
-
+    private int city_id;
     private int zip_code;
     private String street_name;
     private String street_number;
@@ -27,6 +24,14 @@ public class Address {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCity_id() {
+        return city_id;
+    }
+
+    public void setCity_id(int city_id) {
+        this.city_id = city_id;
     }
 
     public int getZip_code() {
@@ -61,11 +66,4 @@ public class Address {
         this.apartment_number = apartment_number;
     }
 
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
 }

@@ -54,7 +54,8 @@ const FrontPageMenuDesktop = () => {
       setMessage('Alla fält är obligatoriska!');
       setVisible(true);
     } else {
-      res = await fetch('/api/clearbnb/residenceSearch/'+datas.city_id+'/'+datas.start_date+'/'+datas.end_date+'/'+datas.count_person+'')
+      res = await fetch('/api/clearbnb/residenceSearch/'+datas.city_id+'/'+datas.start_date+'/'
+                                                        +datas.end_date+'/'+datas.count_person+'')
     }
     res = await res.json()
     setResidences(res)

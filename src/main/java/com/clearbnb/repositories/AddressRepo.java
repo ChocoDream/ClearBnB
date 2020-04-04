@@ -1,9 +1,10 @@
 package com.clearbnb.repositories;
-import com.clearbnb.entities.Residence;
+
+import com.clearbnb.entities.Address;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ResidenceRepo  extends CrudRepository<Residence, Integer>{
-    public Residence findById(int id);
+public interface AddressRepo  extends CrudRepository<Address, Integer> {
+    public Address findById(int id);
 }
