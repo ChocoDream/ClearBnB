@@ -2,7 +2,7 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import ResidenceList from '../components/ResidenceList';
 
-const Results = () => {
+const Residences = () => {
   return (
     <div>
       <Container>
@@ -12,4 +12,4 @@ const Results = () => {
   )
 };
 
-export default Results;
+export default Residences;
