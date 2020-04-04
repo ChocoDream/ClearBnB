@@ -1,5 +1,6 @@
 package com.clearbnb.controllers;
 import com.clearbnb.entities.Booking;
+import com.clearbnb.entities.User;
 import com.clearbnb.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,10 @@ public class BookingController {
     @DeleteMapping("/api/clearbnb/bookings/{id}")
     public void deleteBooking(@PathVariable int id) {
         bookingService.deleteBooking(id);
+    }
+
+    @GetMapping("/api/clearbnb/bookingsbyuserid/{user_id}")
+    public List<Booking> getBookingByUser(@PathVariable int user_id){
+        return bookingService.getBookingByUserId(user_id);
     }
 }
