@@ -21,6 +21,7 @@ import UserContextProvider from './contexts/UserContextProvider'
 import CityContextProvider from './contexts/CityContextProvider'
 import AmenityContextProvider from './contexts/AmenityContextProvider'
 import AmenitiesResidencesIdConProvider from './contexts/AmenitiesResidencesIdConProvider'
+import BookingContextProvider from './contexts/BookingContextProvider'
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
               <UserContextProvider>
                 <AmenityContextProvider>
                   <AmenitiesResidencesIdConProvider>
+                   <BookingContextProvider>
                     <Router>
                       <NavMenu />
                         <Route exact path="/" component={Home} />
@@ -44,6 +46,7 @@ const App = () => {
                         <Route exact path="/create-booking" component={CreateBooking} />
                         <Route exact path="/residences/:id" children={<ResidencePage />} />
                     </Router>
+                    </BookingContextProvider>
                   </AmenitiesResidencesIdConProvider>
                 </AmenityContextProvider>
               </UserContextProvider> 

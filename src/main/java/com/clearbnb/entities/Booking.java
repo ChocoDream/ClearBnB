@@ -11,13 +11,13 @@ public class Booking {
     private int id;
 
     @Column(name = "start_date")
-    private int start_date;
+    private long start_date;
 
     @Column(name = "end_date")
-    private int end_date;
+    private long end_date;
 
     @Column(name = "time_stamp")
-    private int time_stamp;
+    private long time_stamp;
 
     @Column(name = "total_price")
     private int total_price;
@@ -41,7 +41,7 @@ public class Booking {
         this.id = id;
     }
 
-    public int getStart_date() {
+    public long getStart_date() {
         return start_date;
     }
 
@@ -49,7 +49,7 @@ public class Booking {
         this.start_date = start_date;
     }
 
-    public int getEnd_date() {
+    public long getEnd_date() {
         return end_date;
     }
 
@@ -57,7 +57,7 @@ public class Booking {
         this.end_date = end_date;
     }
 
-    public int getTime_stamp() {
+    public long getTime_stamp() {
         return time_stamp;
     }
 

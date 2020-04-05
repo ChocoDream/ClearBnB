@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState } from 'react'
 
 export const BookingContext = createContext()
 
@@ -12,9 +12,14 @@ const BookingContextProvider = (props) => {
     setBookings(res)
   }
 
+  const addBooking = (booking) => {
+    setBookings([...bookings, booking])
+  }
+
   const values = {
     bookings,
-    getBookings
+    getBookings,
+    addBooking
   }
 
   return (
