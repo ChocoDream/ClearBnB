@@ -3,8 +3,9 @@ import { Container, Row, Col } from 'reactstrap';
 import { UserContext } from '../contexts/UserContextProvider'
 import {
   Card, CardTitle, CardText,
-  CardSubtitle, CardBody,
+  CardSubtitle, CardBody, Button
 } from 'reactstrap';
+import moment from 'moment'
 
 const MyPage = (props) => {
   const [ bookings, setBookings ] = useState();
@@ -20,41 +21,66 @@ const MyPage = (props) => {
   useEffect(() => {
     if (user !== null) {
       getBookings(user.id);
-    } else {
-      setMessage('Du har inga bokningar!')
-    }
-  }, [user])
+    } 
+  }, [])
 
-  console.log(bookings);
+  const dateFormat = (seleted_time) => {
+    return moment(seleted_time).format("YYYY.MM.DD");
+  }
   
   let myBooking;
   if (bookings) {
     myBooking = bookings.map((booking) => {
         return(
-          <>
-            <li>{booking.user.first_name}</li>
-          </>
+          <div key="booking.id">
+            <Card>
+              <CardBody className="bg-light border border-info">
+                <CardTitle><h3 className="mt-4 text-info"> 
+                    <span>{booking.residenceInfo.street_number} </span> 
+                    <span>{booking.residenceInfo.street_name}, </span> 
+                    <span>{booking.residenceInfo.city}</span></h3>
+                </CardTitle>
+                <CardSubtitle><h5 className="mt-2 text-muted"> 
+                    <span>{booking.residenceInfo.zip_code} </span>
+                    <span>{booking.residenceInfo.region}, </span> 
+                    <span>{booking.residenceInfo.country}</span></h5>
+                </CardSubtitle>
+                <hr/>
+                <CardSubtitle>
+                   <h4>Totalpris: {booking.total_price} Kr</h4>
+                </CardSubtitle>
+                <CardText>
+                    {/* TODO */}
+                    Startdatum: <span className="text-info">{booking.start_date}</span> <br/>
+                    Slutdatum: <span className="text-info">{dateFormat(booking.end_date)}</span>
+                </CardText>
+                <Button className="btn-danger">Avboka</Button>
+              </CardBody>
+            </Card>
+          </div>
         )
     })
-  }
+  } 
 
   return (
-    <Container className="container">
+    <Container>
         <Row>
-          <Col className="mt-5">
-            <h4>Välkommen</h4>
-            {/* <h4><span>{user.first_name}</span> <span>{user.last_name}</span></h4> */}
+          <Col className="mt-5" xs="12" sm="6">
+            <h4 className="text-secondary">Välkommen</h4>
+            {user&&(
+              <h4 className="text-info"><span>{user.first_name}</span> <span>{user.last_name}</span></h4>
+            )}            
+            <hr/>
           </Col>
         </Row>
         <Row>
-          <Col xs="12">
-            {myBooking}
+          <Col xs="12" sm="6">
+            <h4 className="text-secondary">Minbokning</h4>
+            <hr/>
+              {bookings?
+              (<>{myBooking}</>) :
+              (<h4>{message}</h4>)}      
           </Col>
-          <Col xs="12" sm="8">Column</Col>
-        </Row>
-        <Row>
-          <Col xs="12" sm="4">Column</Col>
-          <Col xs="12" sm="8">Column</Col>
         </Row>
     </Container>
   )
