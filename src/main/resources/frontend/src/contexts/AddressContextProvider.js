@@ -3,7 +3,6 @@ import React, { createContext, useState, useEffect } from 'react'
 export const AddressContext = createContext()
 
 export default function AddressContextProvider(props) {
-  //const [city, setCity] = useState(null)
   const [addresses, setAddresses] = useState([])
 
   //Get Data from API

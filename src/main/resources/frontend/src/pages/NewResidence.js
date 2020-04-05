@@ -8,13 +8,16 @@ import { withRouter } from 'react-router-dom'
 import { CityContext } from '../contexts/CityContextProvider'
 import { AmenityContext } from '../contexts/AmenityContextProvider'
 import { AmenitiesResidencesIdCon } from '../contexts/AmenitiesResidencesIdConProvider'
+import { PhotoContext} from '../contexts/PhotoContextProvider'
 
 function NewResidence(props) {
   const { appendResidence } = useContext(ResidenceCon)
   const { appendAddress } = useContext(AddressContext)  
   const { appendAmenityResidencesId } = useContext(AmenitiesResidencesIdCon)
+  const { appendPhoto} = useContext(PhotoContext)
   const { cities } = useContext(CityContext)
   const { amenities } = useContext(AmenityContext)
+
   const [zip_code, setZipCode] = useState('');
   const [city_id, setCityId] = useState('');
   const [street_name, setStreetName] = useState('')
@@ -32,7 +35,34 @@ function NewResidence(props) {
 
   const [cSelected, setCSelected] = useState([]);
   const [rSelected, setRSelected] = useState(null);
-  
+ 
+  let images = []
+
+  const filesChange = async fileList => {
+      // handle file changes
+      const formData = new FormData();
+
+      if (!fileList.length) return;
+
+      // append the files to FormData
+      Array.from(Array(fileList.length).keys())
+        .map(x => {
+          formData.append("files", fileList[x], fileList[x].name);
+        });
+
+        let response = await fetch('/api/clearbnb/uploadfiles', {
+          method: 'POST',
+          body: formData
+        }).catch(console.warn)
+
+        response = await response.json()
+
+        console.log(response);
+        
+        images = response
+        //imagePath: images[0]
+  }
+
   var someArrayOfStrings =[];
   someArrayOfStrings.map(opt => ({
       label: opt,
@@ -127,6 +157,27 @@ function NewResidence(props) {
         newamxres = await newamxres.json()
         appendAmenityResidencesId(newamxres)
     }
+
+    //PHOTOS
+    for(var i = 0; i < images.length; i++) {
+        var photo_path = images[i];
+    
+        const photo = {
+            residence_id, 
+            path: photo_path
+        }
+   
+        // send new residence to backend
+        let photores = await fetch('/api/clearbnb/photos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(photo)
+        })
+        photores = await photores.json()
+        
+        appendPhoto(photores)
+    }
+
     setReadyMessage('Bostaden är sparad');
     setReadyVisible(true);
 
@@ -303,6 +354,18 @@ const AmenitiesList = () => {
                 </Col>
             </Row>
         </FormGroup>
+        <FormGroup className="m-3">
+          <Label for="files">File to upload:</Label>
+          <Input 
+            type="file" 
+            name="file"
+            id="files" 
+            accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
+            multiple 
+            required
+            onChange={e => filesChange(e.target.files)}
+            />
+          </FormGroup>
         <Button color="info" size="mg">Spara bostad</Button>
         <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
       </Form>     
