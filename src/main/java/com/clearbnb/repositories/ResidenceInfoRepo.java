@@ -90,17 +90,17 @@ public interface ResidenceInfoRepo extends CrudRepository<ResidenceInfo, Integer
             "            and ad.city_id = ci.id\n" +
             "            and ci.id = :city_id\n" +
             "            and re.max_guests >= :max_guest\n" +
-            /*"            and ((b.start_date <= :start_date and :start_date <= b.end_date) \n" +
-            "                   or (:start_date <= b.start_date and start <= :end_date)\n" +
-            "                   or (:start_date <= b.end_date and b.end_date <= :end_date ))\n" +*/
             "            and not EXISTS(\n" +
             "                        select b.residence_id\n" +
             "                        from bookings b\n" +
-            "                        where (\n" +
-            "                        (:start_date < b.end_date and b.start_date < :start_date)\n" +
+            "                        where \n" +
+            /*"                        ((:start_date < b.end_date and b.start_date < :start_date)\n" +
             "                or (:end_date < b.end_date and b.start_date < :end_date)\n" +
             "                or (b.start_date < :start_date and b.end_date > :start_date)\n" +
-            "                   )\n" +
+            "                   )\n" +*/
+            "                   ((b.start_date <= :start_date and :start_date <= b.end_date) \n" +
+            "                   or (:start_date <= b.start_date and b.start_date <= :end_date)\n" +
+            "                   or (:start_date <= b.end_date and b.end_date <= :end_date ))\n" +
             "                and re.id = b.residence_id )\n" +
             "       order by re.id";
     //  "            and (((b.start_date > :end_date) AND (b.end_date < :start_date) or b.start_date is null) and :end_date > :start_date)\n" +
