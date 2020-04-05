@@ -85,13 +85,25 @@ public interface ResidenceInfoRepo extends CrudRepository<ResidenceInfo, Integer
             "           from residences re,\n" +
             "                addresses ad,\n" +
             "                cities ci\n" +
-            "      LEFT JOIN bookings b ON re.id = b.residence_id\n" +
+           /* "      LEFT JOIN bookings b ON re.id = b.residence_id\n" +*/
             "          where re.address_id = ad.id\n" +
             "            and ad.city_id = ci.id\n" +
             "            and ci.id = :city_id\n" +
             "            and re.max_guests >= :max_guest\n" +
-            "            and (((b.start_date > :end_date) or (b.end_date < :start_date) or b.start_date is null) and :end_date > :start_date)\n" +
+            /*"            and ((b.start_date <= :start_date and :start_date <= b.end_date) \n" +
+            "                   or (:start_date <= b.start_date and start <= :end_date)\n" +
+            "                   or (:start_date <= b.end_date and b.end_date <= :end_date ))\n" +*/
+            "            and not EXISTS(\n" +
+            "                        select b.residence_id\n" +
+            "                        from bookings b\n" +
+            "                        where (\n" +
+            "                        (:start_date < b.end_date and b.start_date < :start_date)\n" +
+            "                or (:end_date < b.end_date and b.start_date < :end_date)\n" +
+            "                or (b.start_date < :start_date and b.end_date > :start_date)\n" +
+            "                   )\n" +
+            "                and re.id = b.residence_id )\n" +
             "       order by re.id";
+    //  "            and (((b.start_date > :end_date) AND (b.end_date < :start_date) or b.start_date is null) and :end_date > :start_date)\n" +
     @Query(value = FIND_RESIDENCE_BY_SEARCH_PARAMETERS, nativeQuery = true)
     public List<ResidenceInfo> findBySearchParameters(int city_id,
                                                       int start_date,
