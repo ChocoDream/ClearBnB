@@ -16,9 +16,9 @@ public class PhotoService {
         return (List<Photo>) photoRepo.findAll();
     }
 
-    /*public Photo getPhotosByResidenceId(int residence_id){
-        return (List<Photo>) photoRepo.getPhotosByResidenceId(residence_id);
-    }*/
+    public List<Photo> getPhotosByResidenceId(int residence_id){
+        return photoRepo.getPhotosByResidenceId(residence_id);
+    }
 
     public Photo createPhoto(Photo photo) {
         return photoRepo.save(photo);

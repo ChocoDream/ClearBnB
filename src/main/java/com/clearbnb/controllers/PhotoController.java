@@ -17,10 +17,10 @@ public class PhotoController {
         return photoService.getPhotos();
     }
 
-    /*@GetMapping("/api/clearbnb/photosByResidenceId/{residence_id}")
+    @GetMapping("/api/clearbnb/photosByResidenceId/{residence_id}")
     public List<Photo> getPhotosByResidenceId(@PathVariable int residence_id) {
-        return (List<Photo>) photoService.getPhotosByResidenceId(residence_id);
-    }*/
+        return photoService.getPhotosByResidenceId(residence_id);
+    }
 
     @PostMapping("/api/clearbnb/photos")
     public Photo createPhoto(@RequestBody Photo photo) {
