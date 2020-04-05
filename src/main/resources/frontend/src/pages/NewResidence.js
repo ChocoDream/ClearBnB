@@ -7,11 +7,14 @@ import { AddressContext } from '../contexts/AddressContextProvider'
 import { withRouter } from 'react-router-dom'
 import { CityContext } from '../contexts/CityContextProvider'
 import { AmenityContext } from '../contexts/AmenityContextProvider'
+import { AmenitiesResidencesIdCon } from '../contexts/AmenitiesResidencesIdConProvider'
 
 function NewResidence(props) {
   const { appendResidence } = useContext(ResidenceCon)
-  const { appendAddress } = useContext(AddressContext)
-  //const [address_id, setAddressId] = useState('');
+  const { appendAddress } = useContext(AddressContext)  
+  const { appendAmenityResidencesId } = useContext(AmenitiesResidencesIdCon)
+  const { cities } = useContext(CityContext)
+  const { amenities } = useContext(AmenityContext)
   const [zip_code, setZipCode] = useState('');
   const [city_id, setCityId] = useState('');
   const [street_name, setStreetName] = useState('')
@@ -20,14 +23,13 @@ function NewResidence(props) {
   const [rooms, setRooms] = useState('')
   const [max_guests, setMax_guests] = useState('')
   const [price, setPrice] = useState('')
-  //const [amenities, setAmenities] = useState('')
   const [message, setMessage] = useState();
+  const [ready, setReadyMessage] = useState();
   const [visible, setVisible] = useState(false);
+  const [ready_visible, setReadyVisible] = useState(false);
+  const [form_visible, setFormVisible] = useState(true);
   const onDismiss = () => setVisible(false);
 
-  const { cities } = useContext(CityContext)
-
-  const { amenities } = useContext(AmenityContext)
   const [cSelected, setCSelected] = useState([]);
   const [rSelected, setRSelected] = useState(null);
   
@@ -54,8 +56,8 @@ function NewResidence(props) {
     console.log(datas.city_id+'-'+datas.street_name+' '+datas.street_number+' '+datas.apartment_number+' '
                 +datas.rooms+'-'+datas.max_guests+' '+datas.price);
 
-    if((!datas.city_id) || (!datas.street_name) || (!datas.street_number) || (!datas.apartment_number) 
-                        || (!datas.rooms) || (!datas.max_guests) || (!datas.price)
+    if((!datas.city_id) || (!datas.street_name) || (!datas.street_number) ||
+                        (!datas.rooms) || (!datas.max_guests) || (!datas.price)
         ) {
         setMessage('Alla fält är obligatoriska!');
         setVisible(true);
@@ -88,7 +90,7 @@ function NewResidence(props) {
         price,
         max_guests
     }
-
+   
     // send new residence to backend
     let newres = await fetch('/api/clearbnb/allresidences', {
       method: 'POST',
@@ -96,22 +98,48 @@ function NewResidence(props) {
       body: JSON.stringify(residence)
     })
     newres = await newres.json()
-
+    var residence_id = newres.id;
     console.log(newres)
     
     appendResidence(newres)
 
-    //amenities: {JSON.stringify(cSelected)}
+    const amenities = cSelected;
+    console.log('amenities:'+JSON.stringify(amenities));
+    var start_date = 0; //Date.now();
+    //let newamxres;
+    //var amenity_id = 6;
+    var end_date = 0; //Date.now();
+
+    for(var i = 0; i < amenities.length; i++) {
+        var amenity_id = amenities[i];
+        const amenities_x_residences = {
+            amenity_id,
+            residence_id,
+            start_date,
+            end_date
+        };   
+        // send new residence to backend
+        let newamxres = await fetch('/api/clearbnb/amxres', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(amenities_x_residences)
+        })
+        newamxres = await newamxres.json()
+        appendAmenityResidencesId(newamxres)
+    }
+    setReadyMessage('Bostaden är sparad');
+    setReadyVisible(true);
 
     setStreetName('')
     setStreetNumber('')
     setStreetApartment('')
+    setZipCode('')    
     setCityId('')
     setRooms('')
-    setPrice('')
     setMax_guests('')
+    setPrice('')
+    setCSelected([]);
 
-    props.history.push('/')
   }
 
   const CitiesSelect = () => {
@@ -143,10 +171,12 @@ const AmenitiesList = () => {
 
   return (
     <div className="container">
+        <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={ready_visible}>{ready}</Alert>
       <h1>Ny bostad</h1>
       {/* in Vue: @submit="addResidence" */}
       <Form 
-        onSubmit={addResidence}>
+        onSubmit={addResidence}
+        >
         <Row form>        
             <Col md={6}>
                 <FormGroup>
@@ -208,7 +238,6 @@ const AmenitiesList = () => {
                 <FormGroup>
                 <Label for="apartment_number">Lägenhet</Label>
                 <Input
-                    required
                     type="text" 
                     id="apartment_number" 
                     placeholder=""
@@ -276,7 +305,7 @@ const AmenitiesList = () => {
         </FormGroup>
         <Button color="info" size="mg">Spara bostad</Button>
         <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
-      </Form>
+      </Form>     
     </div>
   )
 }
