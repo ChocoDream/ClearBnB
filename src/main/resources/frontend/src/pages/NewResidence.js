@@ -29,15 +29,16 @@ function NewResidence(props) {
     const [message, setMessage] = useState();
     const [ready, setReadyMessage] = useState();
     const [visible, setVisible] = useState(false);
+    const [disabled, setDisabled] = useState(false);
     const [ready_visible, setReadyVisible] = useState(false);
-    const [form_visible, setFormVisible] = useState(true);
+    //const [form_visible, setFormVisible] = useState(true);
     const onDismiss = () => setVisible(false);
 
     const [cSelected, setCSelected] = useState([]);
     const [rSelected, setRSelected] = useState(null);
  
     let images = []
-
+  
     const filesChange = async fileList => {
         // handle file changes
         const formData = new FormData();
@@ -172,7 +173,7 @@ function NewResidence(props) {
 
         setReadyMessage('Bostaden är sparad');
         setReadyVisible(true);
-
+        setDisabled(true);
         /*setStreetName('')
         setStreetNumber('')
         setStreetApartment('')
@@ -239,6 +240,7 @@ function NewResidence(props) {
                     onChange={
                     e => setZipCode(e.target.value)
                     }
+                    disabled = {disabled}
                 />
                 </FormGroup>
             </Col>
@@ -256,6 +258,7 @@ function NewResidence(props) {
                     onChange={
                     e => setStreetName(e.target.value)
                     }
+                    disabled = {disabled}
                 />
                 </FormGroup>
             </Col>
@@ -271,6 +274,7 @@ function NewResidence(props) {
                     onChange={
                     e => setStreetNumber(e.target.value)
                     }
+                    disabled = {disabled}
                 />
                 </FormGroup>
             </Col>
@@ -285,6 +289,7 @@ function NewResidence(props) {
                     onChange={
                     e => setStreetApartment(e.target.value)
                     }
+                    disabled = {disabled}
                 />
                 </FormGroup>
             </Col>
@@ -301,6 +306,7 @@ function NewResidence(props) {
                     onChange={
                     e => setRooms(e.target.value)
                     }
+                    disabled = {disabled}
                 />
                 </FormGroup>
             </Col>
@@ -312,6 +318,7 @@ function NewResidence(props) {
                     onChange={e=>setMax_guests(e.target.value)} 
                     type="text"
                     id="max_guests"
+                    disabled = {disabled}
                     required  />
                 </FormGroup>
             </Col>
@@ -327,6 +334,7 @@ function NewResidence(props) {
                     onChange={
                     e => setPrice(e.target.value)
                     }
+                    disabled = {disabled}
                 />
                 </FormGroup>
             </Col>
@@ -352,7 +360,7 @@ function NewResidence(props) {
             onChange={e => filesChange(e.target.files)}
             />
           </FormGroup>
-        <Button color="info" size="mg">Spara bostad</Button>
+        <Button color="info" size="mg" disabled = {disabled}>Spara bostad</Button>
         <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
       </Form>     
     </div>
