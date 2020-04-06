@@ -1,16 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import { UserContext } from '../contexts/UserContextProvider'
-// import { BookingContext } from '../contexts/BookingContextProvider'
+import {
+  Card, CardTitle, CardText,
+  CardSubtitle, CardBody, Button
+} from 'reactstrap';
+import moment from 'moment'
 
 const MyPage = (props) => {
-  const [ userId, setUserId ] = useState();
   const [ bookings, setBookings ] = useState();
+  const [ message, setMessage ] = useState('');
+  const { user } = useContext(UserContext);
 
-  const { user } = useContext(UserContext)
-  // const { bookings, getBookings } = useContext(BookingContext); 
-
-  //Get Data from API
   const getBookings = async (id) => {
     let res = await fetch('/api/clearbnb/bookingsbyuserid/' + id)
     res = await res.json()
@@ -18,39 +19,70 @@ const MyPage = (props) => {
   }
 
   useEffect(() => {
-
+    if (user !== null) {
       getBookings(user.id);
-    
+    } 
   }, [])
 
-  console.log(user);
-  console.log(bookings);
+  const dateFormat = (seleted_time) => {
+    return moment(seleted_time).format("YYYY.MM.DD");
+  }
   
-  
-  
+  let myBooking;
+  if (bookings) {
+    myBooking = bookings.map((booking) => {
+        return(
+          <div key="booking.id">
+            <Card>
+              <CardBody className="bg-light border border-info">
+                <CardTitle><h3 className="mt-4 text-info"> 
+                    <span>{booking.residenceInfo.street_number} </span> 
+                    <span>{booking.residenceInfo.street_name}, </span> 
+                    <span>{booking.residenceInfo.city}</span></h3>
+                </CardTitle>
+                <CardSubtitle><h5 className="mt-2 text-muted"> 
+                    <span>{booking.residenceInfo.zip_code} </span>
+                    <span>{booking.residenceInfo.region}, </span> 
+                    <span>{booking.residenceInfo.country}</span></h5>
+                </CardSubtitle>
+                <hr/>
+                <CardSubtitle>
+                   <h4>Totalpris: {booking.total_price} Kr</h4>
+                </CardSubtitle>
+                <CardText>
+                    {/* TODO */}
+                    Startdatum: <span className="text-info">{booking.start_date}</span> <br/>
+                    Slutdatum: <span className="text-info">{dateFormat(booking.end_date)}</span>
+                </CardText>
+                <Button className="btn-danger">Avboka</Button>
+              </CardBody>
+            </Card>
+          </div>
+        )
+    })
+  } 
 
   return (
-    <div className="className">
-      <Container>
+    <Container>
         <Row>
-          <Col className="mt-5">
-            <h4>Välkommen</h4>
-            {/* <h4><span>{user.first_name}</span> <span>{user.last_name}</span></h4> */}
+          <Col className="mt-5" xs="12" sm="6">
+            <h4 className="text-secondary">Välkommen</h4>
+            {user&&(
+              <h4 className="text-info"><span>{user.first_name}</span> <span>{user.last_name}</span></h4>
+            )}            
+            <hr/>
           </Col>
         </Row>
         <Row>
-          <Col xs="12" sm="4">
-            <h4>Min bokning</h4>
-            <h4>{}</h4>
+          <Col xs="12" sm="6">
+            <h4 className="text-secondary">Minbokning</h4>
+            <hr/>
+              {bookings?
+              (<>{myBooking}</>) :
+              (<h4>{message}</h4>)}      
           </Col>
-          <Col xs="12" sm="8">Column</Col>
         </Row>
-        <Row>
-          <Col xs="12" sm="4">Column</Col>
-          <Col xs="12" sm="8">Column</Col>
-        </Row>
-      </Container>
-    </div>
+    </Container>
   )
 }
 
