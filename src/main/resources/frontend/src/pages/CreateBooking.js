@@ -4,21 +4,21 @@ import { UserContext } from '../contexts/UserContextProvider';
 import { BookingContext } from '../contexts/BookingContextProvider';
 import { Container, Button } from 'reactstrap'
 
-const CreateBooking = () => {
+const CreateBooking = (props) => {
   const { residence } = useContext(ResidenceContext);
   const { user } = useContext(UserContext);
   const { addBooking } = useContext(BookingContext);
-
-  const createBooking = async() => {    
+  const createBooking = async() => {  
+    if(!user) props.history.push("/user-login");    
     const myBoking = {
       start_date: 1586102049,
       end_date: 1586188449,
       time_stamp: 1586187695,
-      total_price: 2321,
+      total_price: 321,
+      is_active: true,
       user,
       residenceInfo: residence
     }
-
     let res = await fetch('/api/clearbnb/bookings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -26,8 +26,7 @@ const CreateBooking = () => {
     })
     res = await res.json()
     addBooking(res)
-  }
-    
+  }    
   return (
     <Container className="mt-5">
       <h2>THIS IS THE BOOKING PAGE</h2>
