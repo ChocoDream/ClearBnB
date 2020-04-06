@@ -28,7 +28,7 @@ public class ResidenceInfo {
     //@Column(name = "city_id")
     private int city_id;
 
-    private int zip_code;
+    private String zip_code;
     private String street_name;
     private String street_number;
     private String apartment_number;
@@ -100,11 +100,11 @@ public class ResidenceInfo {
         this.city = city;
     }
 
-    public int getZip_code() {
+    public String getZip_code() {
         return zip_code;
     }
 
-    public void setZip_code(int zip_code) {
+    public void setZip_code(String zip_code) {
         this.zip_code = zip_code;
     }
 

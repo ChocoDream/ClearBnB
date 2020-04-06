@@ -4,11 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "amenities_x_residences")
-public class AmenitiesXresidences {
+public class AmenitiesResidencesId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int amenity_id;
+    private int id;
 
+    @Column(name = "amenity_id")
+    private int amenity_id;
     @Column(name = "residence_id")
     private int residence_id;
     @Column(name = "start_date")
@@ -16,14 +18,22 @@ public class AmenitiesXresidences {
     @Column(name = "end_date")
     private int end_date;
 
-    public AmenitiesXresidences(){
+    public AmenitiesResidencesId(){
     }
 
-    public AmenitiesXresidences(int amenity_id, int residence_id, int start_date, int end_date) {
+    public AmenitiesResidencesId(int amenity_id, int residence_id, int start_date, int end_date) {
         this.amenity_id = amenity_id;
         this.residence_id = residence_id;
         this.start_date = start_date;
         this.end_date = end_date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getAmenity_id() {
