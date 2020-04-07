@@ -9,9 +9,16 @@ const ResidencePage = () => {
   let { id } = useParams();
   const { residence, getResidence } = useContext(ResidenceContext);
 
+  const [totalPrice, setTotalPrice] = useState(Number);
+
   useEffect(() => {
     getResidence(id);
   }, [])
+  
+  useEffect(() => {
+    //Calculating the total price in an useEffect
+    setTotalPrice(residence.price)
+  })
 
   
   return (
@@ -21,12 +28,19 @@ const ResidencePage = () => {
           <h2 className="mt-2 h3"> <b>{residence.street_name} {residence.street_number}, {residence.city}</b> </h2>
           <h4 className="mt-3 mb-3 text-muted"> {residence.region}, {residence.country} </h4>
           {/*BILD HÄR */}
-          <Link to="/create-booking">
-          <Button color="info" size="lg" block>Boka</Button>
-          </Link>
+          <span className="d-flex justify-content-center">
+            <Link to="/create-booking" className="btn btn-info btn-lg">Boka</Link>
+          </span>
           {/*ANVÄNDARE HÄR */}
-          <h3 className="mt-3 mb-2"><b>{residence.price} kr</b> natt</h3>
-          <h2>Information om boendet</h2>
+          <div className="text-center">
+            <h2 className="mt-2"><b>Totalt {totalPrice} kr </b></h2>
+            <h3><b>{residence.price} kr</b> / natt</h3>
+            <h3>2 personer</h3>
+            <h3>3 nätter</h3>
+          </div>
+          <h3><b>Information om boendet</b></h3>
+          <p> logem lipsom logem lipson logem lipson logem lipson logem lipson logem lipson logen lipsom logem lipsom logen losipson lopgen lispon </p>
+          <h3><b>Bekvämligheter</b></h3>
           <AmenityList />
         </Col>
       </Row>
