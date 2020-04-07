@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Card, CardImg, CardText, CardBody, CardTitle,
+import { Card, CardImg, CardBody, CardTitle,
         InputGroup, InputGroupAddon, InputGroupText, 
         Container, Alert, Row, Col, Button, 
         Form, FormGroup, Label, Input } from 'reactstrap'
@@ -45,7 +45,7 @@ function NewResidence(props) {
     //const [rSelected, setRSelected] = useState(null);
  
     let images = []
-  
+
     const filesChange = async fileList => {
         // handle file changes
         const formData = new FormData();
@@ -77,14 +77,17 @@ function NewResidence(props) {
     const addResidence = async (e) => {
         e.preventDefault()
 
-        if (user !== null) {
+        /*if (user !== null) {
             var user_id = user.id;
         } else{            
             setMessage('Du måste logga in.');
             setVisible(true);
             setDisabled(true);
             return
-        }
+        }*/
+        var user_id = user.id;
+        var current_date = Math.floor(new Date().getTime()/1000.0);
+        
 
         const datas = {
             city_id,
@@ -149,6 +152,7 @@ function NewResidence(props) {
         const ownerresidence = {
             owner_id: user_id, 
             residence_id,
+            start_date: current_date
         }
 
         // send new residence to backend
@@ -166,7 +170,6 @@ function NewResidence(props) {
         //AMENITIES
         const amenities = cSelected;
         console.log('amenities:'+JSON.stringify(amenities));
-        var start_date = 0; //Date.now();
         var end_date = 0; //Date.now();
 
         for(var i = 0; i < amenities.length; i++) {
@@ -174,7 +177,7 @@ function NewResidence(props) {
             const amenities_x_residences = {
                 amenity_id,
                 residence_id,
-                start_date,
+                start_date: current_date,
                 end_date
             };   
             // send new residence to backend
@@ -446,7 +449,6 @@ function NewResidence(props) {
     else{
         return(
             <Container fluid>
-                <h2>Ny bostad</h2>
                 <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning">Du måste logga in.</Alert>
             </Container>
         )

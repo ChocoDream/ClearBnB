@@ -71,13 +71,13 @@ public interface ResidenceInfoRepo extends CrudRepository<ResidenceInfo, Integer
     public static final String FIND_RESIDENCE_BY_SEARCH_PARAMETERS = "" +
             "select distinct re.id,\n" +
             "                re.rooms,\n" +
-            "                re.price,\n"+
+            "                re.price,\n" +
             "                re.max_guests,\n" +
-            "                re.address_id,\n " +
+            "                re.address_id,\n" +
             "                ci.country,\n" +
             "                ci.region,\n" +
             "                ci.city,\n" +
-            "                ad.city_id, \n" +
+            "                ad.city_id,\n" +
             "                ad.zip_code,\n" +
             "                ad.street_name,\n" +
             "                ad.street_number,\n" +
@@ -109,4 +109,29 @@ public interface ResidenceInfoRepo extends CrudRepository<ResidenceInfo, Integer
                                                       int start_date,
                                                       int end_date,
                                                       int max_guest);
+
+    public static final String FIND_RESIDENCE_BY_OWNER_ID = "" +
+            "        select distinct re.id,\n" +
+            "                re.rooms,\n" +
+            "                re.price,\n" +
+            "                re.max_guests,\n" +
+            "                re.address_id,\n" +
+            "                ci.country,\n" +
+            "                ci.region,\n" +
+            "                ci.city,\n" +
+            "                ad.city_id,\n" +
+            "                ad.zip_code,\n" +
+            "                ad.street_name,\n" +
+            "                ad.street_number,\n" +
+            "                ad.apartment_number\n" +
+            "           from residences re,\n" +
+            "                addresses ad,\n" +
+            "                cities ci,\n" +
+            "                owners_x_residences ow\n" +
+            "          where re.address_id = ad.id\n" +
+            "            and ad.city_id = ci.id\n" +
+            "            and re.id = ow.residence_id\n" +
+            "            and ow.owner_id = :owner_id";
+    @Query(value = FIND_RESIDENCE_BY_OWNER_ID, nativeQuery = true)
+    public List<ResidenceInfo> findByOwnerId(int owner_id);
 }
