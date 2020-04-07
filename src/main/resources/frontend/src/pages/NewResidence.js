@@ -1,5 +1,8 @@
 import React, { useState, useContext } from 'react'
-import { Alert, Row, Col, Button, ButtonGroup, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Card, CardImg, CardText, CardBody, CardTitle,
+        InputGroup, InputGroupAddon, InputGroupText, 
+        Container, Alert, Row, Col, Button, 
+        Form, FormGroup, Label, Input } from 'reactstrap'
 import Select from 'react-select';
 
 import { ResidenceCon } from '../contexts/ResidenceConProvider'
@@ -8,15 +11,19 @@ import { withRouter } from 'react-router-dom'
 import { CityContext } from '../contexts/CityContextProvider'
 import { AmenityContext } from '../contexts/AmenityContextProvider'
 import { AmenitiesResidencesIdCon } from '../contexts/AmenitiesResidencesIdConProvider'
+import { OwnerResidenceContext } from '../contexts/OwnersResidencesIdConProvider'
 import { PhotoContext} from '../contexts/PhotoContextProvider'
+import { UserContext } from '../contexts/UserContextProvider'
 
 function NewResidence(props) {
     const { appendResidence } = useContext(ResidenceCon)
     const { appendAddress } = useContext(AddressContext)  
     const { appendAmenityResidencesId } = useContext(AmenitiesResidencesIdCon)
     const { appendPhoto} = useContext(PhotoContext)
+    const { appendOwnersResidence} = useContext(OwnerResidenceContext)
     const { cities } = useContext(CityContext)
     const { amenities } = useContext(AmenityContext)
+    const { user } = useContext(UserContext);
 
     const [zip_code, setZipCode] = useState('');
     const [city_id, setCityId] = useState('');
@@ -35,7 +42,7 @@ function NewResidence(props) {
     const onDismiss = () => setVisible(false);
 
     const [cSelected, setCSelected] = useState([]);
-    const [rSelected, setRSelected] = useState(null);
+    //const [rSelected, setRSelected] = useState(null);
  
     let images = []
   
@@ -69,6 +76,15 @@ function NewResidence(props) {
 
     const addResidence = async (e) => {
         e.preventDefault()
+
+        if (user !== null) {
+            var user_id = user.id;
+        } else{            
+            setMessage('Du måste logga in.');
+            setVisible(true);
+            setDisabled(true);
+            return
+        }
 
         const datas = {
             city_id,
@@ -129,6 +145,25 @@ function NewResidence(props) {
 
         appendResidence(newres)
 
+        //OWNER
+        const ownerresidence = {
+            owner_id: user_id, 
+            residence_id,
+        }
+
+        // send new residence to backend
+        let newowner = await fetch('/api/clearbnb/ownersresidences', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(ownerresidence)
+        })
+        newowner = await newowner.json()
+
+        console.log(newowner)
+        appendOwnersResidence(newowner)
+
+
+        //AMENITIES
         const amenities = cSelected;
         console.log('amenities:'+JSON.stringify(amenities));
         var start_date = 0; //Date.now();
@@ -174,16 +209,6 @@ function NewResidence(props) {
         setReadyMessage('Bostaden är sparad');
         setReadyVisible(true);
         setDisabled(true);
-        /*setStreetName('')
-        setStreetNumber('')
-        setStreetApartment('')
-        setZipCode('')    
-        setCityId('')
-        setRooms('')
-        setMax_guests('')
-        setPrice('')
-        setCSelected([]);
-        filesChange('');*/
     }
 
     const CitiesSelect = () => {
@@ -207,164 +232,225 @@ function NewResidence(props) {
     const AmenitiesList = () => {
         return amenities.map((amenity, index) => {
             return (
-            <Button outline className="ml-1" color="primary" key={index} onClick={() => onCheckboxBtnClick(amenity.id)} active={cSelected.includes(amenity.id)}>{amenity.name}
+            <Button outline className="ml-1 mb-1" color="primary" key={index} onClick={() => onCheckboxBtnClick(amenity.id)} active={cSelected.includes(amenity.id)}>{amenity.name}
             </Button>
             )
         })
     }
 
-  return (
-    <div className="container">
-        <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={ready_visible}>{ready}</Alert>
-      <h1>Ny bostad</h1>
-      {/* in Vue: @submit="addResidence" */}
-      <Form 
-        onSubmit={addResidence}
-        >
-        <Row form>        
-            <Col md={6}>
-                <FormGroup>
-                    <Label for="street_name">Ort</Label>
-                    {CitiesSelect()}
-                </FormGroup>
-            </Col>
-            <Col md={6}>
-            <FormGroup>
-                <Label for="zip_code">Postnummer</Label>
-                <Input 
-                    required
-                    type="text" 
-                    id="zip_code" 
-                    placeholder=""
-                    value={zip_code}
-                    onChange={
-                    e => setZipCode(e.target.value)
-                    }
-                    disabled = {disabled}
-                />
-                </FormGroup>
-            </Col>
-        </Row>
-        <Row form>        
-            <Col md={4}>
-                <FormGroup>
-                <Label for="street_name">Gata</Label>
-                <Input 
-                    required
-                    type="text" 
-                    id="street_name" 
-                    placeholder=""
-                    value={street_name}
-                    onChange={
-                    e => setStreetName(e.target.value)
-                    }
-                    disabled = {disabled}
-                />
-                </FormGroup>
-            </Col>
-            <Col md={4}>
-                <FormGroup>
-                <Label for="street_number">Husnummer</Label>
-                <Input
-                    required
-                    type="text" 
-                    id="street_number" 
-                    placeholder=""
-                    value={street_number}
-                    onChange={
-                    e => setStreetNumber(e.target.value)
-                    }
-                    disabled = {disabled}
-                />
-                </FormGroup>
-            </Col>
-            <Col md={4}>
-                <FormGroup>
-                <Label for="apartment_number">Lägenhet</Label>
-                <Input
-                    type="text" 
-                    id="apartment_number" 
-                    placeholder=""
-                    value={apartment_number}
-                    onChange={
-                    e => setStreetApartment(e.target.value)
-                    }
-                    disabled = {disabled}
-                />
-                </FormGroup>
-            </Col>
-        </Row>
-        <Row form>        
-            <Col md={4}>
-                <FormGroup>
-                    <Label for="rooms">Hur många room?</Label>
-                    <Input 
-                    required
-                    type="text" 
-                    id="rooms"
-                    value={rooms}
-                    onChange={
-                    e => setRooms(e.target.value)
-                    }
-                    disabled = {disabled}
-                />
-                </FormGroup>
-            </Col>
-            <Col md={4}>
-                <FormGroup>
-                    <Label for="max_guests">Hur många gäster?</Label>
-                    <Input
-                    value={max_guests}
-                    onChange={e=>setMax_guests(e.target.value)} 
-                    type="text"
-                    id="max_guests"
-                    disabled = {disabled}
-                    required  />
-                </FormGroup>
-            </Col>
-            <Col md={4}>
-                <FormGroup>
-                <Label for="price">Pris</Label>
-                <Input 
-                    required
-                    type="text" 
-                    id="price" 
-                    placeholder=""
-                    value={price}
-                    onChange={
-                    e => setPrice(e.target.value)
-                    }
-                    disabled = {disabled}
-                />
-                </FormGroup>
-            </Col>
-        </Row>
-        <FormGroup>
-            <Row form>
-                <Col md={12}>
-                    <ButtonGroup>
-                        <AmenitiesList></AmenitiesList>
-                    </ButtonGroup>
-                </Col>
-            </Row>
-        </FormGroup>
-        <FormGroup className="m-3">
-          <Label for="files">Ladda upp bilder (Max 1 MB filstorlek):</Label>
-          <Input 
-            type="file" 
-            name="files"
-            id="files" 
-            accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
-            multiple 
-            required
-            onChange={e => filesChange(e.target.files)}
-            />
-          </FormGroup>
-        <Button color="info" size="mg" disabled = {disabled}>Spara bostad</Button>
-        <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
-      </Form>     
-    </div>
-  )
+    if (user !== null) {
+        return (
+            <Container>
+                <Card>
+                    <CardImg className="card_img" top width="100%" src="/assets/livingroomwithcat.jpg" alt="" />
+                    <CardBody>
+                        <CardTitle><h2>Ny bostad</h2></CardTitle>
+                        <div className="container">
+                            <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={ready_visible}>{ready}</Alert>
+                        <Form 
+                            onSubmit={addResidence}
+                            >
+                            <Row form>        
+                                <Col md={6}>
+                                    <FormGroup>
+                                        <Label for="street_name">Ort</Label>
+                                        {CitiesSelect()}
+                                    </FormGroup>
+                                </Col>
+                                <Col md={6}>
+                                <FormGroup>
+                                    <Label for="zip_code">Postnummer</Label>
+                                    <Input 
+                                        required
+                                        type="text" 
+                                        id="zip_code" 
+                                        placeholder=""
+                                        value={zip_code}
+                                        onChange={
+                                        e => setZipCode(e.target.value)
+                                        }
+                                        disabled = {disabled}
+                                    />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row form>        
+                                <Col md={4}>
+                                    <FormGroup>
+                                    <Label for="street_name">Gata</Label>
+                                    <Input 
+                                        required
+                                        type="text" 
+                                        id="street_name" 
+                                        placeholder=""
+                                        value={street_name}
+                                        onChange={
+                                        e => setStreetName(e.target.value)
+                                        }
+                                        disabled = {disabled}
+                                    />
+                                    </FormGroup>
+                                </Col>
+                                <Col md={4}>
+                                    <FormGroup>
+                                    <Label for="street_number">Husnummer</Label>
+                                    <Input
+                                        required
+                                        type="text" 
+                                        id="street_number" 
+                                        placeholder=""
+                                        value={street_number}
+                                        onChange={
+                                        e => setStreetNumber(e.target.value)
+                                        }
+                                        disabled = {disabled}
+                                    />
+                                    </FormGroup>
+                                </Col>
+                                <Col md={4}>
+                                    <FormGroup>
+                                    <Label for="apartment_number">Lägenhet</Label>
+                                    <Input
+                                        type="text" 
+                                        id="apartment_number" 
+                                        placeholder=""
+                                        value={apartment_number}
+                                        onChange={
+                                        e => setStreetApartment(e.target.value)
+                                        }
+                                        disabled = {disabled}
+                                    />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row form>        
+                                <Col md={4}>
+                                    <FormGroup>
+                                        <Label for="rooms">Hur många room?</Label>
+                                        <Input 
+                                        required
+                                        type="number" 
+                                        id="rooms"
+                                        value={rooms}
+                                        onChange={
+                                        e => setRooms(e.target.value)
+                                        }
+                                        disabled = {disabled}
+                                    />
+                                    </FormGroup>
+                                </Col>
+                                <Col md={4}>
+                                    <FormGroup>
+                                        <Label for="max_guests">Hur många gäster?</Label>
+                                        <InputGroup>
+                                            <Input
+                                            value={max_guests}
+                                            onChange={e=>setMax_guests(e.target.value)} 
+                                            type="number"
+                                            id="max_guests"
+                                            disabled = {disabled}
+                                            required  />
+                                            <InputGroupAddon addonType="append">
+                                                <InputGroupText>
+                                                    <svg className="bi bi-person" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fillRule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" 
+                                                        clipRule="evenodd"/>
+                                                    </svg>
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                        </InputGroup>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={4}>
+                                    <FormGroup>
+                                    <Label for="price">Pris</Label>
+                                    <InputGroup>
+                                        <Input 
+                                            required
+                                            type="number" 
+                                            id="price" 
+                                            placeholder=""
+                                            value={price}
+                                            onChange={
+                                            e => setPrice(e.target.value)
+                                            }
+                                            disabled = {disabled}
+                                        />                    
+                                        <InputGroupAddon addonType="append">
+                                        <InputGroupText>Kr</InputGroupText>
+                                    </InputGroupAddon>
+                                    </InputGroup>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <FormGroup>
+                                <Row form>
+                                    <Col md={12}>
+                                        <div>
+                                            <AmenitiesList></AmenitiesList>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </FormGroup>
+                            {/*<FormGroup className="m-3">
+                                <InputGroup>
+                                    <InputGroupText>Uppladdning</InputGroupText>
+                                    <InputGroupAddon addonType="prepend">
+                                        <Input 
+                                        type="file" 
+                                        name="files"
+                                        id="files" 
+                                        accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
+                                        multiple
+                                        onChange={e => filesChange(e.target.files)}
+                                        />
+                                    </InputGroupAddon>
+                                    <InputGroupAddon addonType="append">
+                                        <InputGroupText>Ladda upp bilder (Max 1 MB filstorlek): </InputGroupText>
+                                    </InputGroupAddon>                                
+                                </InputGroup>
+                            </FormGroup>*/}
+                            <FormGroup>
+                                <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text" id="inputGroupFileAddon01">
+                                    Uppladning
+                                    </span>
+                                </div>
+                                <div className="custom-file">
+                                    <Input
+                                    className="custom-file-input"
+                                    type="file" 
+                                    name="files"
+                                    id="files" 
+                                    accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
+                                    multiple
+                                    onChange={e => filesChange(e.target.files)}
+                                    aria-describedby="inputGroupFileAddon01"
+                                    />
+                                    <label className="custom-file-label">
+                                    Ladda upp bilder (Max 1 MB filstorlek):
+                                    </label>
+                                </div>
+                                </div>
+                            </FormGroup>
+                            <Button className="mt-4" color="info" size="lg" block disabled = {disabled}>Spara bostad</Button>
+                            <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
+                        </Form>     
+                        </div>
+                    </CardBody>
+                </Card>
+            </Container>
+        )
+    }
+    else{
+        return(
+            <Container fluid>
+                <h2>Ny bostad</h2>
+                <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning">Du måste logga in.</Alert>
+            </Container>
+        )
+    }
 }
 
 export default withRouter(NewResidence)
