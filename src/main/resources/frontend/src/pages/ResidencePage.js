@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ResidenceContext } from '../contexts/ResidenceContextProvider';
-import { Container, Button, Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { useParams, Link } from 'react-router-dom';
 
 import AmenityList from '../components/AmenitiesList';
@@ -18,7 +18,7 @@ const ResidencePage = () => {
   useEffect(() => {
     //Calculating the total price in an useEffect
     setTotalPrice(residence.price)
-  })
+  }, [residence.price])
 
   
   return (
