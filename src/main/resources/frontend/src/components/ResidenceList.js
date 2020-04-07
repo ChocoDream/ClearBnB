@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 
 const ResidenceList = () => {
-  const { residences, getResidence } = useContext(ResidenceContext)
+  const { residences, getResidenceById } = useContext(ResidenceContext)
 
   //Added randomImages for height card testing. Remove once we got images form db.
   const randomImages = ["https://odis.homeaway.com/odis/listing/7e04139f-1678-4a69-a9dc-d86be6bd80c6.c10.jpg",
@@ -27,7 +27,7 @@ const ResidenceList = () => {
 
           style={{ cursor: "pointer" }}> {/* Makes the whole card selectable */}
           <Link to={`/residences/${residence.id}`}
-          onClick={() => getResidence(residence.id)} className="nav-link">
+          onClick={() => getResidenceById(residence.id)} className="nav-link">
           <Card outline color="light">
             <CardBody>
               {/*Ersätt denna kod neranför med bild från db i nästa sprint */}

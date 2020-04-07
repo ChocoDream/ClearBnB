@@ -7,12 +7,12 @@ import AmenityList from '../components/AmenitiesList';
 
 const ResidencePage = () => {
   let { id } = useParams();
-  const { residence, getResidence } = useContext(ResidenceContext);
+  const { residence, getResidenceById } = useContext(ResidenceContext);
 
   const [totalPrice, setTotalPrice] = useState(Number);
 
   useEffect(() => {
-    getResidence(id);
+    getResidenceById(id);
   }, [])
   
   useEffect(() => {
@@ -41,7 +41,7 @@ const ResidencePage = () => {
           <h3><b>Information om boendet</b></h3>
           <p> logem lipsom logem lipson logem lipson logem lipson logem lipson logem lipson logen lipsom logem lipsom logen losipson lopgen lispon </p>
           <h3><b>Bekvämligheter</b></h3>
-          <AmenityList />
+          <AmenityList residenceId={residence.id} />
         </Col>
       </Row>
     </Container>
