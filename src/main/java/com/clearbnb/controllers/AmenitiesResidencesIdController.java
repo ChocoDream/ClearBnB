@@ -22,6 +22,11 @@ public class AmenitiesResidencesIdController {
         return amenitiesResidencesIdService.createamenitiesresidencesid(amenityresidencesid);
     }
 
+    @GetMapping("/api/clearbnb/amenitiesbyresidence/{residence_id}")
+    public List<AmenitiesResidencesId> getAmenitiesByResidencesid(@PathVariable int residence_id) {
+        return amenitiesResidencesIdService.getAmenitiesByResidencesId(residence_id);
+    }
+
     @DeleteMapping("/api/clearbnb/amenitiesbyresidence/{residence_id}")
     public void deleteAmenitiesresidencesid(@PathVariable int residence_id) {
         amenitiesResidencesIdService.deleteAmenitiesresidencesid(residence_id);
