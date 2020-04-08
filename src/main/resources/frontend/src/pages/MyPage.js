@@ -24,8 +24,8 @@ const MyPage = (props) => {
     } 
   }, [])
 
-  const dateFormat = (seleted_time) => {
-    return moment(seleted_time).format("YYYY.MM.DD");
+  const timeFormat = (time) => {
+    return moment(time).format("YYYY-MM-DD");
   }
   
   let myBooking;
@@ -50,9 +50,8 @@ const MyPage = (props) => {
                    <h4>Totalpris: {booking.total_price} Kr</h4>
                 </CardSubtitle>
                 <CardText>
-                    {/* TODO */}
-                    Startdatum: <span className="text-info">{booking.start_date}</span> <br/>
-                    Slutdatum: <span className="text-info">{dateFormat(booking.end_date)}</span>
+                    Startdatum: <span className="text-info">{timeFormat(booking.start_date)}</span> <br/>
+                    Slutdatum: <span className="text-info">{timeFormat(booking.end_date)}</span>
                 </CardText>
                 <Button className="btn-danger">Avboka</Button>
               </CardBody>
