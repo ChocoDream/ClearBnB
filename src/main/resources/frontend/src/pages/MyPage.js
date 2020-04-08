@@ -6,6 +6,7 @@ import {
   CardSubtitle, CardBody, Button
 } from 'reactstrap';
 import moment from 'moment'
+import SetResidence from '../components/SetResidence';
 
 const MyPage = (props) => {
   const [ bookings, setBookings ] = useState();
@@ -75,11 +76,21 @@ const MyPage = (props) => {
         </Row>
         <Row>
           <Col xs="12" sm="6">
-            <h4 className="text-secondary">Minbokning</h4>
+            <h4 className="text-secondary nav-link">Minbokning</h4>
             <hr/>
               {bookings?
               (<>{myBooking}</>) :
               (<h4>{message}</h4>)}      
+          </Col>
+        </Row>
+        <Row>
+          <SetResidence></SetResidence>
+        </Row>
+        <Row>
+          <Col>
+            <a href="/new-residence" className="nav-link">
+              <h4 className="text-secondary">Ny bostad</h4>
+            </a>
           </Col>
         </Row>
     </Container>
