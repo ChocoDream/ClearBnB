@@ -22,10 +22,10 @@ public class AmenitiesResidencesIdController {
         return amenitiesResidencesIdService.createamenitiesresidencesid(amenityresidencesid);
     }
 
-    /*@PostMapping("/api/clearbnb/amxresbyresidenceid/{residence_id}")
-    public AmenitiesXresidences findById(int residence_id){
-        return amenitiesXresidencesService.findById(int residence_id)(amenitiesXresidences);
-    }*/
+    @GetMapping("/api/clearbnb/amenitiesbyresidence/{residence_id}")
+    public List<AmenitiesResidencesId> getAmenitiesByResidencesid(@PathVariable int residence_id) {
+        return amenitiesResidencesIdService.getAmenitiesByResidencesId(residence_id);
+    }
 
     @DeleteMapping("/api/clearbnb/amenitiesbyresidence/{residence_id}")
     public void deleteAmenitiesresidencesid(@PathVariable int residence_id) {

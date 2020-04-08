@@ -26,3 +26,11 @@ code {
   border-radius: .3rem;
   margin-right: 5px;
 }
+
+.card_img {
+  opacity: 0.75;
+}
+
+.custom-file-label{
+  z-index: 0!important;
+}

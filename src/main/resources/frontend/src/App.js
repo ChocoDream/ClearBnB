@@ -23,6 +23,7 @@ import AmenityContextProvider from './contexts/AmenityContextProvider'
 import AmenitiesResidencesIdConProvider from './contexts/AmenitiesResidencesIdConProvider'
 import BookingContextProvider from './contexts/BookingContextProvider'
 import PhotoContextProvider from './contexts/PhotoContextProvider'
+import OwnersResidencesIdConProvider from './contexts/OwnersResidencesIdConProvider'
 
 const App = () => {
   return (
@@ -35,29 +36,31 @@ const App = () => {
                 <AmenityContextProvider>
                   <AmenitiesResidencesIdConProvider>
                    <BookingContextProvider>
-                   <PhotoContextProvider>
-                    <Router>
-                      <NavMenu />
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/about" component={About} />
-                        <Route exact path="/user-login" component={Login} />
-                        <Route exact path="/user-register" component={Register} />
-                        <Route exact path="/mypage" component={MyPage} />
-                        <Route exact path="/residences" component={Residences} />
-                        <Route exact path="/new-residence" component={NewResidence} />
-                        <Route exact path="/create-booking" component={CreateBooking} />
-                        <Route exact path="/residences/:id" children={<ResidencePage />} />
-                    </Router>
+                    <PhotoContextProvider>
+                      <OwnersResidencesIdConProvider>
+                        <Router>
+                          <NavMenu />
+                            <Route exact path="/" component={Home} />
+                            <Route exact path="/about" component={About} />
+                            <Route exact path="/user-login" component={Login} />
+                            <Route exact path="/user-register" component={Register} />
+                            <Route exact path="/mypage" component={MyPage} />
+                            <Route exact path="/residences" component={Residences} />
+                            <Route exact path="/new-residence" component={NewResidence} />
+                            <Route exact path="/create-booking" component={CreateBooking} />
+                            <Route exact path="/residences/:id" children={<ResidencePage />} />
+                        </Router>
+                      </OwnersResidencesIdConProvider>
                     </PhotoContextProvider>
-                    </BookingContextProvider>
-                  </AmenitiesResidencesIdConProvider>
-                </AmenityContextProvider>
-              </UserContextProvider> 
-            </CityContextProvider>
-          </AddressContextProvider>
-        </ResidenceConProvider>
-      </ResidenceContextProvider>
-    </div>
+                  </BookingContextProvider>
+                </AmenitiesResidencesIdConProvider>
+              </AmenityContextProvider>
+            </UserContextProvider> 
+          </CityContextProvider>
+        </AddressContextProvider>
+      </ResidenceConProvider>
+    </ResidenceContextProvider>
+  </div>
   );
 }
 

@@ -9,12 +9,15 @@ import java.util.List;
 
 @Service
 public class AmenitiesResidencesIdService {
-
     @Autowired
     private AmenitiesResidencesIdRepo amenitiesResidencesIdRepo;
 
     public List<AmenitiesResidencesId> getAmenitiesResidencesId() {
         return (List<AmenitiesResidencesId>) amenitiesResidencesIdRepo.findAll();
+    }
+
+    public List<AmenitiesResidencesId> getAmenitiesByResidencesId(int residence_id) {
+        return (List<AmenitiesResidencesId>) amenitiesResidencesIdRepo.findByResidenceId(residence_id);
     }
 
     public AmenitiesResidencesId createamenitiesresidencesid(AmenitiesResidencesId amenityxresidences) {
