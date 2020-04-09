@@ -24,7 +24,7 @@ const ResidencePage = () => {
   return (
     <Container>
       <Row>
-        <Col>
+        {residence ? (<Col>
           <h2 className="mt-2 h3"> <b>{residence.street_name} {residence.street_number}, {residence.city}</b> </h2>
           <h4 className="mt-3 mb-3 text-muted"> {residence.region}, {residence.country} </h4>
           {/*BILD HÄR */}
@@ -41,8 +41,13 @@ const ResidencePage = () => {
           <h3><b>Information om boendet</b></h3>
           <p> logem lipsom logem lipson logem lipson logem lipson logem lipson logem lipson logen lipsom logem lipsom logen losipson lopgen lispon </p>
           <h3><b>Bekvämligheter</b></h3>
-          <AmenityList residenceId={residence.id} />
-        </Col>
+          {residence.id
+            ? 
+            <AmenityList residenceId={residence.id} />
+            : 'Loading'
+          }
+        </Col>) : ''
+        }
       </Row>
     </Container>
   )
