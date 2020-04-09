@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import { ResidenceContext } from '../contexts/ResidenceContextProvider';
 import { UserContext } from '../contexts/UserContextProvider';
 import { BookingContext } from '../contexts/BookingContextProvider';
-import { Container, Card, CardTitle, CardText, CardSubtitle, CardBody, Row, Col, Input, InputGroup, InputGroupAddon} from 'reactstrap';
+import { Container, Card, CardTitle, CardText, CardSubtitle, CardBody, Row, Col, Input, InputGroup, Alert} from 'reactstrap';
 import DatePicker from 'react-datepicker'
+import moment from 'moment'
 import addDays from 'date-fns/addDays'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -18,6 +19,7 @@ const CreateBooking = (props) => {
   const [guestsNumber, setGuestsNumber] = useState(1)
   const [totalPrice, setTotalPrice] = useState()
   const [totalDays, setTotalDays] = useState(1)
+  const [message, setMessage] = useState('')
 
   const countDays=(start, end)=>{
     let diff = end - start
@@ -29,29 +31,26 @@ const CreateBooking = (props) => {
     setTotalPrice(total)
   }
 
-  const booked = date => {
-    
-  };
-
   useEffect(()=>{
      setTotalPrice(residence.price*residence.max_guests)
      countDays(startDate, endDate)
      countPrice(totalDays, guestsNumber, residence.price)
-  }, [])
+  }, [residence.price, residence.max_guests, startDate, endDate, totalDays, guestsNumber])
  
-
-  //Function to Create Booking
   const createBooking = async() => {  
     if(!user) props.history.push("/user-login");    
     const myBoking = {
-      start_date: startDate,
-      end_date: endDate,
+      start_date: +moment(startDate).format('x'),
+      end_date: +moment(endDate).format('x'),
       time_stamp: Date.now(),
       total_price: totalPrice,
+      total_guests: guestsNumber,
       is_active: true,
       user,
       residenceInfo: residence
     }
+    console.log(myBoking);
+    
     let res = await fetch('/api/clearbnb/bookings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -59,7 +58,12 @@ const CreateBooking = (props) => {
     })
     res = await res.json()
     addBooking(res)
-  }    
+    setMessage('Du har bokat bostaden!')
+    props.history.push("/mypage");  
+  } 
+  
+
+  if (user !== null) {
   return (
     <Container className="mt-5">
       <Row className="p-1">
@@ -75,6 +79,7 @@ const CreateBooking = (props) => {
                   <span>{residence.zip_code} </span>
                   <span>{residence.region}, </span> 
                   <span>{residence.country}</span></h5>
+                  <p>Max antal gäster: {residence.max_guests}</p>
               </CardSubtitle>
               <hr/>
               <CardText>
@@ -85,7 +90,6 @@ const CreateBooking = (props) => {
             </CardBody>
           </Card>
         </Col> 
-        {/* CALENDAR & ANTAL GÄSTER */}
         <Col xs="12" sm="5">
           <Card>
             <CardBody className="bg-light border border-light">
@@ -108,11 +112,11 @@ const CreateBooking = (props) => {
                 />
               </Col>
               <Col xs="12" sm="5" className="pl-sm-0 ml-0">
-              <h5 className="text-light d-block">...</h5>
+              <span className="text-muted d-block mt-2">Slutdatum</span>
                 <DatePicker
                   className="pl-3 pr-1 py-1 text-info"
                   selected={endDate}
-                  onChange={date => setEndDate(date)}
+                  onChange={date => setEndDate(+date)}
                   selectsEnd
                   startDate={startDate}
                   endDate={endDate}
@@ -128,31 +132,34 @@ const CreateBooking = (props) => {
                 <InputGroup>
                   <Input 
                     style={{width: '100px', paddingLeft: '9px'}} 
-                    placeholder={residence.max_guest} 
-                    min={1} max={residence.max_guest} type="number"
+                    type="number"
+                    placeholder={1}
+                    min={1} max={residence.max_guest}
                     onChange={(e)=> {
-                        setGuestsNumber(e.target.value)
+                      e.target.value>residence.max_guests?(
+                        setGuestsNumber(residence.max_guests))
+                        :(setGuestsNumber(e.target.value))
                         setTotalPrice(guestsNumber*residence.price*totalDays)
-                     }
-                    }/>
+                    }}/>
                 </InputGroup>               
               </Col>          
               <Col xs="6" sm="6">   
               <h5 className="text-info">Antal nätter</h5>
                 <InputGroup>
-                  <Input placeholder={totalDays} />
+                  <Input placeholder={totalDays} readOnly className="bg-white"/>
                 </InputGroup>
               </Col>          
             </Row>
             <Row className="mt-3">
               <Col xs="12" sm="12">   
                 <h5 className="text-info">Totalpris</h5>
-                <p>Avgift (15%) </p>
-                <p>{totalPrice}</p>
-                {/* <InputGroup>
-                  <Input placeholder={totalPrice} value={totalPrice}/>
-                  <InputGroupAddon addonType="append"> Kr</InputGroupAddon>
-                </InputGroup> */}
+                <div>
+                  <span className="text-muted">Avgift (15%) ingår  {totalPrice*15/100}.00 Kr</span>
+                </div>
+                <div className="d-flex justify-content-between bg-white pt-2 px-1 text-dark border">
+                   <h6>{residence.price} x {guestsNumber} gäster</h6>
+                   <h6 className="">{totalPrice}.00  Kr</h6>
+                </div>
               </Col>             
             </Row>    
               <hr/>
@@ -164,10 +171,13 @@ const CreateBooking = (props) => {
             </CardBody>
           </Card>
         </Col>     
-      </Row>
-      
+      </Row>      
     </Container>
-  )
+  )} else { return ( 
+    <div className="container">
+     <Alert className="text-secondary bg-warning">Du måster logga in!</Alert>
+    </div>)
+  }
 }
 
 export default CreateBooking;

@@ -15,7 +15,7 @@ public interface BookingRepo extends CrudRepository<Booking, Integer> {
 
     public static final String FIND_BOOKINGBYUSERID = "SELECT b.id, b.user_id, " +
         "                                                      b.residence_id, b.start_date, b.end_date, " +
-        "                                                      b.time_stamp, b.total_price, b.is_active\n" +
+        "                                                      b.time_stamp, b.total_price, b.total_guests, b.is_active\n" +
             "                                                 FROM bookings b\n" +
             "                                                WHERE b.user_id = :user_id" +
             "                                             Order by start_date";
