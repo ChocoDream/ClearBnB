@@ -27,6 +27,11 @@ public class BookingController {
         return bookingService.getAllBookingsByResidenceId(residence_id);
     }
 
+    @GetMapping("/api/clearbnb/bookingsByOwnerId/{owner_id}")
+    public List<Booking> getAllBookingsByOwnerId(@PathVariable int owner_id) {
+        return bookingService.getAllBookingsByOwnerId(owner_id);
+    }
+
     @PostMapping("/api/clearbnb/bookings")
     public Booking createBooking(@RequestBody Booking booking) {
         return bookingService.createBooking(booking);
