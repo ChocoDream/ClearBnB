@@ -66,6 +66,11 @@ const CreateBooking = (props) => {
   if (user !== null) {
   return (
     <Container className="mt-5">
+      <Row>
+        <Col>
+        <h1 className="text-center" xs="12"><b>Bokning</b></h1>
+        </Col>
+      </Row>
       <Row className="p-1">
         <Col>
           <Card xs="12" sm="7">
