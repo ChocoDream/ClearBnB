@@ -4,9 +4,11 @@ import Select from 'react-select';
 import moment from 'moment'
 import { ResidenceContext } from '../contexts/ResidenceContextProvider'
 import { CityContext } from '../contexts/CityContextProvider'
-
-import DatePicker from 'react-datepicker'
+import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import sv from "date-fns/locale/sv"; // the locale you want
+registerLocale("sv", sv); // register it with the name you want
+
 
 const FrontPageMenuDesktop = () => {
   const today = new Date()
@@ -77,31 +79,33 @@ const FrontPageMenuDesktop = () => {
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <DatePicker
               className="p-2 rounded-lg"
-                selected={start_date}
-                onChange={date=>setStartDate(date)}
-                dateFormat='MM/dd/yyyy'
-                minDate={new Date()}
-                isClearable
-                showWeekNumbers
-                showYearDropdown
-                scrolllableMonthYearDropdown
-                placeholderText=""
-              />
+              locale="sv"
+              selected={start_date}
+              onChange={date=>setStartDate(date)}
+              dateFormat='MM/dd/yyyy'
+              minDate={new Date()}
+              isClearable
+              showWeekNumbers
+              showYearDropdown
+              scrolllableMonthYearDropdown
+              placeholderText=""
+            />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <DatePicker
               className="p-2 rounded"
+              locale="sv"
               style={{ padding:'2px !important'}}
-                selected={end_date}
-                onChange={date=>setEndDate(date)}
-                dateFormat='MM/dd/yyyy'
-                minDate={tomorrow}
-                isClearable
-                showWeekNumbers
-                showYearDropdown
-                scrolllableMonthYearDropdown
-                placeholderText=""
-              />
+              selected={end_date}
+              onChange={date=>setEndDate(date)}
+              dateFormat='MM/dd/yyyy'
+              minDate={tomorrow}
+              isClearable
+              showWeekNumbers
+              showYearDropdown
+              scrolllableMonthYearDropdown
+              placeholderText=""
+            />
           </FormGroup>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Input
