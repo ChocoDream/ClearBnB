@@ -3,8 +3,6 @@ import { ResidenceContext } from '../contexts/ResidenceContextProvider';
 import { Container, Row, Col } from 'reactstrap';
 import { useParams, Link } from 'react-router-dom';
 
-import AmenityList from '../components/AmenitiesList';
-
 const ResidencePage = () => {
   let { id } = useParams();
   const { residence, getResidenceById } = useContext(ResidenceContext);
@@ -40,12 +38,6 @@ const ResidencePage = () => {
           </div>
           <h3><b>Information om boendet</b></h3>
           <p> logem lipsom logem lipson logem lipson logem lipson logem lipson logem lipson logen lipsom logem lipsom logen losipson lopgen lispon </p>
-          <h3><b>Bekvämligheter</b></h3>
-          {residence.id
-            ? 
-            <AmenityList residenceId={residence.id} />
-            : 'Loading'
-          }
         </Col>) : ''
         }
       </Row>
