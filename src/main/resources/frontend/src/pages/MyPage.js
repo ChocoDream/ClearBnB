@@ -1,23 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import { UserContext } from '../contexts/UserContextProvider'
+import { BookingContext } from '../contexts/BookingContextProvider'
 import {
   Card, CardTitle, CardText,
-  CardSubtitle, CardBody, Button
+  CardSubtitle, CardBody
 } from 'reactstrap';
 import moment from 'moment'
 import SetResidence from '../components/SetResidence';
 
 const MyPage = (props) => {
-  const [ bookings, setBookings ] = useState();
   const [ message, setMessage ] = useState('');
   const { user } = useContext(UserContext);
-
-  const getBookings = async (id) => {
-    let res = await fetch('/api/clearbnb/bookingsbyuserid/' + id)
-    res = await res.json()
-    setBookings(res)
-  }
+  const { bookings, getBookings, removeBooking } = useContext(BookingContext)
 
   useEffect(() => {
     if (user !== null) {
@@ -37,7 +32,9 @@ const MyPage = (props) => {
         <Col xs="12" sm="12" md="6" key={'book' + booking.id + i}> 
           <Card className="m-2">
             <CardBody className="bg-light border border-info">
-              <CardTitle><h3 className="mt-4 text-info"> 
+              <CardTitle>
+                  <p>Bokningstid: {moment(booking.time_stamp).format("YYYY-MM-DD H:mm")}</p>
+                  <h3 className="mt-4 text-info"> 
                   <span>{booking.residenceInfo.street_number} </span> 
                   <span>{booking.residenceInfo.street_name}, </span> 
                   <span>{booking.residenceInfo.city}</span></h3>
@@ -55,7 +52,8 @@ const MyPage = (props) => {
                   Startdatum: <span className="text-info">{timeFormat(booking.start_date)}</span> <br/>
                   Slutdatum: <span className="text-info">{timeFormat(booking.end_date)}</span>
               </CardText>
-              <Button className="btn-danger">Avboka</Button>
+              <hr/>
+              <button className="btn btn-outline-danger" onClick={()=>removeBooking(booking.id)}>Avboka</button>
             </CardBody>
           </Card>   
         </Col>     
