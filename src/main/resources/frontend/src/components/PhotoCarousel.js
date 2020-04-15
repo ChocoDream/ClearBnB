@@ -41,6 +41,7 @@ const PhotoCarousel = (props) => {
         key={(item.path)}
       >
         <img src={item.path} alt='' />
+        <p> {item.path} </p>
       </CarouselItem>
     );
   });
