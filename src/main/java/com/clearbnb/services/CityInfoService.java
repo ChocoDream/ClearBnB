@@ -21,4 +21,9 @@ public class CityInfoService {
     public List<CityInfo> getAllCities() {
         return cityInfoRepo.findAllCities();
     }
+
+
+    public List<CityInfo> getAllCitiesByRegion(String region){
+        return (List<CityInfo>) cityInfoRepo.getCitiesByRegion(region);
+    }
 }

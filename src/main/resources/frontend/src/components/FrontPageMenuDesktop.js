@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {Alert , Button, Form, Input, FormGroup } from 'reactstrap';
 import Select from 'react-select';
 import moment from 'moment'
 import { ResidenceContext } from '../contexts/ResidenceContextProvider'
-import { CityContext } from '../contexts/CityContextProvider'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import sv from "date-fns/locale/sv"; // the locale you want
@@ -16,15 +15,12 @@ const FrontPageMenuDesktop = () => {
 
   const { setResidences } = useContext(ResidenceContext)
 
-  //const [region, setRegion] = useState('')
-  //const [city, setCity] = useState('')
   const [start_date, setStartDate] = useState(new Date())
   const [end_date, setEndDate] = useState(tomorrow)
   const [count_person, setCountPerson] = useState('')
   const [city_id, setCityId] = useState('');
   const [message, setMessage] = useState();
-
-  const { cities } = useContext(CityContext)
+  const [citiesByRegion, setCitiesByRegion] = useState('')
 
   var someArrayOfStrings =[];
   someArrayOfStrings.map(opt => ({
@@ -62,13 +58,51 @@ const FrontPageMenuDesktop = () => {
     res = await res.json()
     setResidences(res)
   }
-  const CitiesSelect = () => {
-    return (
-      <div className="reactSelectDd">
-        <Select options={cities} onChange = {opt => setCityId(opt.value)} placeholder="Vart vill du åka?" isSearchable required />
+  
+  //Cities by region
+  const formatGroupLabel = data => (
+      <div className="groupStyles">
+      <span>{data.label}</span>
       </div>
+  );
+
+  const CitiesSelect = () => {
+      return (
+          <div className="reactSelectDd">
+          <Select options={citiesByRegion} formatGroupLabel={formatGroupLabel} onChange = {opt => setCityId(opt.value)} 
+          placeholder="Vart vill du åka?" isSearchable required />
+          </div>
       )
   }
+
+  useEffect(() => {
+      const getRegions = async () => {
+          let regions = await fetch('/api/clearbnb/allregions')
+          regions = await regions.json()            
+          //console.log(regions)
+          let citiesArray = [];
+
+          Array.from(Array(regions.length).keys())
+          .map(x => {       
+              fetch('/api/clearbnb/citiesbyregion/'+regions[x]).then(
+                  function(response) {
+                  if (response.status !== 200) {
+                      console.log('Problem in fetching');
+                      return;
+                  }
+                  response.json().then(function(data) {
+                      citiesArray[citiesArray.length] = {
+                          label: regions[x], options: data                          
+                      }     
+                  });                    
+              }) 
+              
+          });  
+          //console.log(citiesArray);
+          setCitiesByRegion(citiesArray);
+      }
+      getRegions()        
+  }, []);
  
   return (
     <div className="d-flex justify-content-center">

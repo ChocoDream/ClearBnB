@@ -17,6 +17,15 @@ public class CityService {
         return (List<City>) cityRepo.findAll();
     }
 
+    public List<City> getAllRegions(){
+        return (List<City>) cityRepo.getAllRegions();
+    }
+
+
+    /*public List getAllCitiesByRegion(String region){
+        return (List) cityRepo.getCitiesByRegion(region);
+    }*/
+
     public City createCity(City city) {
         return cityRepo.save(city);
     }

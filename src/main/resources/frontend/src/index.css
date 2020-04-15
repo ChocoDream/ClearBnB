@@ -34,3 +34,9 @@ code {
 .custom-file-label{
   z-index: 0!important;
 }
+
+.groupStyles{
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'space-between'
+}

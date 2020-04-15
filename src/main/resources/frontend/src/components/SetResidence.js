@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContextProvider'
-import { UncontrolledCollapse, Button, Alert, CardHeader,
-         CardDeck, Card, CardBody, Container, Row, Col,
-         CardTitle, CardText, CardSubtitle} from 'reactstrap'
+import { UncontrolledCollapse, Alert, CardHeader,
+         CardDeck, Card, CardBody, Col,
+         CardTitle, CardText} from 'reactstrap'
 import moment from 'moment'
 const SetResidence = () => {
     const { user } = useContext(UserContext);
@@ -30,7 +30,7 @@ const SetResidence = () => {
             res = await res.json();
             console.log(res)
             
-            if (res.length == 0){
+            if (res.length === 0){
                 setMessage('Inga sparade bostäder.');
                 setVisible(true);
                 return
@@ -56,7 +56,7 @@ const SetResidence = () => {
             let res = await fetch('/api/clearbnb/bookingsByOwnerId/' + owner_id)      
             res = await res.json();
 
-            if (res.length == 0){
+            if (res.length === 0){
                 setBookingMessage('Inga sparade bostäder.');
                 setBookingMessageVisible(true);
                 return
@@ -86,7 +86,7 @@ const SetResidence = () => {
                                         email: {res[x].user.email}
                                     </Col>
                                     <Col>    
-                                        aktiv: {(res[x].is_active == true) ? 'Ja' : 'Nej'}
+                                        aktiv: {(res[x].is_active === true) ? 'Ja' : 'Nej'}
                                     </Col>
                                     </CardBody>
                             </Card>)

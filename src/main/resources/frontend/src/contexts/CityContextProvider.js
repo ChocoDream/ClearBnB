@@ -4,13 +4,26 @@ export const CityContext = createContext()
 
 export default function CityContextProvider(props) {
   const [cities, setCities] = useState([])
+  //const [regions, setRegions] = useState([])
+  //const [citiesByRegion, setCitiesByRegion] = useState([])
 
-  //Get Data from API
+  /*const getRegions = async () => {
+    let res = await fetch('/api/clearbnb/allregions')
+    res = await res.json()
+    setRegions(res)
+  }*/
+
   const getCities = async () => {
     let res = await fetch('/api/clearbnb/cities')
     res = await res.json()
     setCities(res)
   }
+
+  /*const getCitiesByRegion = async (region) => {
+    let res = await fetch('/api/clearbnb/citiesbyregion/'+region)
+    res = await res.json()
+    setCitiesByRegion(res)
+  }*/
 
   useEffect(() => {
     getCities()
@@ -18,7 +31,11 @@ export default function CityContextProvider(props) {
 
   const values = {
     cities, 
-    setCities
+    setCities,
+    /*regions,
+    setRegions,*/
+    /*citiesByRegion,
+    setCitiesByRegion*/
   }
 
   return (

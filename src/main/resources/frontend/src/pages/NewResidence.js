@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+//import Select from 'react-select-plus';
 import { Card, CardImg, CardBody, CardTitle,
         InputGroup, InputGroupAddon, InputGroupText, 
         Container, Alert, Row, Col, Button, 
@@ -8,7 +9,6 @@ import Select from 'react-select';
 import { ResidenceCon } from '../contexts/ResidenceConProvider'
 import { AddressContext } from '../contexts/AddressContextProvider'
 import { withRouter } from 'react-router-dom'
-import { CityContext } from '../contexts/CityContextProvider'
 import { AmenityContext } from '../contexts/AmenityContextProvider'
 import { AmenitiesResidencesIdCon } from '../contexts/AmenitiesResidencesIdConProvider'
 import { OwnerResidenceContext } from '../contexts/OwnersResidencesIdConProvider'
@@ -21,7 +21,6 @@ function NewResidence(props) {
     const { appendAmenityResidencesId } = useContext(AmenitiesResidencesIdCon)
     const { appendPhoto} = useContext(PhotoContext)
     const { appendOwnersResidence} = useContext(OwnerResidenceContext)
-    const { cities } = useContext(CityContext)
     const { amenities } = useContext(AmenityContext)
     const { user } = useContext(UserContext);
 
@@ -39,11 +38,9 @@ function NewResidence(props) {
     const [visible, setVisible] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [ready_visible, setReadyVisible] = useState(false);
-    //const [form_visible, setFormVisible] = useState(true);
+    const [citiesByRegion, setCitiesByRegion] = useState('')
     const onDismiss = () => setVisible(false);
-
     const [cSelected, setCSelected] = useState([]);
-    //const [rSelected, setRSelected] = useState(null);
  
     let images = []
 
@@ -81,8 +78,7 @@ function NewResidence(props) {
         e.preventDefault()
 
         var user_id = user.id;
-        var current_date = Math.floor(new Date().getTime()/1000.0);
-        
+        var current_date = Math.floor(new Date().getTime()/1000.0);        
 
         const datas = {
             city_id,
@@ -209,13 +205,52 @@ function NewResidence(props) {
         setDisabled(true);
     }
 
+    //Cities By Region
+    const formatGroupLabel = data => (
+        <div className="groupStyles">
+        <span>{data.label}</span>
+        </div>
+    );
+
     const CitiesSelect = () => {
         return (
             <div>
-            <Select options={cities} onChange = {opt => setCityId(opt.value)} placeholder="Vilken ort?" isSearchable required />
+            <Select options={citiesByRegion} formatGroupLabel={formatGroupLabel} onChange = {opt => setCityId(opt.value)} 
+            placeholder="Vilken ort?" isSearchable required />
             </div>
-            )
+        )
     }
+
+    useEffect(() => {
+        const getRegions = async () => {
+            let regions = await fetch('/api/clearbnb/allregions')
+            regions = await regions.json()            
+            console.log(regions)
+            let citiesArray = [];
+
+            Array.from(Array(regions.length).keys())
+            .map(x => {     
+                fetch('/api/clearbnb/citiesbyregion/'+regions[x]).then(
+                    function(response) {
+                    if (response.status !== 200) {
+                        console.log('Problem in fetching');
+                        return;
+                    }
+                    response.json().then(function(data) {
+                        citiesArray[citiesArray.length] = {
+                            label: regions[x], options: data                          
+                        }     
+                    });                    
+                }) 
+                
+            });  
+            //console.log(citiesArray);
+            setCitiesByRegion(citiesArray);
+        }
+        getRegions()        
+    }, []);
+
+
 
     const onCheckboxBtnClick = (selected) => {
         const index = cSelected.indexOf(selected);
