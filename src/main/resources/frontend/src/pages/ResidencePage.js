@@ -4,12 +4,14 @@ import { PhotoContext } from '../contexts/PhotoContextProvider';
 import { Container, Row, Col } from 'reactstrap';
 import { useParams, Link } from 'react-router-dom';
 import PhotoCarousel from '../components/PhotoCarousel';
+//import AmenitiesList from '../components/AmenitiesList';
 
 const ResidencePage = () => {
   let { id } = useParams();
   const { residence, getResidenceById } = useContext(ResidenceContext);
   const { getPhotosByResidenceId } = useContext(PhotoContext);
   const [totalPrice, setTotalPrice] = useState(Number);
+
 
   useEffect(() => {
     getPhotosByResidenceId(id);
@@ -43,7 +45,7 @@ const ResidencePage = () => {
               </span>
               <h2 className="mt-2 order-sm-2 order-lg-5"><b>Totalt {totalPrice} kr </b></h2>
               <h3 className="order-sm-3 order-lg-1"><b>{residence.price} kr</b> / natt</h3>
-              <h3 className="order-lg-2"><hr width="60%" noshade></hr></h3>
+              <h3 className="order-lg-2"><hr width="60%"></hr></h3>
               <h3 className="order-sm-4 order-lg-3">2 personer</h3>
               <h3 className="order-sm-5 order-lg-4">3 nätter</h3>
             </Col>
@@ -52,6 +54,9 @@ const ResidencePage = () => {
         <Col xs="12" md={{ size: 6, order: 1 }}>
           <h3><b>Information om boendet</b></h3>
           <p> logem lipsom logem lipson logem lipson logem lipson logem lipson logem lipson logen lipsom logem lipsom logen losipson lopgen lispon </p>
+          {/*AMENITIES
+          {residence && <AmenitiesList residenceId={id} />}
+          */}
         </Col>
       </Row>
     </Container>

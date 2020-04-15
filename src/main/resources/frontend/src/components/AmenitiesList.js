@@ -9,46 +9,44 @@ export default function AmenitiesList(props) {
   const { getAmenitiesFromResidenceId, amenitiesResidence } = useContext(AmenitiesResidencesIdCon);
   const [amenitiesVals, setAmenitiesVals] = useState([]);
 
+  const getAmenities = async () => {
+    console.log(props.residenceId)
+    console.log("Check all props: ", props)
+    await getAmenitiesFromResidenceId(props.residenceId)
+  }
+
+  useEffect(() => {
+    console.log("amenities ", amenities)
+    console.log("amenity Residence ", amenitiesResidence)
+    amenities.forEach(a => {
+      setAmenitiesVals(
+        amenitiesResidence.filter(ar => {
+          return (a.id == ar.amenity_id)
+        })
+      )
+    })
+  }, [amenities])
+
    useEffect(() => {
-     getAmenitiesFromResidenceId(props.residenceId)
-     console.log("hej")
+    getAmenities()
   }, [])
 
   const appendAmenities = (amenity) => {
-    setAmenitiesVals(amenitiesVals.push(amenity))
+    console.log("amenity", amenity)
+    setAmenitiesVals([...amenitiesVals, amenity])
   }
 
-  const getAmenities = () => {
-    amenities.forEach(a => {
-      amenitiesResidence.filter(ar => {
-        if (a.id === ar.amenity_id) {
-          return appendAmenities(a);
-        }
-      })
-    })
-    console.log("Hopefully this works, getting amenitiesVals", amenitiesVals)
-  }
   //VIKTIGT, Be Johan om hjälp om detta imorgon! Kan ej lösa själv
   //Löste det at last. WHOO
 
   const AmenitiesList = () => {
-    return (
-      <div>
-      {
-        amenitiesResidence
-        ? <p onClick={() => getAmenities(props.residenceId)}> hello </p>
-        : 'this is false'
-      }
-      </div>
-    )
-
-/*     return amenities.map((amenity, index) => {
+     return amenitiesVals.map((amenity, index) => {
         return (
             <Col key={index}
-            onClick={() => { console.log("amenity :", amenity.id); getAmenities() }}>
+            onClick={() => { console.log("amenity :", amenity.id)}}>
             >{amenity.name} ({amenity.id})</Col>
           )
-        }) */
+        })
   }
 
   return (
