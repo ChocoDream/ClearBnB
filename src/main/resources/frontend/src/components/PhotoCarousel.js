@@ -33,15 +33,14 @@ const PhotoCarousel = (props) => {
     setActiveIndex(newIndex);
   }
 
-  const slides = items.map((item) => {
+  const slides = items.map((item, index) => {
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
-        key={(item.path)}
+        key={(index)}
       >
-        <img src={item.path} alt='' />
-        <p> {item.path} </p>
+        <img src={item.path} alt={`boende bild ${index}`} style={{width: "25%"}} />
       </CarouselItem>
     );
   });
