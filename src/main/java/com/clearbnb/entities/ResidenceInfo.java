@@ -8,7 +8,6 @@ public class ResidenceInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
     private int price;
@@ -26,7 +25,7 @@ public class ResidenceInfo {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "city_id")
+    //@Column(name = "city_id")
     private int city_id;
 
     private String zip_code;
@@ -99,22 +98,6 @@ public class ResidenceInfo {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public int getMax_guests() {
-        return max_guests;
-    }
-
-    public void setMax_guests(int max_guests) {
-        this.max_guests = max_guests;
-    }
-
-    public int getCity_id() {
-        return city_id;
-    }
-
-    public void setCity_id(int city_id) {
-        this.city_id = city_id;
     }
 
     public String getZip_code() {

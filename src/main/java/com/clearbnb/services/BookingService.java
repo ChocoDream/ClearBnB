@@ -26,10 +26,6 @@ public class BookingService {
         return bookingRepo.findByResidenceId(residence_id);
     }
 
-    public List<Booking> getAllBookingsByOwnerId(int owner_id) {
-        return bookingRepo.findByOwnerId(owner_id);
-    }
-
     public Booking createBooking(Booking booking) {
         return bookingRepo.save(booking);
     }

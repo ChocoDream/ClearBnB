@@ -31,8 +31,7 @@ const Login = (props) => {
 
   return (
     <div className="container">
-      <AvForm className="col-lg-6 col-sm-12 mx-auto" 
-        onSubmit={userLogin}>
+      <AvForm className="col-lg-6 col-sm-12 mx-auto">
         <h3 className="my-3 pb-3 text-info">Logga in</h3>
         <FormGroup>
           <Label for="username">Username</Label>
@@ -56,7 +55,7 @@ const Login = (props) => {
             />
         </FormGroup>
         <div className="d-flex flex-row">
-          <Button color="info">Submit</Button>
+          <Button color="info" onClick={userLogin}>Submit</Button>
           <div className="ml-4 pt-2 text-danger">{message}</div>
         </div>
       </AvForm>

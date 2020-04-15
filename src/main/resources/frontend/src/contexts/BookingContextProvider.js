@@ -16,18 +16,10 @@ const BookingContextProvider = (props) => {
     setBookings([...bookings, booking])
   }
 
-  const removeBooking = id => {
-    setBookings(bookings.filter(r => r.id !== id))
-    fetch('/api/clearbnb/bookings/' + id, {
-      method: 'DELETE'
-    })
-  }
-
   const values = {
     bookings,
     getBookings,
-    addBooking,
-    removeBooking
+    addBooking
   }
 
   return (

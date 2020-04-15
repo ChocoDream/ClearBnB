@@ -1,25 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { Alert, Col, Row, Form, FormGroup, Input, Container } from 'reactstrap';
 import Select from 'react-select';
-import moment from 'moment'
 import { ResidenceContext } from '../contexts/ResidenceContextProvider'
 import { CityContext } from '../contexts/CityContextProvider'
-import DatePicker, { registerLocale } from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import sv from "date-fns/locale/sv"; // the locale you want
-registerLocale("sv", sv); // register it with the name you want
-
 
 const FrontPageMenuMobile = () => {
-  const today = new Date()
-  const tomorrow = today.setDate(today.getDate()+1)
-
   const { setResidences } = useContext(ResidenceContext)
 
   //const [region, setRegion] = useState('')
   //const [city, setCity] = useState('')
-  const [start_date, setStartDate] = useState(new Date())
-  const [end_date, setEndDate] = useState(tomorrow)
+  const [start_date, setStartDate] = useState('')
+  const [end_date, setEndDate] = useState('')
   const [count_person, setCountPerson] = useState('')
   const [city_id, setCityId] = useState('');
   const [message, setMessage] = useState();
@@ -31,7 +22,9 @@ const FrontPageMenuMobile = () => {
       label: opt,
       value: opt
   }));
+
   const [visible, setVisible] = useState(false);
+
   const onDismiss = () => setVisible(false);
 
   const doSearch = async() => {
@@ -39,8 +32,8 @@ const FrontPageMenuMobile = () => {
                   //region,
                   //city,
                   city_id,
-                  start_date: moment(start_date).format('X'),
-                  end_date: moment(end_date).format('X'),
+                  start_date,
+                  end_date,
                   count_person
                   }
     console.log(datas.city_id+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
@@ -56,8 +49,7 @@ const FrontPageMenuMobile = () => {
       setMessage('Alla fält är obligatoriska!');
       setVisible(true);
     } else {
-      res = await fetch('/api/clearbnb/residenceSearch/'+datas.city_id+'/'+datas.start_date+'/'
-                                                        +datas.end_date+'/'+datas.count_person+'')
+      res = await fetch('/api/clearbnb/residenceSearch/'+datas.city_id+'/'+datas.start_date+'/'+datas.end_date+'/'+datas.count_person+'')
     }
     res = await res.json()
     setResidences(res)
@@ -77,37 +69,24 @@ const FrontPageMenuMobile = () => {
           <Row form>
             <Col sd={6}>
               <FormGroup>
-                <DatePicker
-                  className="p-2 rounded-lg"
-                  locale="sv"
-                  selected={start_date}
-                  onChange={date=>setStartDate(date)}
-                  dateFormat='MM/dd/yyyy'
-                  minDate={new Date()}
-                  isClearable
-                  showWeekNumbers
-                  showYearDropdown
-                  scrolllableMonthYearDropdown
-                  placeholderText=""
-                />
+                <Input value={start_date} 
+                  onChange={e=>setStartDate(e.target.value)}
+                  bsSize="lg" 
+                  type="text" name="start_date" 
+                  id="start_date"
+                  placeholder="Startdatum"
+                  required />
               </FormGroup>
             </Col>
             <Col sd={6}>
               <FormGroup>
-                <DatePicker
-                  className="p-2 rounded"
-                  locale="sv"
-                  style={{ padding:'2px !important'}}
-                  selected={end_date}
-                  onChange={date=>setEndDate(date)}
-                  dateFormat='MM/dd/yyyy'
-                  minDate={tomorrow}
-                  isClearable
-                  showWeekNumbers
-                  showYearDropdown
-                  scrolllableMonthYearDropdown
-                  placeholderText=""
-                />
+                <Input value={end_date} 
+                  onChange={e=>setEndDate(e.target.value)}
+                  bsSize="lg" 
+                  type="text" name="end_date" 
+                  id="end_date" 
+                  placeholder="Slutdatum"
+                  required />
               </FormGroup>
             </Col>
           </Row>

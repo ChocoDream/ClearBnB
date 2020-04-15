@@ -56,9 +56,4 @@ public class ResidenceInfoController {
                                                     ) {
         return residenceInfoService.getAllResidencesBySearchParameters(city_id,start_date,end_date,max_guest);
     }
-
-    @GetMapping("/api/clearbnb/residencesbyowner/{owner_id}")
-    public List<ResidenceInfo> getResidencesByOwnerId(@PathVariable int owner_id) {
-        return residenceInfoService.getResidencesByOwnerId(owner_id);
-    }
 }
