@@ -3,7 +3,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Card, CardImg, CardBody, CardTitle,
         InputGroup, InputGroupAddon, InputGroupText, 
         Container, Alert, Row, Col, Button, 
-        Form, FormGroup, Label, Input } from 'reactstrap'
+        Form, FormGroup, Label, Input,
+        Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import Select from 'react-select';
 
 import { ResidenceCon } from '../contexts/ResidenceConProvider'
@@ -25,7 +26,9 @@ function NewResidence(props) {
     const { user } = useContext(UserContext);
 
     const [zip_code, setZipCode] = useState('');
+    const [region, setRegion] = useState('');
     const [city_id, setCityId] = useState('');
+    const [city, setCity] = useState('');
     const [street_name, setStreetName] = useState('')
     const [street_number, setStreetNumber] = useState('')
     const [apartment_number, setStreetApartment] = useState('')
@@ -41,8 +44,9 @@ function NewResidence(props) {
     const [citiesByRegion, setCitiesByRegion] = useState('')
     const onDismiss = () => setVisible(false);
     const [cSelected, setCSelected] = useState([]);
- 
     let images = []
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
 
     const filesChange = async fileList => {
         // handle file changes
@@ -73,6 +77,26 @@ function NewResidence(props) {
         label: opt,
         value: opt
     }));
+
+    const addCity = async() =>{
+        toggle();
+
+        const datas = {            
+            country: 'Sverige',
+            region: region,
+            city: city
+        }
+        console.log(datas.region+' '+datas.city)
+
+        let res = await fetch('/api/clearbnb/allcities', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datas)
+        })
+        res = await res.json()
+        console.log(res)
+        window.location.reload(false);
+    }
 
     const addResidence = async (e) => {
         e.preventDefault()
@@ -286,7 +310,9 @@ function NewResidence(props) {
                             <Row form>        
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="street_name">Ort</Label>
+                                        <Label for="street_name">Ort 
+                                        <Button className="ml-2 pb-0 pt-0" outline color="primary" size="sm" onClick={toggle}>+</Button>
+                                        </Label>
                                         {CitiesSelect()}
                                     </FormGroup>
                                 </Col>
@@ -307,6 +333,34 @@ function NewResidence(props) {
                                     </FormGroup>
                                 </Col>
                             </Row>
+                            <Modal isOpen={modal} toggle={toggle}>
+                            <ModalHeader toggle={toggle}>Ny ort</ModalHeader>
+                            <ModalBody>
+                            <Form>
+                                <Row>
+                                    <Col md={6}>
+                                        <Label>Region</Label>
+                                        <Input required type="text" id="region" placeholder=""
+                                            value={region} onChange={e => setRegion(e.target.value)}
+                                            disabled = {disabled}/>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>
+                                        <Label>Ny ort</Label>
+                                        <Input required type="text" id="city" placeholder=""
+                                            value={city} onChange={ e => setCity(e.target.value)}
+                                            disabled = {disabled}/>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </ModalBody>
+                        <ModalFooter>
+                        <Button color="primary" onClick={addCity}>Spara</Button>
+                        <Button color="secondary" onClick={toggle}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
+                            
                             <Row form>        
                                 <Col md={4}>
                                     <FormGroup>
