@@ -45,7 +45,7 @@ const ResidencePage = () => {
               </span>
               <h2 className="mt-2 order-sm-2 order-lg-5"><b>Totalt {totalPrice} kr </b></h2>
               <h3 className="order-sm-3 order-lg-1"><b>{residence.price} kr</b> / natt</h3>
-              <h3 className="order-lg-2"><hr width="60%" noshade></hr></h3>
+              <h3 className="order-lg-2 d-none d-md-block"><hr width="60%" noshade></hr></h3>
               <h3 className="order-sm-4 order-lg-3">2 personer</h3>
               <h3 className="order-sm-5 order-lg-4">3 nätter</h3>
             </Col>

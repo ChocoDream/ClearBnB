@@ -11,16 +11,19 @@ public class Booking {
     private int id;
 
     @Column(name = "start_date")
-    private int start_date;
+    private long start_date;
 
     @Column(name = "end_date")
-    private int end_date;
+    private long end_date;
 
     @Column(name = "time_stamp")
-    private int time_stamp;
+    private long time_stamp;
 
     @Column(name = "total_price")
     private int total_price;
+
+    @Column(name = "total_guests")
+    private int total_guests;
 
     @Column(name = "is_active")
     private boolean is_active;
@@ -33,6 +36,20 @@ public class Booking {
     @JoinColumn(name = "residence_id")
     ResidenceInfo residenceInfo;
 
+    public Booking(){}
+
+    public Booking(int id, long start_date, long end_date, long time_stamp, int total_price, int total_guests, boolean is_active, User user, ResidenceInfo residenceInfo) {
+        this.id = id;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.time_stamp = time_stamp;
+        this.total_price = total_price;
+        this.total_guests = total_guests;
+        this.is_active = is_active;
+        this.user = user;
+        this.residenceInfo = residenceInfo;
+    }
+
     public int getId() {
         return id;
     }
@@ -41,27 +58,27 @@ public class Booking {
         this.id = id;
     }
 
-    public int getStart_date() {
+    public long getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(int start_date) {
+    public void setStart_date(long start_date) {
         this.start_date = start_date;
     }
 
-    public int getEnd_date() {
+    public long getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(int end_date) {
+    public void setEnd_date(long end_date) {
         this.end_date = end_date;
     }
 
-    public int getTime_stamp() {
+    public long getTime_stamp() {
         return time_stamp;
     }
 
-    public void setTime_stamp(int time_stamp) {
+    public void setTime_stamp(long time_stamp) {
         this.time_stamp = time_stamp;
     }
 
@@ -71,6 +88,14 @@ public class Booking {
 
     public void setTotal_price(int total_price) {
         this.total_price = total_price;
+    }
+
+    public int getTotal_guests() {
+        return total_guests;
+    }
+
+    public void setTotal_guests(int total_guests) {
+        this.total_guests = total_guests;
     }
 
     public boolean isIs_active() {

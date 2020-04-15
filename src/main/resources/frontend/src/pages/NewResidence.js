@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Card, CardImg, CardText, CardBody, CardTitle,
+import { Card, CardImg, CardBody, CardTitle,
         InputGroup, InputGroupAddon, InputGroupText, 
         Container, Alert, Row, Col, Button, 
         Form, FormGroup, Label, Input } from 'reactstrap'
@@ -34,6 +34,7 @@ function NewResidence(props) {
     const [max_guests, setMax_guests] = useState('')
     const [price, setPrice] = useState('')
     const [message, setMessage] = useState();
+    const [photos_list, setPhotosList] = useState();
     const [ready, setReadyMessage] = useState();
     const [visible, setVisible] = useState(false);
     const [disabled, setDisabled] = useState(false);
@@ -45,17 +46,18 @@ function NewResidence(props) {
     //const [rSelected, setRSelected] = useState(null);
  
     let images = []
-  
+
     const filesChange = async fileList => {
         // handle file changes
         const formData = new FormData();
-
+        var photos='';
         if (!fileList.length) return;
 
         // append the files to FormData
         Array.from(Array(fileList.length).keys())
         .map(x => {
             formData.append("files", fileList[x], fileList[x].name);
+            photos = photos+fileList[x].name+' ';
         });
 
         let response = await fetch('/api/clearbnb/uploadfiles', {
@@ -66,6 +68,7 @@ function NewResidence(props) {
         response = await response.json()
         console.log(response);        
         images = response
+        setPhotosList(photos);
     }
 
     var someArrayOfStrings =[];
@@ -77,14 +80,9 @@ function NewResidence(props) {
     const addResidence = async (e) => {
         e.preventDefault()
 
-        if (user !== null) {
-            var user_id = user.id;
-        } else{            
-            setMessage('Du måste logga in.');
-            setVisible(true);
-            setDisabled(true);
-            return
-        }
+        var user_id = user.id;
+        var current_date = Math.floor(new Date().getTime()/1000.0);
+        
 
         const datas = {
             city_id,
@@ -149,6 +147,7 @@ function NewResidence(props) {
         const ownerresidence = {
             owner_id: user_id, 
             residence_id,
+            start_date: current_date
         }
 
         // send new residence to backend
@@ -166,7 +165,6 @@ function NewResidence(props) {
         //AMENITIES
         const amenities = cSelected;
         console.log('amenities:'+JSON.stringify(amenities));
-        var start_date = 0; //Date.now();
         var end_date = 0; //Date.now();
 
         for(var i = 0; i < amenities.length; i++) {
@@ -174,7 +172,7 @@ function NewResidence(props) {
             const amenities_x_residences = {
                 amenity_id,
                 residence_id,
-                start_date,
+                start_date: current_date,
                 end_date
             };   
             // send new residence to backend
@@ -412,27 +410,28 @@ function NewResidence(props) {
                             </FormGroup>*/}
                             <FormGroup>
                                 <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text" id="inputGroupFileAddon01">
-                                    Uppladning
-                                    </span>
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text" id="inputGroupFileAddon01">
+                                        Uppladning
+                                        </span>
+                                    </div>
+                                    <div className="custom-file">
+                                        <Input
+                                        className="custom-file-input"
+                                        type="file" 
+                                        name="files"
+                                        id="files" 
+                                        accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
+                                        multiple
+                                        onChange={e => filesChange(e.target.files)}
+                                        aria-describedby="inputGroupFileAddon01"
+                                        />
+                                        <label className="custom-file-label">
+                                        Ladda upp bilder (Max 1 MB filstorlek):
+                                        </label>
+                                    </div>
                                 </div>
-                                <div className="custom-file">
-                                    <Input
-                                    className="custom-file-input"
-                                    type="file" 
-                                    name="files"
-                                    id="files" 
-                                    accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
-                                    multiple
-                                    onChange={e => filesChange(e.target.files)}
-                                    aria-describedby="inputGroupFileAddon01"
-                                    />
-                                    <label className="custom-file-label">
-                                    Ladda upp bilder (Max 1 MB filstorlek):
-                                    </label>
-                                </div>
-                                </div>
+                                <div>{photos_list}</div>
                             </FormGroup>
                             <Button className="mt-4" color="info" size="lg" block disabled = {disabled}>Spara bostad</Button>
                             <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning" isOpen={visible} toggle={onDismiss}>{message}</Alert>
@@ -446,7 +445,6 @@ function NewResidence(props) {
     else{
         return(
             <Container fluid>
-                <h2>Ny bostad</h2>
                 <Alert className="mb-1 ml-2 mr-sm-0 mb-sm-0" color="warning">Du måste logga in.</Alert>
             </Container>
         )

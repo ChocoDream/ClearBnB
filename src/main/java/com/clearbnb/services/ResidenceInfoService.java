@@ -47,5 +47,9 @@ public class ResidenceInfoService {
                                                                   int max_guest) {
         return residenceInfoRepo.findBySearchParameters(city_id,start_date,end_date,max_guest);
     }
+
+    public List<ResidenceInfo> getResidencesByOwnerId(int owner_id) {
+        return residenceInfoRepo.findByOwnerId(owner_id);
+    }
 }
 
