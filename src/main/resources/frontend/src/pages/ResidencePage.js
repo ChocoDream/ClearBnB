@@ -31,7 +31,9 @@ const ResidencePage = () => {
         </Col>
         <Col xs={{ size: 12, order: 2 }} lg={{ order: 1 }}>
           {/*PHOTO HERE */}
+          {/* 
           <PhotoCarousel className="mb-4" />
+          */}
         </Col>
       </Row>
       <Row>
