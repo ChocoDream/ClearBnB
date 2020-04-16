@@ -50,6 +50,7 @@ const App = () => {
                               <Route exact path="/create-booking" component={CreateBooking} />
                               <Route exact path="/residences/:id" children={<ResidencePage />} />
                             </div>
+                          <Footer />
                         </Router>
                       </OwnersResidencesIdConProvider>
                     </PhotoContextProvider>
