@@ -347,7 +347,7 @@ function NewResidence(props) {
                                 </Row>
                                 <Row>
                                     <Col md={6}>
-                                        <Label>Ny ort</Label>
+                                        <Label>Ort</Label>
                                         <Input required type="text" id="city" placeholder=""
                                             value={city} onChange={ e => setCity(e.target.value)}
                                             disabled = {disabled}/>
@@ -357,7 +357,7 @@ function NewResidence(props) {
                         </ModalBody>
                         <ModalFooter>
                         <Button color="primary" onClick={addCity}>Spara</Button>
-                        <Button color="secondary" onClick={toggle}>Cancel</Button>
+                        <Button color="secondary" onClick={toggle}>Avbryt</Button>
                         </ModalFooter>
                     </Modal>
                             
