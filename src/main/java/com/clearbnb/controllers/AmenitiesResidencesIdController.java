@@ -23,7 +23,7 @@ public class AmenitiesResidencesIdController {
     }
 
     @GetMapping("/api/clearbnb/amenitiesbyresidence/{residence_id}")
-    public List<AmenitiesResidencesId> getAmenitiesByResidencesid(@PathVariable int residence_id) {
+    public List getAmenitiesByResidencesid(@PathVariable int residence_id) {
         return amenitiesResidencesIdService.getAmenitiesByResidencesId(residence_id);
     }
 

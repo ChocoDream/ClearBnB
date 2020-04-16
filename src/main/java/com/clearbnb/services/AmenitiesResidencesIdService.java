@@ -16,8 +16,8 @@ public class AmenitiesResidencesIdService {
         return (List<AmenitiesResidencesId>) amenitiesResidencesIdRepo.findAll();
     }
 
-    public List<AmenitiesResidencesId> getAmenitiesByResidencesId(int residence_id) {
-        return (List<AmenitiesResidencesId>) amenitiesResidencesIdRepo.findByResidenceId(residence_id);
+    public List getAmenitiesByResidencesId(int residence_id) {
+        return (List) amenitiesResidencesIdRepo.findByResidenceId(residence_id);
     }
 
     public AmenitiesResidencesId createamenitiesresidencesid(AmenitiesResidencesId amenityxresidences) {

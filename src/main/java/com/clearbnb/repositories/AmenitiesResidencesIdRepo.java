@@ -11,13 +11,11 @@ import java.util.List;
 public interface AmenitiesResidencesIdRepo extends CrudRepository<AmenitiesResidencesId, Integer> {
     public AmenitiesResidencesId findById(int residence_id);
 
-    public static final String FIND_AMENITIESBYRESIDENCEID = "SELECT ar.id,\n" +
-            "           ar.amenity_id,\n" +
-            "           ar.residence_id,\n" +
-            "           ar.start_date,\n" +
-            "           ar.end_date\n" +
-            "      FROM amenities_x_residences ar\n" +
-            "     WHERE ar.residence_id = :residence_id";
+    public static final String FIND_AMENITIESBYRESIDENCEID = "SELECT a.name\n" +
+            "      FROM amenities_x_residences ar,\n" +
+            "           amenitites a\n" +
+            "     WHERE ar.amenity_id = a.id \n" +
+            "       AND ar.residence_id = :residence_id";
     @Query(value = FIND_AMENITIESBYRESIDENCEID, nativeQuery = true)
-    public List<AmenitiesResidencesId> findByResidenceId(int residence_id);
+    public List findByResidenceId(int residence_id);
 }
