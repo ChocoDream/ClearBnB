@@ -28,7 +28,8 @@ public interface ResidenceInfoRepo extends CrudRepository<ResidenceInfo, Integer
                 "           a.zip_code,\n" +
                 "           a.street_name,\n" +
                 "           a.street_number,\n" +
-                "           a.apartment_number\n" +
+                "           a.apartment_number,\n" +
+                "           '' path \n" +
                 "      FROM residences r,\n" +
                 "           addresses a,\n" +
                 "           cities ci\n" +
@@ -50,7 +51,12 @@ public interface ResidenceInfoRepo extends CrudRepository<ResidenceInfo, Integer
             "           a.zip_code,\n" +
             "           a.street_name,\n" +
             "           a.street_number,\n" +
-            "           a.apartment_number\n" +
+            "           a.apartment_number,\n" +
+            "           SUBSTR((SELECT p.path\n" +
+            "               FROM photos p\n" +
+            "               WHERE p.residence_id = re.id\n" +
+            "               ORDER BY p.residence_id\n" +
+            "               LIMIT 1),8) path\n" +
             "      FROM residences r,\n" +
             "           addresses a,\n" +
             "           cities ci\n" +
@@ -81,7 +87,12 @@ public interface ResidenceInfoRepo extends CrudRepository<ResidenceInfo, Integer
             "                ad.zip_code,\n" +
             "                ad.street_name,\n" +
             "                ad.street_number,\n" +
-            "                ad.apartment_number\n" +
+            "                ad.apartment_number,\n" +
+            "           SUBSTR((SELECT p.path\n" +
+            "               FROM photos p\n" +
+            "               WHERE p.residence_id = re.id\n" +
+            "               ORDER BY p.residence_id\n" +
+            "               LIMIT 1),8) path\n" +
             "           from residences re,\n" +
             "                addresses ad,\n" +
             "                cities ci\n" +
@@ -123,7 +134,12 @@ public interface ResidenceInfoRepo extends CrudRepository<ResidenceInfo, Integer
             "                ad.zip_code,\n" +
             "                ad.street_name,\n" +
             "                ad.street_number,\n" +
-            "                ad.apartment_number\n" +
+            "                ad.apartment_number,\n" +
+            "           SUBSTR((SELECT p.path\n" +
+            "               FROM photos p\n" +
+            "               WHERE p.residence_id = re.id\n" +
+            "               ORDER BY p.residence_id\n" +
+            "               LIMIT 1),8) path\n" +
             "           from residences re,\n" +
             "                addresses ad,\n" +
             "                cities ci,\n" +
