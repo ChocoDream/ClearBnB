@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 const Footer = () => (
-    <footer class="footer">
+    <footer className="footer">
       <p>Clearbnb</p>
     </footer>
   );
