@@ -33,6 +33,7 @@ public class ResidenceInfo {
     private String street_name;
     private String street_number;
     private String apartment_number;
+    private String path;
 
     public ResidenceInfo(){
     }
@@ -147,5 +148,13 @@ public class ResidenceInfo {
 
     public void setApartment_number(String apartment_number) {
         this.apartment_number = apartment_number;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }
