@@ -40,3 +40,12 @@ code {
   align-items: 'center';
   justify-content: 'space-between'
 }
+
+.carousel-inner { 
+  position: relative; 
+  width: 100%; 
+  overflow: hidden; 
+  max-height: 500px; 
+  display: flex; 
+  align-items: center;
+}
