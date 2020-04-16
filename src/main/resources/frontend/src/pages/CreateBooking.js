@@ -2,10 +2,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import { ResidenceContext } from '../contexts/ResidenceContextProvider';
 import { UserContext } from '../contexts/UserContextProvider';
 import { BookingContext } from '../contexts/BookingContextProvider';
+import { Link } from 'react-router-dom'
 import { Container, Card, CardTitle, CardText, CardSubtitle, CardBody, Row, Col, Input, InputGroup, Alert} from 'reactstrap';
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import addDays from 'date-fns/addDays'
+import { addDays, sv } from 'date-fns'
 import 'react-datepicker/dist/react-datepicker.css'
 
 const CreateBooking = (props) => {
@@ -49,7 +50,6 @@ const CreateBooking = (props) => {
       user,
       residenceInfo: residence
     }
-    console.log(myBoking);
     
     let res = await fetch('/api/clearbnb/bookings', {
       method: 'POST',
@@ -62,7 +62,6 @@ const CreateBooking = (props) => {
     props.history.push("/mypage");  
   } 
   
-
   if (user !== null) {
   return (
     <Container className="mt-5">
@@ -93,12 +92,12 @@ const CreateBooking = (props) => {
         <Col xs="12" sm="5">
           <Card>
             <CardBody className="bg-light border border-light">
-            <Row className="mt-3">
-             
+            <Row className="mt-3">             
               <Col xs="12" sm="6"> 
               <h5 className="text-info d-block">Datum</h5>              
                 <DatePicker
                   className="pl-2 pr-3 py-1 text-info"
+                  locale="sv"
                   selected={startDate}
                   minDate={startDate}
                   onChange={date => {
@@ -115,17 +114,17 @@ const CreateBooking = (props) => {
               <span className="text-muted d-block mt-2">Slutdatum</span>
                 <DatePicker
                   className="pl-3 pr-1 py-1 text-info"
+                  locale="sv"
                   selected={endDate}
                   onChange={date => setEndDate(+date)}
                   selectsEnd
                   startDate={startDate}
                   endDate={endDate}
-                  minDate={startDate}
+                  minDate={endDate}
                   dateFormat="yyyy-MM-dd"
                 />                             
               </Col>
             </Row>
-
             <Row className="mt-3">
               <Col xs="6" sm="6">   
               <h5 className="text-info">Antal gäster</h5>
@@ -163,7 +162,7 @@ const CreateBooking = (props) => {
               </Col>             
             </Row>    
               <hr/>
-              <button className="btn btn-outline-info float-left">Tillbaka</button>
+              <Link to="/" className="btn btn-outline-info float-left">Tillbaka</Link>
               <button 
                 className="btn btn-outline-success float-right px-5" 
                 onClick={()=> createBooking()}>Boka
