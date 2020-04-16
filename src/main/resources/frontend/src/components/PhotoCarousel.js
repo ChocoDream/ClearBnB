@@ -15,7 +15,6 @@ const PhotoCarousel = (props) => {
 
   const items = residencePhotos;
 
-
   const next = () => {
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
@@ -53,8 +52,12 @@ const PhotoCarousel = (props) => {
     >
       <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
       {slides}
-      <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-      <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+      {items.length > 1 ? 
+        <div>
+          <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+          <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+      </div>
+      : ''}
     </Carousel>
   );
 }
