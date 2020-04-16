@@ -40,7 +40,7 @@ const PhotoCarousel = (props) => {
         onExited={() => setAnimating(false)}
         key={(index)}
       >
-        <img src={item.path} alt={`boende bild ${index}`} style={{width: "25%"}} />
+        <img src={item.path.slice(7)} className="img-fluid" alt={`boende bild ${index}`} />
       </CarouselItem>
     );
   });
