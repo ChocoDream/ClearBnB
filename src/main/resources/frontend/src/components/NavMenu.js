@@ -22,13 +22,6 @@ const NavMenu = (props) => {
       <Collapse isOpen={!collapsed} navbar>
         <Nav navbar className="text-right ml-auto">
           <NavItem>
-            {/* <Link to="/search/" className="nav-link text-info">Sök</Link> */}
-            <Form className="form-inline d-flex flex-row">         
-              <input className="form-control mt-1 mr-sm-0 py-0" type="search" placeholder="Sök" aria-label="Search"/>
-              <button className="btn btn-sm btn-outline-success my-sm-0 d-none" type="submit">Sök</button>          
-            </Form>
-          </NavItem>
-          <NavItem>
             <Link to="/about/" className="nav-link text-info h5">Om oss</Link>
           </NavItem>
           {!user?(
