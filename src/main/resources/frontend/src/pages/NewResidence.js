@@ -498,6 +498,7 @@ function NewResidence(props) {
                                 </InputGroup>
                             </FormGroup>*/}
                             <FormGroup>
+                                <Label>Ladda upp bilder</Label>
                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text" id="inputGroupFileAddon01">
@@ -516,7 +517,7 @@ function NewResidence(props) {
                                         aria-describedby="inputGroupFileAddon01"
                                         />
                                         <label className="custom-file-label">
-                                        Ladda upp bilder (Max 1 MB filstorlek):
+                                        Max 1 MB filstorlek
                                         </label>
                                     </div>
                                 </div>
