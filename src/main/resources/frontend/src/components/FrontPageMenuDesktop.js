@@ -105,8 +105,8 @@ const FrontPageMenuDesktop = () => {
   }, []);
  
   return (
-    <div className="d-flex justify-content-center">
-      <Form className="bg-secondary rounded p-1 form-inline" style={{marginTop: '5%'}}>
+    <div className="d-flex justify-content-center frontpage-splash">
+      <Form className="bg-secondary rounded p-1 form-inline" style={{margin: '5% auto'}}>
           <FormGroup>
             {CitiesSelect()}
           </FormGroup>

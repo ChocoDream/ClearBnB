@@ -106,7 +106,7 @@ const FrontPageMenuMobile = () => {
   }, []);
  
   return (
-    <div>
+    <div className="frontpage-splash">
     <Container className="pt-4 rounded d-lg-hide bg-secondary">
         <Form>
           <Row form>

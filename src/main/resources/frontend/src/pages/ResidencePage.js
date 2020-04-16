@@ -19,12 +19,6 @@ const ResidencePage = () => {
     getAmenities(id);
   }, [])
 
-  /*useEffect(() => {
-    //Calculating the total price in an useEffect
-    setTotalPrice(residence.price)
-  }, [residence.price])*/
-
-
   const getAmenities = async (id) => {
     let amenities = await fetch(`/api/clearbnb/amenitiesbyresidence/${id}`);
     amenities = await amenities.json();
@@ -47,7 +41,7 @@ const ResidencePage = () => {
 
 
   return (
-    <Container>
+    <Container className="mb-3">
       <Row style={{ marginBottom: '5%' }}>
         <Col xs={{ size: 12, order: 1 }} md={{ order: 2 }}>
           <span className="mt-2 h1" xs="12" lg="5"> <b>{residence.street_name} {residence.street_number}, {residence.city}</b> </span>

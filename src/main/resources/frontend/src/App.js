@@ -14,6 +14,7 @@ import NewResidence from './pages/NewResidence';
 import CreateBooking from './pages/CreateBooking';
   
 import NavMenu from './components/NavMenu';
+import Footer from './components/Footer';
 import ResidenceContextProvider from './contexts/ResidenceContextProvider'
 import ResidenceConProvider from './contexts/ResidenceConProvider'
 import AddressContextProvider from './contexts/AddressContextProvider'
@@ -40,6 +41,7 @@ const App = () => {
                       <OwnersResidencesIdConProvider>
                         <Router>
                           <NavMenu />
+                            <div className="content">
                             <Route exact path="/" component={Home} />
                             <Route exact path="/about" component={About} />
                             <Route exact path="/user-login" component={Login} />
@@ -49,6 +51,8 @@ const App = () => {
                             <Route exact path="/new-residence" component={NewResidence} />
                             <Route exact path="/create-booking" component={CreateBooking} />
                             <Route exact path="/residences/:id" children={<ResidencePage />} />
+                            </div>
+                          <Footer />
                         </Router>
                       </OwnersResidencesIdConProvider>
                     </PhotoContextProvider>

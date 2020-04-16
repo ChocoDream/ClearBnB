@@ -5,6 +5,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;   
+  min-height: 100vh;
+  flex-direction: column; 
+}
+
+.App{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; 
+}
+
+.content { 
+  flex: 1; 
 }
 
 code {
@@ -16,7 +29,6 @@ code {
   background: url(https://images.freeimages.com/images/large-previews/905/germany-apartments-modern-2-1214410.jpg);
   background-position: center;
   background-size: cover;
-  height: 100vh;
 }
 
 .reactSelectDd{
@@ -48,4 +60,10 @@ code {
   max-height: 500px; 
   display: flex; 
   align-items: center;
+}
+
+.footer {   
+  flex-shrink: 0; 
+  height: 50px;
+  text-align: center;
 }

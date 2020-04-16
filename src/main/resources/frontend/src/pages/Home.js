@@ -6,7 +6,7 @@ import Residences from './Residences.js';
 const Home = () => {
   
   return (
-    <div className="frontpage-splash">
+    <div>
       <div className="d-lg-none"> {/*MOBILE-TABLET MODE */}
         <FrontPageMenuMobile />
         <Residences />
