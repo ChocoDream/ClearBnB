@@ -28,7 +28,7 @@ const SetResidence = () => {
         const getResidenceByOwner = async (owner_id) => {
             let res = await fetch('/api/clearbnb/residencesbyowner/' + owner_id)            
             res = await res.json();
-            console.log(res)
+            //console.log(res)
             
             if (res.length === 0){
                 setMessage('Inga sparade bostäder.');
@@ -37,7 +37,7 @@ const SetResidence = () => {
             }
             const list = Array.from(Array(res.length).keys())
                 .map(x => {
-                console.log(res[x].id);
+                //console.log(res[x].id);
                                 
                 return (<Card key={res[x].id} >
                             <CardHeader> {res[x].city}, {res[x].region} Id [{res[x].id}]</CardHeader>
@@ -99,7 +99,7 @@ const SetResidence = () => {
         if (user_id== null){*/
             if (user !== null){
                 var user_id=user.id;
-                console.log(user.id)      
+                //console.log(user.id)      
                 getResidenceByOwner(user_id);
                 getBookingByOwnerId(user_id);
             }

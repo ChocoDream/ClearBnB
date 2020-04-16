@@ -44,9 +44,9 @@ function NewResidence(props) {
     const [citiesByRegion, setCitiesByRegion] = useState('')
     const onDismiss = () => setVisible(false);
     const [cSelected, setCSelected] = useState([]);
-    let images = []
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+    const [images, setImages] = useState('');
 
     const filesChange = async fileList => {
         // handle file changes
@@ -67,8 +67,8 @@ function NewResidence(props) {
         }).catch(console.warn)
 
         response = await response.json()
-        console.log(response);        
-        images = response
+        console.log(response);
+        setImages(response)
         setPhotosList(photos);
     }
 
@@ -205,10 +205,11 @@ function NewResidence(props) {
             appendAmenityResidencesId(newamxres)
         }
 
+console.log(images)
         //PHOTOS
         for(var i = 0; i < images.length; i++) {
             var photo_path = images[i];
-
+        console.log(photo_path)
             const photo = {
                 residence_id, 
                 path: photo_path
@@ -220,7 +221,7 @@ function NewResidence(props) {
             body: JSON.stringify(photo)
             })
             photores = await photores.json()
-            
+            console.log(photores)
             appendPhoto(photores)
         }
 
