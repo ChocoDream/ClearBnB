@@ -57,7 +57,7 @@ const SetResidence = () => {
             res = await res.json();
 
             if (res.length === 0){
-                setBookingMessage('Inga sparade bostäder.');
+                setBookingMessage('Inga sparade bokningar.');
                 setBookingMessageVisible(true);
                 return
             }
