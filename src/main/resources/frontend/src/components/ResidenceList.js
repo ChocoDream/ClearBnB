@@ -11,16 +11,12 @@ import {
 const ResidenceList = () => {
   const { residences, getResidenceById } = useContext(ResidenceContext)
 
-  /*const getPhoto= (path) => {
-    if(path){
-      path=path.substring(7)
-    }
-    else{
-      console.log('no')
+  const getPhoto= (path) => {
+    if(!path){
       path = '/assets/noavailablephoto.jpg'
     }
     return path;
-  }*/
+  }
 
   const list = () => {
     return residences.map((residence, index) => {
@@ -34,7 +30,7 @@ const ResidenceList = () => {
           <Card outline color="light">
             <CardBody>
               {/*Ersätt denna kod neranför med bild från db i nästa sprint */}
-              <CardImg src={residence.path} alt="ClearBnB boende" />
+              <CardImg src={getPhoto(residence.path)} alt="ClearBnB boende" />
 
               <CardText className="text-muted">Max antal gäster: {residence.max_guest} </CardText>
               <CardSubtitle className="text-dark"> {residence.city}, {residence.region} </CardSubtitle>
