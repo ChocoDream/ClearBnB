@@ -9,22 +9,22 @@ const Footer = () => {
         className="mt-5 mb-3"      
       >
         <Row className="font-small indigo " >
-          <Col className="mb-3">
+          <Col sm="12" md="3" className="mb-3">
             <h6 className="text-uppercase font-weight-bold text-center">
               <Link to="/">Bostäder</Link>
             </h6>
           </Col>
-          <Col className="mb-3">
+          <Col sm="12" md="3" className="mb-3">
             <h6 className="text-uppercase font-weight-bold text-center">
               <Link to="/about">Om oss</Link>
             </h6>
           </Col>
-          <Col className="mb-3">
+          <Col sm="12" md="3" className="mb-3">
             <h6 className="text-uppercase font-weight-bold text-center">
               <Link to="/user-login">Logga in</Link>
             </h6>
           </Col>
-          <Col className="mb-3">
+          <Col sm="12" md="3" className="mb-3">
             <h6 className="text-uppercase font-weight-bold text-center text-info">
               <Link to="/user-register">Skapa konto</Link>
             </h6>
