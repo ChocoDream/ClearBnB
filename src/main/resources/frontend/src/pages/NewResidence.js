@@ -205,11 +205,9 @@ function NewResidence(props) {
             appendAmenityResidencesId(newamxres)
         }
 
-console.log(images)
         //PHOTOS
         for(var i = 0; i < images.length; i++) {
             var photo_path = images[i];
-        console.log(photo_path)
             const photo = {
                 residence_id, 
                 path: photo_path
