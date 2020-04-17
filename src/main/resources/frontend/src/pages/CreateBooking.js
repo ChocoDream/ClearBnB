@@ -21,6 +21,7 @@ const CreateBooking = (props) => {
   const [totalPrice, setTotalPrice] = useState()
   const [totalDays, setTotalDays] = useState(1)
   const [message, setMessage] = useState('')
+  const [bookedDates, setBookedDates] = useState()
 
   const countDays=(start, end)=>{
     let diff = end - start
@@ -32,10 +33,28 @@ const CreateBooking = (props) => {
     setTotalPrice(total)
   }
 
+  const getBookings = async () => {
+    let res = await fetch('/api/clearbnb/bookings/')
+    res = await res.json()
+    let dates = []   
+    res.map((d) => {
+      let s = d.start_date, e = d.end_date
+      if (residence.id === d.residenceInfo.id) {
+      while(s<=e){   
+        dates.push(s)
+          s+=86400000
+        }
+      }
+    })
+    setBookedDates(dates)
+  }
+
+
   useEffect(()=>{
+     getBookings()  
      setTotalPrice(residence.price*residence.max_guests)
      countDays(startDate, endDate)
-     countPrice(totalDays, guestsNumber, residence.price)
+     countPrice(totalDays, guestsNumber, residence.price)   
   }, [residence.price, residence.max_guests, startDate, endDate, totalDays, guestsNumber])
  
   const createBooking = async() => {  
@@ -99,7 +118,7 @@ const CreateBooking = (props) => {
                   className="pl-2 pr-3 py-1 text-info"
                   locale="sv"
                   selected={startDate}
-                  minDate={startDate}
+                  minDate={new Date()}
                   onChange={date => {
                     setStartDate(date)
                     setEndDate(addDays(date, 1))
@@ -108,6 +127,7 @@ const CreateBooking = (props) => {
                   startDate={startDate}
                   endDate={endDate}
                   dateFormat="yyyy-MM-dd"
+                  excludeDates={bookedDates}
                 />
               </Col>
               <Col xs="12" sm="5" className="pl-sm-0 ml-0">
@@ -122,6 +142,7 @@ const CreateBooking = (props) => {
                   endDate={endDate}
                   minDate={endDate}
                   dateFormat="yyyy-MM-dd"
+                  excludeDates={bookedDates}
                 />                             
               </Col>
             </Row>
