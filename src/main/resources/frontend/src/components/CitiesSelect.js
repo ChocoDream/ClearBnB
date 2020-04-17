@@ -12,7 +12,7 @@ export default function CityList() {
     const getRegions = async () => {
         let regions = await fetch('/api/clearbnb/allregions')
         regions = await regions.json()            
-        console.log(regions)
+        //console.log(regions)
         let citiesArray = [];
 
         let citiesRegions = Array.from(Array(regions.length).keys())

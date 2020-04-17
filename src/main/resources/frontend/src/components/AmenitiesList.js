@@ -11,7 +11,7 @@ export default function AmenitiesList(props) {
 
    useEffect(() => {
      getAmenitiesFromResidenceId(props.residenceId)
-     console.log("hej")
+     //console.log("hej")
   }, [])
 
   const appendAmenities = (amenity) => {
@@ -26,7 +26,7 @@ export default function AmenitiesList(props) {
         }
       })
     })
-    console.log("Hopefully this works, getting amenitiesVals", amenitiesVals)
+    //console.log("Hopefully this works, getting amenitiesVals", amenitiesVals)
   }
   //VIKTIGT, Be Johan om hjälp om detta imorgon! Kan ej lösa själv
   //Löste det at last. WHOO

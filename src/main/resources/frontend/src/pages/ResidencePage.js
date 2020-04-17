@@ -24,7 +24,7 @@ const ResidencePage = () => {
     amenities = await amenities.json();
     
     if (amenities.length === 0){
-        console.log('Inga sparade bostäder.');
+        //console.log('Inga sparade bostäder.');
         return
     }
     const amenitiesList = Array.from(Array(amenities.length).keys())
