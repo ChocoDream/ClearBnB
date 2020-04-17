@@ -39,7 +39,7 @@ const FrontPageMenuDesktop = () => {
                   end_date: moment(end_date).format('X'),
                   count_person
                   }
-    console.log(datas.city_id+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
+    //console.log(datas.city_id+'-'+datas.start_date+'-'+datas.end_date+' person:'+datas.count_person);
 
     let res;
     if (datas.start_date > datas.end_date){

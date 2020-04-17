@@ -67,7 +67,7 @@ function NewResidence(props) {
         }).catch(console.warn)
 
         response = await response.json()
-        console.log(response);
+        //console.log(response);
         setImages(response)
         setPhotosList(photos);
     }
@@ -86,7 +86,7 @@ function NewResidence(props) {
             region: region,
             city: city
         }
-        console.log(datas.region+' '+datas.city)
+        //console.log(datas.region+' '+datas.city)
 
         let res = await fetch('/api/clearbnb/allcities', {
             method: 'POST',
@@ -94,7 +94,7 @@ function NewResidence(props) {
             body: JSON.stringify(datas)
         })
         res = await res.json()
-        console.log(res)
+        //console.log(res)
         window.location.reload(false);
     }
 
@@ -113,8 +113,8 @@ function NewResidence(props) {
             max_guests,
             price
             }
-        console.log(datas.city_id+'-'+datas.street_name+' '+datas.street_number+' '+datas.apartment_number+' '
-                    +datas.rooms+'-'+datas.max_guests+' '+datas.price);
+        //console.log(datas.city_id+'-'+datas.street_name+' '+datas.street_number+' '+datas.apartment_number+' '
+        //            +datas.rooms+'-'+datas.max_guests+' '+datas.price);
 
         if((!datas.city_id) || (!datas.street_name) || (!datas.street_number) ||
                             (!datas.rooms) || (!datas.max_guests) || (!datas.price)
@@ -140,7 +140,7 @@ function NewResidence(props) {
         })
         res = await res.json()
 
-        console.log(res)
+        //console.log(res)
         var address_id = res.id;
         appendAddress(res)
 
@@ -159,7 +159,7 @@ function NewResidence(props) {
         })
         newres = await newres.json()
         var residence_id = newres.id;
-        console.log(newres)
+        //console.log(newres)
 
         appendResidence(newres)
 
@@ -178,13 +178,13 @@ function NewResidence(props) {
         })
         newowner = await newowner.json()
 
-        console.log(newowner)
+        //console.log(newowner)
         appendOwnersResidence(newowner)
 
 
         //AMENITIES
         const amenities = cSelected;
-        console.log('amenities:'+JSON.stringify(amenities));
+        //console.log('amenities:'+JSON.stringify(amenities));
         var end_date = 0; //Date.now();
 
         for(var i = 0; i < amenities.length; i++) {
@@ -219,7 +219,7 @@ function NewResidence(props) {
             body: JSON.stringify(photo)
             })
             photores = await photores.json()
-            console.log(photores)
+            //console.log(photores)
             appendPhoto(photores)
         }
 
@@ -248,7 +248,7 @@ function NewResidence(props) {
         const getRegions = async () => {
             let regions = await fetch('/api/clearbnb/allregions')
             regions = await regions.json()            
-            console.log(regions)
+            //console.log(regions)
             let citiesArray = [];
 
             Array.from(Array(regions.length).keys())

@@ -17,10 +17,10 @@ export default function PhotoContextProvider(props) {
     let res = await fetch(`/api/clearbnb/photosByResidenceId/${id}`)
     res = await res.json()
     if (res.length === 0) { //If residence contains no photo
-      console.log("Is empty")
+      //console.log("Is empty")
       res = [{ path: "/assets/noavailablephoto.jpg"}] //HACKY WAY TO SHOW GIVE RESIDENCE WITHOUT A PHOTO AN UNAVAILBLE PHOTO
     }
-    console.log(res)
+    //console.log(res)
     setResidencePhotos(res)
   }
   

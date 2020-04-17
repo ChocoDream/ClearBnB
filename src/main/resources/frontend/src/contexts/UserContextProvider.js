@@ -11,7 +11,7 @@ const UserContextProvider = (props) => {
       res = await res.json()
       setUser(res)
     } catch {
-      console.log('Not authenticated');
+      //console.log('Not authenticated');
     }
   }
 
